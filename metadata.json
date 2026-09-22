@@ -1,0 +1,6 @@
+{
+  "name": "NORI TOUR",
+  "description": "Curated K-beauty, wellness, and cultural experiences designed to help you discover what truly works for you — and enjoy Korea in a way that feels entirely your own.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
