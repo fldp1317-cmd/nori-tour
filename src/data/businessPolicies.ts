@@ -47,8 +47,8 @@ export const BUSINESS_INFORMATION: BusinessInformation = {
   companyName: 'NORI TOUR Co., Ltd.',
   koreanName: '주식회사 노리투어',
   legalEntity: 'NORI TOUR Co., Ltd. (주식회사 노리투어)',
-  representative: 'Park Dong-eun / 박동은',
-  representativeKorean: '박동은',
+  representative: 'Lucy',
+  representativeKorean: 'Lucy',
   businessRegistrationNumber: '117-81-56534',
   tourismLicenseNumber: '2019-82',
   telecomSalesNumber: '2019-Seoul Gangnam-05371',
@@ -137,7 +137,7 @@ export const PRIVACY_POLICY: PolicySection = {
     },
     {
       heading: 'Data Security, Retention & Officer',
-      description: 'We do not sell, rent, or monetize personal or health data. Traveler information is retained only as long as necessary to complete your travel itinerary and fulfill Korean tax and tourism licensing regulations. Privacy inquiries can be addressed to our representative director Park Dong-eun at noritour1@naver.com.'
+      description: 'We do not sell, rent, or monetize personal or health data. Traveler information is retained only as long as necessary to complete your travel itinerary and fulfill Korean tax and tourism licensing regulations. Privacy inquiries can be addressed to our representative director Lucy at noritour1@naver.com.'
     }
   ]
 };

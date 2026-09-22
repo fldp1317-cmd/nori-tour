@@ -731,7 +731,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="relative aspect-3/4 rounded-3xl overflow-hidden shadow-md bg-[#ECE4D9]">
               <img
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80"
-                alt="Park Dong-eun, Representative Director of NORI TOUR"
+                alt="Lucy, Representative Director of NORI TOUR"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
@@ -740,7 +740,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   Representative Director
                 </span>
                 <p className="font-editorial text-sm font-medium text-[#302B29]">
-                  Park Dong-eun (박동은) • Representative Director
+                  Lucy • Representative Director
                 </p>
               </div>
             </div>

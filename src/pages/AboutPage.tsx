@@ -227,13 +227,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
               <div className="aspect-3/3 bg-[#ECE4D9] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
-                  alt="Park Dong-eun, Representative Director of NORI TOUR Co., Ltd."
+                  alt="Lucy, Representative Director of NORI TOUR Co., Ltd."
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="p-6 space-y-2">
-                <h4 className="text-xl font-editorial font-light text-[#302B29]">Park Dong-eun (박동은)</h4>
+                <h4 className="text-xl font-editorial font-light text-[#302B29]">Lucy</h4>
                 <p className="text-xs uppercase tracking-wider text-[#D9B4B0] font-semibold">Representative Director</p>
                 <p className="text-xs text-[#786761] leading-relaxed font-light">
                   Representative Director of NORI TOUR Co., Ltd. (주식회사 노리투어). Dedicated to transparent travel operations, statutory integrity, and personalized Korean beauty experiences.
