@@ -197,7 +197,66 @@ export const saveBookingRecord = (
       // fallback
     }
   }
+// Send booking to Netlify Forms
+if (typeof window !== 'undefined') {
+  const params = new URLSearchParams();
 
+  params.append('form-name', 'nori-booking');
+  params.append('orderId', newRecord.orderId || '');
+  params.append('tourTitle', newRecord.tourTitle || '');
+  params.append('date', newRecord.date || '');
+  params.append('guests', String(newRecord.guests || ''));
+  params.append('priceUsd', String(newRecord.priceUsd || ''));
+  params.append('priceKrw', String(newRecord.priceKrw || ''));
+  params.append('status', newRecord.status || '');
+  params.append('paymentMethod', newRecord.paymentMethod || '');
+
+  params.append('fullName', newRecord.customerProfile?.fullName || '');
+  params.append('whatsapp', newRecord.customerProfile?.whatsapp || '');
+  params.append('email', newRecord.customerProfile?.email || '');
+  params.append('country', newRecord.customerProfile?.country || '');
+
+  params.append('focusCategory', newRecord.customerProfile?.focusCategory || '');
+  params.append(
+    'skinConcerns',
+    (newRecord.customerProfile?.skinConcerns || []).join(', ')
+  );
+  params.append(
+    'currentSkincareRoutine',
+    newRecord.customerProfile?.currentSkincareRoutine || ''
+  );
+  params.append(
+    'allergiesOrSensitivity',
+    newRecord.customerProfile?.allergiesOrSensitivity || ''
+  );
+  params.append(
+    'beautyInterests',
+    (newRecord.customerProfile?.beautyInterests || []).join(', ')
+  );
+  params.append(
+    'makeupInterests',
+    (newRecord.customerProfile?.makeupInterests || []).join(', ')
+  );
+  params.append(
+    'personalColorInterest',
+    newRecord.customerProfile?.personalColorInterest || ''
+  );
+  params.append('budget', newRecord.customerProfile?.budget || '');
+  params.append(
+    'specialRequests',
+    newRecord.customerProfile?.specialRequests || ''
+  );
+
+  fetch('/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: params.toString(),
+  }).catch((error) => {
+    console.error('Netlify booking submission failed:', error);
+  });
+}
   return newRecord;
 };
 
