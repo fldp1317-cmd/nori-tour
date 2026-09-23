@@ -158,12 +158,46 @@ export const BookingPage: React.FC<BookingPageProps> = ({
   };
 
   const handleConfirmAndProceedToPayment = () => {
-    if (!paymentOrder && selectedTour) {
-      setPaymentOrder(createPaymentOrder(selectedTour, formData));
-    }
-    setBookingStep('payment');
-    window.scrollTo({ top: 120, behavior: 'smooth' });
+  if (!selectedTour) return;
+
+  const order =
+    paymentOrder || createPaymentOrder(selectedTour, formData);
+
+  if (!paymentOrder) {
+    setPaymentOrder(order);
+  }
+
+  const customerProfile: CustomerBeautyProfile = {
+    focusCategory: formData.focusCategory,
+    skinConcerns: formData.skinConcerns,
+    currentSkincareRoutine: formData.currentSkincareRoutine,
+    allergiesOrSensitivity: formData.allergiesOrSensitivity,
+    beautyInterests: formData.beautyInterests,
+    makeupInterests: formData.makeupInterests,
+    personalColorInterest: formData.personalColorInterest,
+    budget: formData.budget,
+    preferredExperience: selectedTour.title,
+    fullName: formData.fullName,
+    whatsapp: formData.whatsapp,
+    email: formData.email,
+    country: formData.country,
+    specialRequests: formData.specialRequests,
   };
+
+  saveBookingRecord(
+    selectedTour,
+    customerProfile,
+    formData.date,
+    formData.guests,
+    pricing.totalUsd,
+    pricing.totalKrw,
+    order.orderId,
+    'Pending'
+  );
+
+  setBookingStep('payment');
+  window.scrollTo({ top: 120, behavior: 'smooth' });
+};
 
   const handlePaymentSuccess = (orderId: string, method: PaymentMethodType) => {
     setRefCode(orderId);
