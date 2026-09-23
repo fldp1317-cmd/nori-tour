@@ -49,7 +49,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE]">
             <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
             <span className="text-xs uppercase tracking-[0.28em] text-[#786761] font-medium">
-              About NORI TOUR • 놀이
+              About NORI TOUR • Nori
             </span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-editorial font-light text-[#302B29] tracking-tight">
@@ -67,7 +67,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
               The Meaning of Our Name
             </span>
             <h2 className="text-3xl sm:text-4xl font-editorial font-light text-[#302B29] leading-tight">
-              NORI comes from the Korean word “놀이,” meaning “play.”
+              NORI comes from the Korean word “Nori,” meaning “play.”
             </h2>
             <div className="space-y-4 text-sm text-[#786761] font-light leading-relaxed">
               <p>

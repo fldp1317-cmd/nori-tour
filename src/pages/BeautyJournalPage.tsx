@@ -49,7 +49,7 @@ export const BeautyJournalPage: React.FC<BeautyJournalPageProps> = ({
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE]">
             <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
             <span className="text-xs uppercase tracking-[0.28em] text-[#786761] font-medium">
-              The NORI Journal • 놀이
+              The NORI Journal • Nori
             </span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-editorial font-light text-[#302B29] tracking-tight">

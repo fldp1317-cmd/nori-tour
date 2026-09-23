@@ -166,7 +166,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
           <div className="bg-[#302B29] text-[#F7F2EC] p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
             <div className="space-y-1 text-center sm:text-left">
               <p className="text-xs uppercase tracking-[0.22em] text-[#D9B4B0] font-semibold">
-                Curated Experience • 놀이
+                Curated Experience • Nori
               </p>
               <h4 className="text-xl sm:text-2xl font-editorial font-light text-[#F7F2EC]">
                 Experience these beauty rituals in person

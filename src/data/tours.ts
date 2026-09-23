@@ -1169,7 +1169,7 @@ export const TOURS_DATA: Tour[] = [
       'Day 2: Signature 1-on-1 makeup lesson: "Half by the artist. Half by you." hands-on masterclass',
       'Day 2: Lesson-connected cosmetic shopping matching your newly mastered look',
       'Day 3: Restorative non-medical aesthetic facial care or scalp wellness treatment',
-      'Day 3: K-beauty lifestyle & sensory play (놀이) across iconic design flagships',
+      'Day 3: K-beauty lifestyle & sensory play (Nori) across iconic design flagships',
       'Day 3 Deliverable: Presentation of "Your NORI Glow Book" (complete digital beauty roadmap)',
       'Zero-commission, honest shopping navigation: only what serves your real daily routine'
     ],
@@ -1285,9 +1285,9 @@ export const TOURS_DATA: Tour[] = [
           },
           {
             timeOfDay: 'Midday',
-            title: 'K-Beauty Lifestyle & Play (놀이)',
+            title: 'K-Beauty Lifestyle & Play (Nori)',
             subtitle: 'Interactive Flagships, Lifestyle Fragrance & Sensory Discovery',
-            description: 'Celebrate the true spirit of NORI (놀이 = play). Explore innovative interactive beauty flagships, sensory fragrance houses, and creative beauty spaces. Test textures, discover indie formulations, and enjoy Seoul’s beauty culture with curiosity and joy—without any educational pressure.',
+            description: 'Celebrate the true spirit of NORI (Nori = play). Explore innovative interactive beauty flagships, sensory fragrance houses, and creative beauty spaces. Test textures, discover indie formulations, and enjoy Seoul’s beauty culture with curiosity and joy—without any educational pressure.',
             highlights: [
               'Visits to iconic Seoul beauty lifestyle spaces and architectural flagships (e.g. Seongsu / Hannam)',
               'Sensory perfume and body care testing from Korea’s leading niche fragrance creators',
@@ -1325,7 +1325,7 @@ export const TOURS_DATA: Tour[] = [
       {
         time: 'Day 3 (Full Day)',
         title: 'Day 3 — Glow Your Way',
-        description: 'Curated Restorative Beauty & Wellness Experience (non-medical facial ritual or scalp care) + K-Beauty Lifestyle & Play (놀이) flagship exploration + Final Lounge Session & presentation of "Your NORI Glow Book."'
+        description: 'Curated Restorative Beauty & Wellness Experience (non-medical facial ritual or scalp care) + K-Beauty Lifestyle & Play (Nori) flagship exploration + Final Lounge Session & presentation of "Your NORI Glow Book."'
       }
     ],
     itinerary: [
@@ -1342,7 +1342,7 @@ export const TOURS_DATA: Tour[] = [
       {
         time: 'Day 3 (10:30 – 16:30)',
         title: 'Day 3 — Glow Your Way',
-        description: 'Morning restorative non-medical facial or scalp therapy. Midday playful lifestyle discovery (놀이). Concludes with a quiet lounge review and the presentation of Your NORI Glow Book.'
+        description: 'Morning restorative non-medical facial or scalp therapy. Midday playful lifestyle discovery (Nori). Concludes with a quiet lounge review and the presentation of Your NORI Glow Book.'
       }
     ],
     glowBookSections: [
@@ -1440,7 +1440,7 @@ export const TOURS_DATA: Tour[] = [
       'Day 2: Private hands-on makeup masterclass ("Half by the artist. Half by you.") with Seoul artist',
       'Day 2: Lesson-connected curated cosmetics shopping navigation',
       'Day 3: Curated restorative non-medical facial care or scalp wellness treatment',
-      'Day 3: K-beauty lifestyle & sensory play (놀이) exploration across architectural flagships',
+      'Day 3: K-beauty lifestyle & sensory play (Nori) exploration across architectural flagships',
       'Day 3: Concluding tea lounge review session & official presentation of "Your NORI Glow Book"',
       'All partner studio booking fees, diagnostic fees, and lesson fees',
       'Warm artisan Korean tea and refreshments during daily consultations'

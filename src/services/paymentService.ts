@@ -188,3 +188,54 @@ export async function initiateTossPaymentsV2(
     }, 600);
   });
 }
+
+/**
+ * Server-side payment confirmation handler for Toss Payments API.
+ * Uses process.env.TOSS_SECRET_KEY as an environment variable (never hardcoded).
+ * Do not run or test the Toss Payments API execution in client/browser environments.
+ */
+export async function confirmTossPaymentServerSide(
+  paymentKey: string,
+  orderId: string,
+  amount: number
+): Promise<{
+  status: string;
+  orderId: string;
+  paymentKey: string;
+  amount: number;
+  approvedAt?: string;
+  [key: string]: any;
+}> {
+  // Access secret key strictly via environment variable
+  const secretKey = typeof process !== 'undefined' && process.env ? process.env.TOSS_SECRET_KEY : '';
+
+  if (!secretKey) {
+    throw new Error('TOSS_SECRET_KEY environment variable is not configured.');
+  }
+
+  // Toss Payments requires Basic Auth: Base64(secretKey + ':')
+  const basicAuthToken = typeof Buffer !== 'undefined'
+    ? Buffer.from(`${secretKey}:`).toString('base64')
+    : btoa(`${secretKey}:`);
+
+  const response = await fetch('https://api.tosspayments.com/v1/payments/confirm', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Basic ${basicAuthToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      paymentKey,
+      orderId,
+      amount,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new Error(errorBody.message || `Toss Payments confirmation failed with HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+

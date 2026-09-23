@@ -400,7 +400,7 @@ export const BeautyJourneyModal: React.FC<BeautyJourneyModalProps> = ({
             <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
             <div>
               <p className="text-[10px] uppercase tracking-[0.24em] text-[#786761] font-medium">
-                NORI • 놀이 • Build Your Beauty Journey
+                NORI • Nori • Build Your Beauty Journey
               </p>
               <h3 className="font-editorial text-lg text-[#302B29] font-light">
                 Discover your beauty path

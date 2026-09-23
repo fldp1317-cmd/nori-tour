@@ -76,7 +76,7 @@ export const NoriLogo: React.FC<NoriLogoProps> = ({
             opacity={isLight ? 0.65 : 0.5}
           />
 
-          {/* Elegant petal loop representing "Nori" (놀이 - playful loop / harmony) */}
+          {/* Elegant petal loop representing "Nori" (playful loop / harmony) */}
           <path
             d="M22 8C27 15 34 19 34 25C34 30.5 28.5 35 22 35C15.5 35 10 30.5 10 25C10 19 17 15 22 8Z"
             stroke="url(#noriGlowGrad)"
@@ -118,7 +118,7 @@ export const NoriLogo: React.FC<NoriLogoProps> = ({
             >
               SEOUL • CURATED K-BEAUTY
             </span>
-            <span className="text-[9px] text-[#D9B4B0] font-serif">놀이</span>
+            <span className="text-[9px] text-[#D9B4B0] font-serif">Nori</span>
           </div>
         )}
       </div>

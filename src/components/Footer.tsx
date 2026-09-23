@@ -64,7 +64,7 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#443E3B]/60 border border-[#524B47]">
               <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
               <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-medium">
-                The Seoul Beauty Dispatch • 놀이
+                The Seoul Beauty Dispatch • Nori
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light tracking-wide leading-tight text-[#F7F2EC]">
@@ -113,7 +113,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="col-span-2 space-y-4">
             <NoriLogo variant="light" size="md" showSubtitle={true} />
             <p className="text-xs leading-relaxed text-[#D9B4B0] font-light max-w-sm pt-1">
-              NORI TOUR crafts elevated Korean beauty, wellness, and cultural journeys for international travelers. Rooted in "놀이" (playful discovery), comfort, and honest guidance.
+              NORI TOUR crafts elevated Korean beauty, wellness, and cultural journeys for international travelers. Rooted in "Nori" (playful discovery), comfort, and honest guidance.
             </p>
             <div className="pt-2 text-xs text-[#9B8983] space-y-1">
               <p className="text-[#E9D2CD] font-medium">

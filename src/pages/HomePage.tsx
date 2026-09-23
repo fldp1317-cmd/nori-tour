@@ -80,7 +80,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FCFAF7]/95 border border-[#EADBCE] shadow-xs backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-[#D9B4B0] animate-pulse" />
             <span className="text-[11px] uppercase tracking-[0.26em] text-[#786761] font-medium">
-              NORI TOUR • 놀이 • SEOUL BEAUTY & WELLNESS
+              NORI TOUR • Nori • SEOUL BEAUTY & WELLNESS
             </span>
           </div>
 
@@ -120,7 +120,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Editorial Trust Markers */}
           <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto text-center border-t border-[#EADBCE]/80">
             <div className="p-2">
-              <span className="text-2xl sm:text-3xl font-editorial font-light text-[#302B29]">놀이</span>
+              <span className="text-2xl sm:text-3xl font-editorial font-light text-[#302B29]">Nori</span>
               <p className="text-[11px] uppercase tracking-wider text-[#786761] font-medium mt-0.5">Mindful Play</p>
             </div>
             <div className="p-2">
@@ -748,12 +748,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           <div className="md:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FCFAF7] border border-[#EADBCE] text-xs text-[#786761]">
-              <span className="text-xs font-serif text-[#D9B4B0]">놀이</span>
+              <span className="text-xs font-serif text-[#D9B4B0]">Nori</span>
               <span>The Meaning Behind Our Name</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-editorial font-light text-[#302B29] leading-tight">
-              NORI comes from the Korean word “놀이,” meaning “play.”
+              NORI comes from the Korean word “Nori,” meaning “play.”
             </h2>
 
             <div className="space-y-4 text-sm text-[#786761] font-light leading-relaxed">

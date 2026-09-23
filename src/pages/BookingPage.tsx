@@ -250,7 +250,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE]">
             <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
             <span className="text-xs uppercase tracking-[0.28em] text-[#786761] font-medium">
-              Reservations & Beauty Profile • 놀이
+              Reservations & Beauty Profile • Nori
             </span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-editorial font-light text-[#302B29] tracking-tight">

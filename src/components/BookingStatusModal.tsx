@@ -89,7 +89,7 @@ export const BookingStatusModal: React.FC<BookingStatusModalProps> = ({
             <div className="flex items-center gap-2 mb-0.5">
               <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
               <span className="text-[10px] tracking-[0.24em] uppercase text-[#D9B4B0] font-semibold">
-                Guest Service • 놀이
+                Guest Service • Nori
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-editorial font-light text-[#F7F2EC]">
