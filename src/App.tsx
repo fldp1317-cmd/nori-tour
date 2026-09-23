@@ -10,6 +10,7 @@ import { ArticleModal } from './components/ArticleModal';
 import { BeautyJourneyModal } from './components/BeautyJourneyModal';
 import { LegalPoliciesModal, PolicyTabId } from './components/LegalPoliciesModal';
 import { BookingStatusModal } from './components/BookingStatusModal';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { HomePage } from './pages/HomePage';
 import { ExperiencesPage } from './pages/ExperiencesPage';
 import { TourDetailPage } from './pages/TourDetailPage';
@@ -243,6 +244,9 @@ export default function App() {
           handleTabChange('booking');
         }}
       />
+
+      {/* Floating WhatsApp Contact Button */}
+      <WhatsAppButton />
     </div>
   );
 }
