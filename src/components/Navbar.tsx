@@ -8,6 +8,8 @@ interface NavbarProps {
   onOpenBooking: (tourId?: string) => void;
   onStartBeautyJourney?: () => void;
   onOpenBookingStatus?: () => void;
+  currentLang?: 'EN' | '中文';
+  onLanguageChange?: (lang: 'EN' | '中文') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -16,10 +18,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenBooking,
   onStartBeautyJourney,
   onOpenBookingStatus,
+  currentLang: controlledLang,
+  onLanguageChange,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState<'EN' | '中文'>('EN');
+  const [internalLang, setInternalLang] = useState<'EN' | '中文'>('EN');
+
+  const currentLang = controlledLang ?? internalLang;
+  const handleLanguageSelect = (lang: 'EN' | '中文') => {
+    if (onLanguageChange) {
+      onLanguageChange(lang);
+    } else {
+      setInternalLang(lang);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <button
                 type="button"
-                onClick={() => setCurrentLang('EN')}
+                onClick={() => handleLanguageSelect('EN')}
                 className={`transition-colors font-medium px-1.5 ${
                   currentLang === 'EN'
                     ? 'text-[#302B29] font-semibold'
@@ -131,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="text-[#D5C7BC] text-[10px]" aria-hidden="true">|</span>
               <button
                 type="button"
-                onClick={() => setCurrentLang('中文')}
+                onClick={() => handleLanguageSelect('中文')}
                 className={`transition-colors px-1.5 ${
                   currentLang === '中文'
                     ? 'text-[#302B29] font-semibold'

@@ -33,6 +33,25 @@ export default function App() {
   const [activePolicyTab, setActivePolicyTab] = useState<PolicyTabId>('cancellation');
   const [isBookingStatusModalOpen, setIsBookingStatusModalOpen] = useState<boolean>(false);
 
+  // Language state (default EN, active on homepage)
+  const [language, setLanguage] = useState<'EN' | '中文'>(() => {
+    try {
+      const saved = localStorage.getItem('nori_language');
+      return saved === '中文' ? '中文' : 'EN';
+    } catch {
+      return 'EN';
+    }
+  });
+
+  const handleLanguageChange = (lang: 'EN' | '中文') => {
+    setLanguage(lang);
+    try {
+      localStorage.setItem('nori_language', lang);
+    } catch {
+      // ignore
+    }
+  };
+
   // Handle hash-based navigation for deep links or browser history
   useEffect(() => {
     const handleHashChange = () => {
@@ -114,6 +133,8 @@ export default function App() {
         onOpenBooking={handleOpenBookingModal}
         onStartBeautyJourney={handleOpenJourneyModal}
         onOpenBookingStatus={handleOpenBookingStatusModal}
+        currentLang={language}
+        onLanguageChange={handleLanguageChange}
       />
 
       {/* Main Page Routing Views */}
@@ -138,6 +159,7 @@ export default function App() {
                 onStartBeautyJourney={handleOpenJourneyModal}
                 onSelectArticle={handleSelectArticle}
                 onNavigate={handleTabChange}
+                language={language}
               />
             )}
 
