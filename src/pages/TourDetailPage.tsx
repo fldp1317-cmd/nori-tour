@@ -1507,13 +1507,15 @@ export const TourDetailPage: React.FC<TourDetailPageProps> = ({
               <p className="text-[#786761] leading-relaxed font-light">
                 Our bilingual curators can advise whether this experience suits your current skin condition and products.
               </p>
-              <button
-                onClick={() => onBookNow(tour.id)}
+              <a
+                href="https://wa.me/821048295754?text=Hi%20NORI!%20I%20have%20a%20question%20about%20your%20beauty%20experiences%20in%20Seoul."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#D9B4B0] hover:text-[#786761] font-medium inline-flex items-center gap-1 pt-1"
               >
                 <span>Ask Curators Directly</span>
                 <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+              </a>
             </div>
           </div>
         </div>

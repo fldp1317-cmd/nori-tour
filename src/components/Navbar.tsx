@@ -19,6 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState<'EN' | '中文'>('EN');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,14 +88,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Actions: Track Reservation & Start Journey CTA */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Right Actions: Track Reservation, Start Journey CTA & Language Switcher */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
             {onOpenBookingStatus && (
               <button
                 id="nav-track-booking-btn"
                 onClick={onOpenBookingStatus}
                 title="Lookup reservation status by Order ID or email"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs uppercase tracking-[0.14em] text-[#786761] hover:text-[#302B29] rounded-full border border-[#EADBCE] hover:border-[#D9B4B0] bg-[#FCFAF7] transition-all"
+                className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs uppercase tracking-[0.14em] text-[#786761] hover:text-[#302B29] rounded-full border border-[#EADBCE] hover:border-[#D9B4B0] bg-[#FCFAF7] transition-all"
               >
                 <ClipboardList className="w-3.5 h-3.5 text-[#D9B4B0]" />
                 <span className="hidden md:inline">My Reservation</span>
@@ -104,22 +105,54 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-start-journey-btn"
               onClick={() => (onStartBeautyJourney ? onStartBeautyJourney() : onOpenBooking())}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#302B29] text-[#F7F2EC] text-xs uppercase tracking-[0.18em] font-medium rounded-full hover:bg-[#443E3B] transition-all shadow-xs group border border-[#302B29]"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#302B29] text-[#F7F2EC] text-xs uppercase tracking-[0.18em] font-medium rounded-full hover:bg-[#443E3B] transition-all shadow-xs group border border-[#302B29]"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#E9D2CD] group-hover:rotate-12 transition-transform" />
               <span>Start Journey</span>
             </button>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            id="mobile-menu-toggle-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Navigation Menu"
-            className="lg:hidden p-2 text-[#302B29] hover:text-[#D9B4B0] transition-colors focus:outline-none"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {/* Language Switcher UI: EN | 中文 */}
+            <div
+              className="inline-flex items-center px-2 py-1 rounded-full border border-[#EADBCE] bg-[#FCFAF7] text-[11px] select-none"
+              aria-label="Language selector"
+            >
+              <button
+                type="button"
+                onClick={() => setCurrentLang('EN')}
+                className={`transition-colors font-medium px-1.5 ${
+                  currentLang === 'EN'
+                    ? 'text-[#302B29] font-semibold'
+                    : 'text-[#9B8983] hover:text-[#302B29]'
+                }`}
+                aria-current={currentLang === 'EN' ? 'true' : undefined}
+              >
+                EN
+              </button>
+              <span className="text-[#D5C7BC] text-[10px]" aria-hidden="true">|</span>
+              <button
+                type="button"
+                onClick={() => setCurrentLang('中文')}
+                className={`transition-colors px-1.5 ${
+                  currentLang === '中文'
+                    ? 'text-[#302B29] font-semibold'
+                    : 'text-[#9B8983] hover:text-[#302B29]'
+                }`}
+                aria-current={currentLang === '中文' ? 'true' : undefined}
+              >
+                中文
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              id="mobile-menu-toggle-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Navigation Menu"
+              className="lg:hidden p-2 text-[#302B29] hover:text-[#D9B4B0] transition-colors focus:outline-none"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </header>
 

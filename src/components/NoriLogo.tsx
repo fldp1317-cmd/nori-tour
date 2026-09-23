@@ -112,13 +112,12 @@ export const NoriLogo: React.FC<NoriLogoProps> = ({
         </div>
 
         {showSubtitle && (
-          <div className="flex items-center gap-1.5 mt-0.5 leading-none">
+          <div className="mt-0.5 leading-none">
             <span
               className={`text-[9px] sm:text-[10px] tracking-[0.26em] uppercase font-light ${subColor}`}
             >
               SEOUL • CURATED K-BEAUTY
             </span>
-            <span className="text-[9px] text-[#D9B4B0] font-serif">Nori</span>
           </div>
         )}
       </div>

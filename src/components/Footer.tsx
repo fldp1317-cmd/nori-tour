@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Send, ShieldCheck, Clock, FileText, Building2, ClipboardList } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Clock, FileText, Building2, ClipboardList } from 'lucide-react';
 import { NoriLogo } from './NoriLogo';
 import { PolicyTabId } from './LegalPoliciesModal';
 import { BUSINESS_POLICIES } from '../data/businessPolicies';
@@ -17,8 +17,6 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenPoliciesModal,
   onOpenBookingStatus,
 }) => {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const [seoulTime, setSeoulTime] = useState('');
 
   useEffect(() => {
@@ -39,16 +37,6 @@ export const Footer: React.FC<FooterProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    setSubscribed(true);
-    setTimeout(() => {
-      setEmail('');
-      setSubscribed(false);
-    }, 4000);
-  };
-
   const handlePolicyClick = (tab: PolicyTabId) => {
     if (onOpenPoliciesModal) {
       onOpenPoliciesModal(tab);
@@ -68,39 +56,25 @@ export const Footer: React.FC<FooterProps> = ({
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light tracking-wide leading-tight text-[#F7F2EC]">
-              Curated Korean aesthetics, delivered to your inbox.
+              Curated Korean beauty and wellness, all in one place.
             </h2>
             <p className="text-sm text-[#D9B4B0] font-light max-w-xl leading-relaxed">
               Seasonal skincare guides from Cheongdam clinics, mindful Hanok retreats, and personal travel tips before visiting Seoul.
             </p>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            {subscribed ? (
-              <div className="p-4 bg-[#3E3835] border border-[#D9B4B0]/40 rounded-2xl text-sm text-[#F7F2EC] flex items-center gap-3">
-                <ShieldCheck className="w-5 h-5 text-[#D9B4B0]" />
-                <span>Thank you. Your personal Seoul seasonal dispatch will arrive shortly.</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  required
-                  className="px-5 py-3.5 bg-[#3E3835] border border-[#524B47] rounded-full text-sm text-[#F7F2EC] placeholder-[#9B8983] focus:outline-none focus:border-[#D9B4B0] flex-1"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3.5 bg-[#D9B4B0] text-[#302B29] hover:bg-[#E9D2CD] transition-colors rounded-full text-xs uppercase tracking-[0.18em] font-semibold flex items-center justify-center gap-2 shadow-xs"
-                >
-                  <span>Join</span>
-                  <Send className="w-3.5 h-3.5" />
-                </button>
-              </form>
-            )}
-            <div className="mt-3 flex items-center gap-2 text-[11px] text-[#9B8983] tracking-wider">
+          <div className="lg:col-span-5 flex flex-col justify-center items-start lg:items-end">
+            <button
+              onClick={() => {
+                setActiveTab('journal');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-8 py-3.5 bg-[#D9B4B0] text-[#302B29] hover:bg-[#E9D2CD] transition-all rounded-full text-xs uppercase tracking-[0.18em] font-semibold flex items-center justify-center gap-2 shadow-xs group"
+            >
+              <span>Read the Journal</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#302B29] group-hover:translate-x-0.5 transition-transform" />
+            </button>
+            <div className="mt-4 flex items-center gap-2 text-[11px] text-[#9B8983] tracking-wider">
               <Clock className="w-3.5 h-3.5 text-[#D9B4B0]" />
               <span>Current Time in Seoul (KST): <strong className="text-[#F7F2EC]">{seoulTime || '09:00 AM'}</strong></span>
             </div>

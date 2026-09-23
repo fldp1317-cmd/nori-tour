@@ -201,7 +201,7 @@ export const BookingStatusModal: React.FC<BookingStatusModalProps> = ({
                   <div className="pt-2 text-[11px] text-[#786761] flex items-center justify-between">
                     <span>Need to reschedule? Free up to 48h before start.</span>
                     <a
-                      href="https://wa.me/821054101387"
+                      href="https://wa.me/821048295754?text=Hi%20NORI!%20I%20have%20a%20question%20about%20your%20beauty%20experiences%20in%20Seoul."
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#302B29] font-medium underline hover:text-[#D9B4B0]"
