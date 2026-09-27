@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles, ArrowRight, Search, ClipboardList } from 'lucide-react';
+import { Menu, X, Sparkles, ArrowRight } from 'lucide-react';
 import { NoriLogo } from './NoriLogo';
 
 interface NavbarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  onOpenBooking: (tourId?: string) => void;
-  onStartBeautyJourney?: () => void;
-  onOpenBookingStatus?: () => void;
+  onPlanMyTrip: () => void;
   currentLang?: 'EN' | '中文';
   onLanguageChange?: (lang: 'EN' | '中文') => void;
 }
@@ -15,9 +13,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
-  onOpenBooking,
-  onStartBeautyJourney,
-  onOpenBookingStatus,
+  onPlanMyTrip,
   currentLang: controlledLang,
   onLanguageChange,
 }) => {
@@ -43,12 +39,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'experiences', label: 'Experiences' },
-    { id: 'journal', label: 'Beauty Journal' },
-    { id: 'reviews', label: 'Reviews' },
-    { id: 'about', label: 'About NORI' },
-    { id: 'booking', label: 'Contact & Book' },
+    { id: 'home', label: 'HOME' },
+    { id: 'arrange', label: 'WHAT WE CAN ARRANGE' },
+    { id: 'plan', label: 'PLAN YOUR TRIP' },
+    { id: 'journal', label: "NORI'S JOURNAL" },
+    { id: 'about', label: 'ABOUT' },
   ];
 
   const handleNavClick = (id: string) => {
@@ -78,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav id="desktop-nav" className="hidden lg:flex items-center gap-7 xl:gap-8">
+          <nav id="desktop-nav" className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navItems.map((item) => {
               const isActive = activeTab === item.id;
               return (
@@ -101,27 +96,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Actions: Track Reservation, Start Journey CTA & Language Switcher */}
+          {/* Right Actions: PLAN MY TRIP CTA & Language Switcher */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {onOpenBookingStatus && (
-              <button
-                id="nav-track-booking-btn"
-                onClick={onOpenBookingStatus}
-                title="Lookup reservation status by Order ID or email"
-                className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs uppercase tracking-[0.14em] text-[#786761] hover:text-[#302B29] rounded-full border border-[#EADBCE] hover:border-[#D9B4B0] bg-[#FCFAF7] transition-all"
-              >
-                <ClipboardList className="w-3.5 h-3.5 text-[#D9B4B0]" />
-                <span className="hidden md:inline">My Reservation</span>
-              </button>
-            )}
-
             <button
-              id="nav-start-journey-btn"
-              onClick={() => (onStartBeautyJourney ? onStartBeautyJourney() : onOpenBooking())}
+              id="nav-plan-trip-btn"
+              onClick={onPlanMyTrip}
               className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#302B29] text-[#F7F2EC] text-xs uppercase tracking-[0.18em] font-medium rounded-full hover:bg-[#443E3B] transition-all shadow-xs group border border-[#302B29]"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#E9D2CD] group-hover:rotate-12 transition-transform" />
-              <span>Start Journey</span>
+              <span>PLAN MY TRIP</span>
             </button>
 
             {/* Language Switcher UI: EN | 中文 */}
@@ -198,35 +181,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="pt-8 border-t border-[#EADBCE] space-y-3">
-            {onOpenBookingStatus && (
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenBookingStatus();
-                }}
-                className="w-full py-3 bg-[#FCFAF7] border border-[#EADBCE] text-[#302B29] text-xs uppercase tracking-[0.16em] font-medium rounded-full flex items-center justify-center gap-2"
-              >
-                <ClipboardList className="w-4 h-4 text-[#D9B4B0]" />
-                <span>Track Reservation Status</span>
-              </button>
-            )}
-
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                if (onStartBeautyJourney) {
-                  onStartBeautyJourney();
-                } else {
-                  onOpenBooking();
-                }
+                onPlanMyTrip();
               }}
               className="w-full py-3.5 bg-[#302B29] text-[#F7F2EC] text-xs uppercase tracking-[0.2em] font-medium rounded-full flex items-center justify-center gap-2 shadow-xs"
             >
               <Sparkles className="w-4 h-4 text-[#D9B4B0]" />
-              <span>Start Your Beauty Journey</span>
+              <span>PLAN MY TRIP</span>
             </button>
             <div className="text-center text-[11px] text-[#786761] tracking-wider">
-              <span>Seoul, South Korea • Registered Inbound K-Beauty Concierge</span>
+              <span>Seoul, South Korea • Personalized Travel & K-Beauty Planning</span>
             </div>
           </div>
         </div>

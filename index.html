@@ -15,31 +15,92 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
   </head>
   <body class="bg-[#F7F2EC] text-[#302B29] antialiased selection:bg-[#E9D2CD] selection:text-[#302B29]">
-    <form name="nori-booking" data-netlify="true" hidden>
-  <input type="hidden" name="form-name" value="nori-booking" />
-  <input name="orderId" />
-  <input name="tourTitle" />
-  <input name="date" />
-  <input name="guests" />
-  <input name="priceUsd" />
-  <input name="priceKrw" />
-  <input name="status" />
-  <input name="paymentMethod" />
+    <form name="nori-booking" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="nori-booking" />
 
-  <input name="fullName" />
-  <input name="whatsapp" />
-  <input name="email" />
-  <input name="country" />
+      <!-- Logical Group Summaries for NORI Team -->
+      <input name="Inquiry_Reference" />
+      <textarea name="TRAVELER"></textarea>
+      <textarea name="TRIP_DETAILS"></textarea>
+      <textarea name="TRAVEL_SUPPORT"></textarea>
+      <textarea name="BEAUTY_INTERESTS"></textarea>
+      <textarea name="PREFERENCES"></textarea>
+      <textarea name="CONTACT"></textarea>
+      <input name="CONSENT" />
 
-  <input name="focusCategory" />
-  <input name="skinConcerns" />
-  <input name="currentSkincareRoutine" />
-  <input name="allergiesOrSensitivity" />
-  <input name="beautyInterests" />
-  <input name="makeupInterests" />
-  <input name="personalColorInterest" />
-  <input name="budget" />
-  <input name="specialRequests" />
+      <!-- CUSTOMER / CONTACT -->
+      <input name="First_Name" />
+      <input name="Last_Name" />
+      <input name="Email" />
+      <input name="WhatsApp_Number" />
+      <input name="Preferred_Contact_Method" />
+      <input name="Preferred_Language" />
+      <input name="Instagram_or_Social_Handle" />
+
+      <!-- TRIP -->
+      <input name="Country_or_Region" />
+      <input name="Arrival_Date" />
+      <input name="Departure_Date" />
+      <input name="Flexible_Dates_Status" />
+      <input name="Number_of_Travelers" />
+      <input name="Travel_Party_Type" />
+
+      <!-- TRAVEL SUPPORT (Descriptive) -->
+      <input name="Airport_Transfer_Selections" />
+      <input name="Airport_Pickup" />
+      <input name="Airport_Drop_Off" />
+      <input name="Private_Vehicle_and_Driver" />
+      <input name="Driving_Guide" />
+      <input name="Private_Guide" />
+      <input name="Transportation_Requests" />
+      <input name="Hotel_Assistance" />
+      <input name="Itinerary_Planning" />
+      <input name="Restaurant_Support" />
+      <input name="Activity_and_Experience_Support" />
+      <input name="Only_Interested_in_Beauty_Experiences" />
+
+      <!-- BEAUTY (Descriptive) -->
+      <input name="Skincare_Selections" />
+      <input name="Shopping_Selections" />
+      <input name="K_Beauty_Shopping" />
+      <input name="Personal_Color" />
+      <input name="Personal_Color_Selections" />
+      <input name="Makeup_Selections" />
+      <input name="Hair_Selections" />
+      <input name="Wellness_Selections" />
+      <input name="Dermatology_and_Aesthetic_Selections" />
+      <input name="Plastic_Surgery_Consultation" />
+      <input name="Interpretation_Support" />
+      <input name="Not_Sure_Recommend_Options" />
+
+      <!-- PREFERENCES & CONSENT -->
+      <input name="Travel_Interests" />
+      <input name="Approximate_Budget" />
+      <textarea name="Free_Text_Request"></textarea>
+      <input name="Quote_Request_Acknowledgement" />
+
+      <!-- Legacy compatibility fields -->
+      <input name="orderId" />
+      <input name="tourTitle" />
+      <input name="date" />
+      <input name="guests" />
+      <input name="priceUsd" />
+      <input name="priceKrw" />
+      <input name="status" />
+      <input name="paymentMethod" />
+      <input name="fullName" />
+      <input name="whatsapp" />
+      <input name="email" />
+      <input name="country" />
+      <input name="focusCategory" />
+      <input name="skinConcerns" />
+      <input name="currentSkincareRoutine" />
+      <input name="allergiesOrSensitivity" />
+      <input name="beautyInterests" />
+      <input name="makeupInterests" />
+      <input name="personalColorInterest" />
+      <input name="budget" />
+      <textarea name="specialRequests"></textarea>
     </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

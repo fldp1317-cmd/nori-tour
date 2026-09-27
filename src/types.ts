@@ -189,7 +189,7 @@ export interface Review {
   id: string;
   guestName: string;
   country: string;
-  experienceBooked: string;
+  experienceBooked?: string;
   reviewText: string;
   rating: number;
   optionalPhoto?: string;
@@ -248,4 +248,45 @@ export interface BookingRecord {
   customerProfile: CustomerBeautyProfile;
   paymentMethod?: string;
   paymentReference?: string;
+  inquiryDetails?: TripInquiryData;
 }
+
+export interface TripInquiryData {
+  // Step 01 — Your Trip
+  countryRegion: string;
+  arrivalDate: string;
+  departureDate: string;
+  datesFlexible: boolean;
+  numberOfTravelers: number;
+  travelCompanions: string[];
+
+  // Step 02 — Travel Support
+  travelSupportAirport: string[];
+  travelSupportGettingAround: string[];
+  travelSupportStayPlanning: string[];
+  travelSupportBeautyOnly: boolean;
+
+  // Step 03 — Beauty
+  beautySkincareShopping: string[];
+  beautyColorMakeup: string[];
+  beautyHairWellness: string[];
+  beautyAestheticCare: string[];
+  beautyNotSureRecommend: boolean;
+
+  // Step 04 — Your Preferences
+  preferencesMattersMost: string[];
+  approximateBudget: string;
+  freeTextRequest: string;
+
+  // Step 05 — Contact & Consent
+  firstName: string;
+  lastName: string;
+  email: string;
+  preferredContactMethod: 'WhatsApp' | 'Email';
+  whatsappCountryCode: string;
+  whatsappNumber: string;
+  preferredLanguage: 'English' | 'Korean' | 'Chinese' | 'Other';
+  instagramHandle: string;
+  quoteRequestConsent: boolean;
+}
+

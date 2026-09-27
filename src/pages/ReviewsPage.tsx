@@ -1,48 +1,32 @@
 import React, { useState } from 'react';
-import { Star, ShieldCheck, Heart, Sparkles, Plus, CheckCircle2, X, Camera, Image } from 'lucide-react';
-import { Review, Tour } from '../types';
+import { Star, ShieldCheck, Plus, CheckCircle2, X } from 'lucide-react';
+import { Review } from '../types';
 
 interface ReviewsPageProps {
   reviews: Review[];
-  tours: Tour[];
   onAddReview: (review: Review) => void;
-  onBookExperience: () => void;
 }
 
 export const ReviewsPage: React.FC<ReviewsPageProps> = ({
   reviews,
-  tours,
   onAddReview,
-  onBookExperience,
 }) => {
-  const [filterTourId, setFilterTourId] = useState<string>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // New review form fields (matching required review data fields)
+  // New review form fields
   const [newGuestName, setNewGuestName] = useState('');
   const [newCountry, setNewCountry] = useState('');
-  const [newTourId, setNewTourId] = useState(tours[0]?.id || '');
   const [newRating, setNewRating] = useState(5);
   const [newReviewText, setNewReviewText] = useState('');
   const [newOptionalPhoto, setNewOptionalPhoto] = useState('');
   const [newPhotoConsent, setNewPhotoConsent] = useState(true);
   const [submitted, setSubmitted] = useState(false);
 
-  const filteredReviews = reviews.filter((r) => {
-    if (filterTourId === 'all') return true;
-    return r.tourId === filterTourId;
-  });
-
   const handleCreateReview = (e: React.FormEvent) => {
     e.preventDefault();
-    const tourMatch = tours.find(t => t.id === newTourId);
-    const expTitle = tourMatch ? tourMatch.title : 'Curated Seoul Experience';
 
     const created: Review = {
       id: 'rev-user-' + Date.now(),
-      tourId: newTourId,
-      tourName: expTitle,
-      experienceBooked: expTitle,
       guestName: newGuestName,
       country: newCountry,
       rating: newRating,
@@ -128,34 +112,9 @@ export const ReviewsPage: React.FC<ReviewsPageProps> = ({
           </div>
         </div>
 
-        {/* Filter Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-6 border-b border-[#EADBCE]">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-[#786761] uppercase tracking-wider">
-              Filter by Experience:
-            </span>
-            <select
-              value={filterTourId}
-              onChange={(e) => setFilterTourId(e.target.value)}
-              className="px-4 py-2 bg-[#FCFAF7] border border-[#EADBCE] rounded-full text-xs text-[#302B29] focus:outline-none focus:border-[#D9B4B0]"
-            >
-              <option value="all">All Experiences ({reviews.length})</option>
-              {tours.map((t) => (
-                <option key={t.id} value={t.id}>
-                  {t.title}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <span className="text-xs text-[#786761]">
-            Showing <strong>{filteredReviews.length}</strong> testimonials
-          </span>
-        </div>
-
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredReviews.map((rev) => (
+          {reviews.map((rev) => (
             <div
               key={rev.id}
               className="p-8 rounded-3xl bg-[#FCFAF7] border border-[#EADBCE] flex flex-col justify-between hover:border-[#D9B4B0] transition-all shadow-xs hover:shadow-md"
@@ -206,9 +165,6 @@ export const ReviewsPage: React.FC<ReviewsPageProps> = ({
                       {rev.guestName}
                     </h4>
                     <p className="text-[11px] text-[#786761]">{rev.country}</p>
-                    <p className="text-[10px] text-[#D9B4B0] font-medium truncate max-w-[180px]">
-                      {rev.experienceBooked || rev.tourName}
-                    </p>
                   </div>
                 </div>
 
@@ -221,16 +177,6 @@ export const ReviewsPage: React.FC<ReviewsPageProps> = ({
               </div>
             </div>
           ))}
-        </div>
-
-        {/* CTA banner */}
-        <div className="mt-16 text-center">
-          <button
-            onClick={onBookExperience}
-            className="px-8 py-4 bg-[#302B29] hover:bg-[#443E3B] text-[#F7F2EC] text-xs uppercase tracking-[0.2em] font-medium rounded-full transition-all shadow-md"
-          >
-            Find Your Glow with NORI
-          </button>
         </div>
       </div>
 
@@ -293,24 +239,6 @@ export const ReviewsPage: React.FC<ReviewsPageProps> = ({
                       placeholder="e.g. Sydney, Australia"
                       className="w-full px-4 py-2.5 rounded-xl bg-[#F7F2EC] border border-[#EADBCE] text-xs text-[#302B29] focus:outline-none focus:border-[#D9B4B0]"
                     />
-                  </div>
-
-                  {/* Experience Booked */}
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#786761] mb-1">
-                      Experience Booked *
-                    </label>
-                    <select
-                      value={newTourId}
-                      onChange={(e) => setNewTourId(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#F7F2EC] border border-[#EADBCE] text-xs text-[#302B29] focus:outline-none focus:border-[#D9B4B0]"
-                    >
-                      {tours.map((t) => (
-                        <option key={t.id} value={t.id}>
-                          {t.title}
-                        </option>
-                      ))}
-                    </select>
                   </div>
 
                   {/* Rating */}

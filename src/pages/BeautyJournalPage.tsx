@@ -77,12 +77,6 @@ export const BeautyJournalPage: React.FC<BeautyJournalPageProps> = ({
                 <span className="px-3.5 py-1.5 bg-[#F7F2EC]/90 backdrop-blur-md text-[11px] uppercase tracking-[0.2em] font-semibold text-[#302B29] rounded-full shadow-xs">
                   Cover Story
                 </span>
-                {featuredArticle.relatedExperience && (
-                  <span className="px-3.5 py-1.5 bg-[#302B29]/80 backdrop-blur-md text-[11px] uppercase tracking-[0.16em] font-medium text-[#F7F2EC] rounded-full shadow-xs flex items-center gap-1">
-                    <Compass className="w-3 h-3 text-[#D9B4B0]" />
-                    {featuredArticle.relatedExperience}
-                  </span>
-                )}
               </div>
             </div>
 
@@ -207,13 +201,6 @@ export const BeautyJournalPage: React.FC<BeautyJournalPageProps> = ({
                   <p className="text-xs text-[#786761] leading-relaxed line-clamp-2 font-light mb-3">
                     {article.excerpt}
                   </p>
-
-                  {article.relatedExperience && (
-                    <div className="inline-flex items-center gap-1 text-[10px] text-[#302B29] bg-[#F7F2EC] px-2.5 py-1 rounded-md border border-[#EADBCE]">
-                      <Compass className="w-3 h-3 text-[#D9B4B0]" />
-                      <span className="truncate max-w-[200px]">{article.relatedExperience}</span>
-                    </div>
-                  )}
                 </div>
               </div>
 
@@ -242,14 +229,6 @@ export const BeautyJournalPage: React.FC<BeautyJournalPageProps> = ({
               From clinical facials in Cheongdam to mindful Hanok head spas, let our bilingual aestheticians guide your journey.
             </p>
           </div>
-
-          <button
-            onClick={onBookExperience}
-            className="px-8 py-3.5 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#302B29] rounded-full text-xs uppercase tracking-[0.18em] font-semibold transition-all shrink-0 shadow-md flex items-center gap-2"
-          >
-            <Sparkles className="w-4 h-4 text-[#302B29]" />
-            <span>Book Your Journey</span>
-          </button>
         </div>
       </div>
     </div>

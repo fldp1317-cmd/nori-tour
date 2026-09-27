@@ -5,10 +5,15 @@ import React from 'react';
  * Connected to official WhatsApp Business: +82 10-4829-5754
  * Pre-filled message: "Hi NORI! I have a question about your beauty experiences in Seoul."
  */
+export const NORI_WHATSAPP_PHONE = '821048295754';
+export const NORI_WHATSAPP_MESSAGE =
+  'Hi NORI! I have a question about your beauty experiences in Seoul.';
+export const NORI_WHATSAPP_URL = `https://wa.me/${NORI_WHATSAPP_PHONE}?text=${encodeURIComponent(
+  NORI_WHATSAPP_MESSAGE
+)}`;
+
 export const WhatsAppButton: React.FC = () => {
-  const phoneNumber = '821048295754';
-  const message = 'Hi NORI! I have a question about your beauty experiences in Seoul.';
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = NORI_WHATSAPP_URL;
 
   return (
     <aside

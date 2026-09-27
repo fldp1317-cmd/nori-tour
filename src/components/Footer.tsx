@@ -82,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Middle Navigation Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-10 py-16">
           {/* Col 1: Brand & Business Registration */}
           <div className="col-span-2 space-y-4">
             <NoriLogo variant="light" size="md" showSubtitle={true} />
@@ -105,67 +105,34 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
-          {/* Col 2: Experiences */}
+          {/* Col 2: Navigation */}
           <div className="space-y-3">
             <h4 className="text-xs uppercase tracking-[0.22em] text-[#D9B4B0] font-semibold">
-              Experiences
+              Explore NORI
             </h4>
             <ul className="space-y-2 text-xs text-[#E9D2CD]">
               <li>
                 <button
-                  onClick={() => { setActiveTab('experiences'); window.scrollTo(0, 0); }}
+                  onClick={() => { setActiveTab('arrange'); window.scrollTo(0, 0); }}
                   className="hover:text-[#F7F2EC] transition-colors text-left"
                 >
-                  Cheongdam Glass Skin Clinic
+                  What We Can Arrange
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => { setActiveTab('experiences'); window.scrollTo(0, 0); }}
+                  onClick={() => { setActiveTab('plan'); window.scrollTo(0, 0); }}
                   className="hover:text-[#F7F2EC] transition-colors text-left"
                 >
-                  NORI Glow Day (Signature)
+                  Plan Your Trip
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('experiences'); window.scrollTo(0, 0); }}
-                  className="hover:text-[#F7F2EC] transition-colors text-left"
-                >
-                  Personal Color Studio
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('experiences'); window.scrollTo(0, 0); }}
-                  className="hover:text-[#F7F2EC] transition-colors text-left"
-                >
-                  Hanok Head Spa & Tea Ritual
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('experiences'); window.scrollTo(0, 0); }}
-                  className="hover:text-[#F7F2EC] transition-colors text-left"
-                >
-                  Private VIP Concierge
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Journal & Stories */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-[0.22em] text-[#D9B4B0] font-semibold">
-              Journal & Stories
-            </h4>
-            <ul className="space-y-2 text-xs text-[#E9D2CD]">
               <li>
                 <button
                   onClick={() => { setActiveTab('journal'); window.scrollTo(0, 0); }}
                   className="hover:text-[#F7F2EC] transition-colors text-left"
                 >
-                  The Beauty Journal
+                  NORI's Journal
                 </button>
               </li>
               <li>
@@ -173,23 +140,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => { setActiveTab('about'); window.scrollTo(0, 0); }}
                   className="hover:text-[#F7F2EC] transition-colors text-left"
                 >
-                  Our Story & Philosophy
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('reviews'); window.scrollTo(0, 0); }}
-                  className="hover:text-[#F7F2EC] transition-colors text-left"
-                >
-                  Guest Testimonials
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('about'); window.scrollTo(0, 0); }}
-                  className="hover:text-[#F7F2EC] transition-colors text-left"
-                >
-                  Honest Guidance Promise
+                  About NORI
                 </button>
               </li>
             </ul>

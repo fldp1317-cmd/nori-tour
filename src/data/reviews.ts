@@ -3,14 +3,11 @@ import { Review } from '../types';
 export const REVIEWS_DATA: Review[] = [
   {
     id: 'rev-1',
-    tourId: 'cheongdam-glass-skin',
-    tourName: 'Cheongdam Glass Skin & Clinical Facial Ritual',
-    experienceBooked: 'Cheongdam Glass Skin & Clinical Facial Ritual',
     guestName: 'Elena Rostova',
     country: 'London, United Kingdom',
     rating: 5,
     date: 'September 2024',
-    reviewText: "Booking this with NORI was hands down the single best decision of my two weeks in Seoul. As someone who doesn't speak Korean, navigating medical aesthetics in Gangnam felt terrifying. Lucy (Seoha) was beside me the entire time, translating every nuance and preventing any unnecessary clinic upsells. My skin has never glowed like this.",
+    reviewText: "Planning my trip with NORI was hands down the single best decision of my two weeks in Seoul. As someone who doesn't speak Korean, navigating medical aesthetics in Gangnam felt terrifying. Lucy (Seoha) was beside me the entire time, translating every nuance and preventing any unnecessary clinic upsells. My skin has never glowed like this.",
     guestPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
     optionalPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
     photoConsent: true,
@@ -18,9 +15,6 @@ export const REVIEWS_DATA: Review[] = [
   },
   {
     id: 'rev-2',
-    tourId: 'personal-color-kbeauty-styling',
-    tourName: 'Personal Color Harmony & K-Beauty Stylist Studio',
-    experienceBooked: 'Personal Color Harmony & K-Beauty Stylist Studio',
     guestName: 'Claire & Vivienne Chen',
     country: 'San Francisco, USA',
     rating: 5,
@@ -33,9 +27,6 @@ export const REVIEWS_DATA: Review[] = [
   },
   {
     id: 'rev-3',
-    tourId: 'bukchon-hanok-head-spa-tea',
-    tourName: 'Bukchon Hanok Herbal Head Spa & Mindful Tea Ceremony',
-    experienceBooked: 'Bukchon Hanok Herbal Head Spa & Mindful Tea Ceremony',
     guestName: 'Sophie Moreau',
     country: 'Paris, France',
     rating: 5,
@@ -48,9 +39,6 @@ export const REVIEWS_DATA: Review[] = [
   },
   {
     id: 'rev-4',
-    tourId: 'private-vip-cheongdam-dermatology-concierge',
-    tourName: 'Private VIP Cheongdam Dermatology & Luxury Shopping Concierge',
-    experienceBooked: 'Private VIP Cheongdam Dermatology & Luxury Shopping Concierge',
     guestName: 'Amara Al-Maktoum',
     country: 'Dubai, UAE',
     rating: 5,
@@ -63,9 +51,6 @@ export const REVIEWS_DATA: Review[] = [
   },
   {
     id: 'rev-5',
-    tourId: 'joseon-royal-palace-modern-hanbok',
-    tourName: 'Joseon Royal Palace Aesthetics & Modern Silk Hanbok Editorial Tour',
-    experienceBooked: 'Joseon Royal Palace Aesthetics & Modern Silk Hanbok Editorial Tour',
     guestName: 'Kaitlyn Miller',
     country: 'Melbourne, Australia',
     rating: 5,
@@ -78,9 +63,6 @@ export const REVIEWS_DATA: Review[] = [
   },
   {
     id: 'rev-6',
-    tourId: '2hr-kbeauty-skincare-shopping-seoul',
-    tourName: '2-Hour Essential K-Beauty Skincare & Shopping Consultation',
-    experienceBooked: '2-Hour Essential K-Beauty Skincare & Shopping Consultation',
     guestName: 'Hanna Lindqvist',
     country: 'Stockholm, Sweden',
     rating: 5,

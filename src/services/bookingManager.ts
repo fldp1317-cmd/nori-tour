@@ -1,4 +1,4 @@
-import { BookingRecord, BookingStatus, CustomerBeautyProfile, Tour } from '../types';
+import { BookingRecord, BookingStatus, CustomerBeautyProfile, Tour, TripInquiryData } from '../types';
 
 const STORAGE_KEY = 'nori_tour_bookings_v1';
 
@@ -284,3 +284,338 @@ export const updateBookingStatus = (orderId: string, status: BookingStatus): boo
     return false;
   }
 };
+
+export const submitTripInquiry = async (inquiry: TripInquiryData): Promise<BookingRecord> => {
+  const orderId = `NORI-TRIP-${Math.floor(100000 + Math.random() * 900000)}`;
+  const customerName = `${inquiry.firstName.trim()} ${inquiry.lastName.trim()}`.trim();
+  const formattedWhatsapp = inquiry.whatsappNumber.trim()
+    ? `${inquiry.whatsappCountryCode.trim()} ${inquiry.whatsappNumber.trim()}`.trim()
+    : '';
+
+  const travelDatesSummary = inquiry.datesFlexible
+    ? `${inquiry.arrivalDate || 'Not specified'} to ${inquiry.departureDate || 'Not specified'} (Flexible / Not Confirmed Yet)`
+    : `${inquiry.arrivalDate || 'Not specified'} to ${inquiry.departureDate || 'Not specified'}`;
+
+  // Descriptive Airport Pickup & Drop-off values (e.g. "Incheon", "Gimpo", "Incheon, Gimpo", or "No")
+  const pickupAirports: string[] = [];
+  if (inquiry.travelSupportAirport.includes('Incheon Airport pickup')) pickupAirports.push('Incheon');
+  if (inquiry.travelSupportAirport.includes('Gimpo Airport pickup')) pickupAirports.push('Gimpo');
+  const airportPickupValue = pickupAirports.length > 0 ? pickupAirports.join(', ') : 'No';
+
+  const dropoffAirports: string[] = [];
+  if (inquiry.travelSupportAirport.includes('Incheon Airport drop-off')) dropoffAirports.push('Incheon');
+  if (inquiry.travelSupportAirport.includes('Gimpo Airport drop-off')) dropoffAirports.push('Gimpo');
+  const airportDropoffValue = dropoffAirports.length > 0 ? dropoffAirports.join(', ') : 'No';
+
+  const allTravelSupport = [
+    ...inquiry.travelSupportAirport,
+    ...inquiry.travelSupportGettingAround,
+    ...inquiry.travelSupportStayPlanning,
+    ...(inquiry.travelSupportBeautyOnly
+      ? ["I don't need travel support — I'm only interested in beauty experiences."]
+      : []),
+  ];
+
+  // Separate Skincare vs Shopping selections clearly for NORI team
+  const skincareItems = inquiry.beautySkincareShopping.filter((item) =>
+    ['Personalized skincare guidance', 'Skincare routine guidance'].includes(item)
+  );
+  const shoppingItems = inquiry.beautySkincareShopping.filter((item) =>
+    [
+      'K-beauty shopping',
+      'Olive Young shopping',
+      'Korean pharmacy beauty',
+      'Beauty flagship stores',
+    ].includes(item)
+  );
+  const personalColorSelected = inquiry.beautyColorMakeup.includes('Personal color analysis');
+  const makeupItems = inquiry.beautyColorMakeup.filter((item) => item !== 'Personal color analysis');
+  const hairItems = inquiry.beautyHairWellness.filter((item) =>
+    ['Korean hair salon', 'Hair styling', 'Scalp care / head spa'].includes(item)
+  );
+  const wellnessItems = inquiry.beautyHairWellness.filter((item) =>
+    ['Scalp care / head spa', 'Korean spa / wellness experience'].includes(item)
+  );
+  const dermatologyAestheticItems = inquiry.beautyAestheticCare.filter((item) =>
+    [
+      'Dermatology consultation',
+      'Skin treatments',
+      'Lifting / anti-aging treatments',
+    ].includes(item)
+  );
+  const plasticSurgerySelected = inquiry.beautyAestheticCare.includes(
+    'Plastic surgery consultation'
+  );
+  const interpretationSelected = inquiry.beautyAestheticCare.includes(
+    'Beauty clinic interpretation support'
+  );
+
+  const allBeautySelections = [
+    ...inquiry.beautySkincareShopping,
+    ...inquiry.beautyColorMakeup,
+    ...inquiry.beautyHairWellness,
+    ...inquiry.beautyAestheticCare,
+    ...(inquiry.beautyNotSureRecommend
+      ? ["I'm not sure — I'd like NORI to recommend options."]
+      : []),
+  ];
+
+  // Logical Group Summaries for immediate readability by the NORI team
+  const travelerGroupSummary = [
+    `Name: ${customerName}`,
+    `Country / Region: ${inquiry.countryRegion.trim() || 'Not specified'}`,
+    `Preferred Language: ${inquiry.preferredLanguage}`,
+  ].join(' | ');
+
+  const tripDetailsGroupSummary = [
+    `Origin: ${inquiry.countryRegion.trim() || 'Not specified'}`,
+    `Arrival: ${inquiry.arrivalDate || 'Not specified'}`,
+    `Departure: ${inquiry.departureDate || 'Not specified'}`,
+    `Flexible Dates: ${inquiry.datesFlexible ? 'Yes' : 'No'}`,
+    `Number of Travelers: ${inquiry.numberOfTravelers}`,
+    `Travel Party: ${inquiry.travelCompanions.length > 0 ? inquiry.travelCompanions.join(', ') : 'Not specified'}`,
+  ].join(' | ');
+
+  const travelSupportGroupSummary = inquiry.travelSupportBeautyOnly
+    ? "Only interested in beauty experiences (No travel support requested)"
+    : allTravelSupport.length > 0
+    ? allTravelSupport.join(', ')
+    : 'None selected';
+
+  const beautyInterestsGroupSummary =
+    allBeautySelections.length > 0 ? allBeautySelections.join(', ') : 'None selected';
+
+  const preferencesGroupSummary = [
+    `Matters Most: ${inquiry.preferencesMattersMost.length > 0 ? inquiry.preferencesMattersMost.join(', ') : 'Not specified'}`,
+    `Approximate Budget (NORI services): ${inquiry.approximateBudget || 'Not specified'}`,
+    `Notes: ${inquiry.freeTextRequest.trim() || 'None'}`,
+  ].join(' | ');
+
+  const contactGroupSummary = [
+    `Name: ${customerName}`,
+    `Email: ${inquiry.email.trim()}`,
+    `Preferred Contact: ${inquiry.preferredContactMethod}`,
+    `WhatsApp: ${formattedWhatsapp || 'Not provided'}`,
+    `Language: ${inquiry.preferredLanguage}`,
+    `Instagram / Social: ${inquiry.instagramHandle.trim() || 'Not provided'}`,
+  ].join(' | ');
+
+  const consentSummary = inquiry.quoteRequestConsent
+    ? 'Yes — Customer understands this is a personalized quote request and not an instant booking'
+    : 'No';
+
+  const customerProfile: CustomerBeautyProfile = {
+    focusCategory: 'both',
+    skinConcerns: inquiry.preferencesMattersMost,
+    currentSkincareRoutine: travelSupportGroupSummary,
+    allergiesOrSensitivity: '',
+    beautyInterests: allBeautySelections,
+    makeupInterests: inquiry.beautyColorMakeup,
+    personalColorInterest: personalColorSelected ? 'Yes' : 'No',
+    budget: inquiry.approximateBudget || "I'm not sure yet",
+    preferredExperience: 'Personalized Korea Trip Request',
+    fullName: customerName,
+    whatsapp: formattedWhatsapp,
+    email: inquiry.email.trim(),
+    country: inquiry.countryRegion.trim(),
+    specialRequests: inquiry.freeTextRequest.trim(),
+  };
+
+  const newRecord: BookingRecord = {
+    id: 'inq-' + Date.now(),
+    orderId,
+    tourId: 'personalized-trip-inquiry',
+    tourTitle: 'Personalized Korea Trip & Beauty Plan Request',
+    date: travelDatesSummary,
+    guests: inquiry.numberOfTravelers,
+    priceUsd: 0,
+    priceKrw: 0,
+    status: 'Pending',
+    createdAt: new Date().toISOString(),
+    customerProfile,
+    inquiryDetails: inquiry,
+  };
+
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams();
+    params.append('form-name', 'nori-booking');
+
+    // 1. Logical Group Summaries
+    params.append('Inquiry_Reference', orderId);
+    params.append('TRAVELER', travelerGroupSummary);
+    params.append('TRIP_DETAILS', tripDetailsGroupSummary);
+    params.append('TRAVEL_SUPPORT', travelSupportGroupSummary);
+    params.append('BEAUTY_INTERESTS', beautyInterestsGroupSummary);
+    params.append('PREFERENCES', preferencesGroupSummary);
+    params.append('CONTACT', contactGroupSummary);
+    params.append('CONSENT', consentSummary);
+
+    // 2. CUSTOMER / CONTACT
+    params.append('First_Name', inquiry.firstName.trim());
+    params.append('Last_Name', inquiry.lastName.trim() || 'Not provided');
+    params.append('Email', inquiry.email.trim());
+    params.append('WhatsApp_Number', formattedWhatsapp || 'Not provided');
+    params.append('Preferred_Contact_Method', inquiry.preferredContactMethod);
+    params.append('Preferred_Language', inquiry.preferredLanguage);
+    params.append('Instagram_or_Social_Handle', inquiry.instagramHandle.trim() || 'Not provided');
+
+    // 3. TRIP DETAILS
+    params.append('Country_or_Region', inquiry.countryRegion.trim() || 'Not specified');
+    params.append('Arrival_Date', inquiry.arrivalDate || 'Not specified');
+    params.append('Departure_Date', inquiry.departureDate || 'Not specified');
+    params.append('Flexible_Dates_Status', inquiry.datesFlexible ? 'Yes (Flexible / Not confirmed yet)' : 'No');
+    params.append('Number_of_Travelers', String(inquiry.numberOfTravelers));
+    params.append(
+      'Travel_Party_Type',
+      inquiry.travelCompanions.length > 0 ? inquiry.travelCompanions.join(', ') : 'Not specified'
+    );
+
+    // 4. TRAVEL SUPPORT (Descriptive values)
+    params.append(
+      'Airport_Transfer_Selections',
+      inquiry.travelSupportAirport.length > 0 ? inquiry.travelSupportAirport.join(', ') : 'None'
+    );
+    params.append('Airport_Pickup', airportPickupValue);
+    params.append('Airport_Drop_Off', airportDropoffValue);
+    params.append(
+      'Private_Vehicle_and_Driver',
+      inquiry.travelSupportGettingAround.includes('Private vehicle & driver') ? 'Yes' : 'No'
+    );
+    params.append(
+      'Driving_Guide',
+      inquiry.travelSupportGettingAround.includes('Driving guide') ? 'Yes' : 'No'
+    );
+    params.append(
+      'Private_Guide',
+      inquiry.travelSupportGettingAround.includes('Private English-speaking guide') ? 'Yes' : 'No'
+    );
+    params.append(
+      'Transportation_Requests',
+      inquiry.travelSupportGettingAround.includes('Transportation between activities')
+        ? 'Yes (Transportation between activities)'
+        : 'No'
+    );
+    const hotelSelections = inquiry.travelSupportStayPlanning.filter((item) =>
+      ['Hotel recommendations', 'Hotel booking assistance'].includes(item)
+    );
+    params.append(
+      'Hotel_Assistance',
+      hotelSelections.length > 0 ? hotelSelections.join(', ') : 'No'
+    );
+    params.append(
+      'Itinerary_Planning',
+      inquiry.travelSupportStayPlanning.includes('Personalized itinerary planning') ? 'Yes' : 'No'
+    );
+    params.append(
+      'Restaurant_Support',
+      inquiry.travelSupportStayPlanning.includes('Restaurant recommendations / reservations')
+        ? 'Yes'
+        : 'No'
+    );
+    params.append(
+      'Activity_and_Experience_Support',
+      inquiry.travelSupportStayPlanning.includes('Local activities / experience reservations')
+        ? 'Yes'
+        : 'No'
+    );
+    params.append(
+      'Only_Interested_in_Beauty_Experiences',
+      inquiry.travelSupportBeautyOnly ? 'Yes' : 'No'
+    );
+
+    // 5. BEAUTY (Descriptive values)
+    params.append(
+      'Skincare_Selections',
+      skincareItems.length > 0 ? skincareItems.join(', ') : 'None'
+    );
+    params.append(
+      'Shopping_Selections',
+      shoppingItems.length > 0 ? shoppingItems.join(', ') : 'None'
+    );
+    params.append('K_Beauty_Shopping', shoppingItems.length > 0 ? 'Yes' : 'No');
+    params.append('Personal_Color', personalColorSelected ? 'Yes' : 'No');
+    params.append(
+      'Personal_Color_Selections',
+      personalColorSelected ? 'Personal color analysis' : 'None'
+    );
+    params.append(
+      'Makeup_Selections',
+      makeupItems.length > 0 ? makeupItems.join(', ') : 'None'
+    );
+    params.append('Hair_Selections', hairItems.length > 0 ? hairItems.join(', ') : 'None');
+    params.append(
+      'Wellness_Selections',
+      wellnessItems.length > 0 ? wellnessItems.join(', ') : 'None'
+    );
+    params.append(
+      'Dermatology_and_Aesthetic_Selections',
+      dermatologyAestheticItems.length > 0 ? dermatologyAestheticItems.join(', ') : 'None'
+    );
+    params.append('Plastic_Surgery_Consultation', plasticSurgerySelected ? 'Yes' : 'No');
+    params.append('Interpretation_Support', interpretationSelected ? 'Yes' : 'No');
+    params.append(
+      'Not_Sure_Recommend_Options',
+      inquiry.beautyNotSureRecommend ? 'Yes (Please recommend options)' : 'No'
+    );
+
+    // 6. PREFERENCES & CONSENT
+    params.append(
+      'Travel_Interests',
+      inquiry.preferencesMattersMost.length > 0
+        ? inquiry.preferencesMattersMost.join(', ')
+        : 'Not specified'
+    );
+    params.append('Approximate_Budget', inquiry.approximateBudget || 'Not specified');
+    params.append('Free_Text_Request', inquiry.freeTextRequest.trim() || 'None');
+    params.append('Quote_Request_Acknowledgement', consentSummary);
+
+    // 7. Legacy compatibility fields
+    params.append('orderId', orderId);
+    params.append('tourTitle', 'Personalized Korea Trip & Beauty Plan Request');
+    params.append('date', travelDatesSummary);
+    params.append('guests', String(inquiry.numberOfTravelers));
+    params.append('priceUsd', '0');
+    params.append('priceKrw', '0');
+    params.append('status', 'Inquiry - Pending Personalized Quote');
+    params.append('paymentMethod', 'Pending Personalized Quote');
+    params.append('fullName', customerName);
+    params.append('whatsapp', formattedWhatsapp);
+    params.append('email', inquiry.email.trim());
+    params.append('country', inquiry.countryRegion.trim());
+    params.append('focusCategory', 'both');
+    params.append('skinConcerns', inquiry.preferencesMattersMost.join(', '));
+    params.append('currentSkincareRoutine', travelSupportGroupSummary);
+    params.append('allergiesOrSensitivity', '');
+    params.append('beautyInterests', allBeautySelections.join(', '));
+    params.append('makeupInterests', inquiry.beautyColorMakeup.join(', '));
+    params.append('personalColorInterest', personalColorSelected ? 'Yes' : 'No');
+    params.append('budget', inquiry.approximateBudget || "I'm not sure yet");
+    params.append('specialRequests', inquiry.freeTextRequest.trim());
+
+    const response = await fetch('/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params.toString(),
+    });
+
+    // On Netlify production, POST / returns 200 OK.
+    // On local Vite dev server (without Netlify's edge middleware), POST / may return 404.
+    // Throw an error if there is a 5xx server failure.
+    if (response.status >= 500) {
+      throw new Error(`Submission failed with status ${response.status}`);
+    }
+
+    try {
+      const existing = getStoredBookings();
+      const updated = [newRecord, ...existing];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } catch {
+      // localStorage fallback
+    }
+  }
+
+  return newRecord;
+};
+

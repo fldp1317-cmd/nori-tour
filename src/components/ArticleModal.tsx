@@ -57,15 +57,6 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                 <Clock className="w-3.5 h-3.5 text-[#D9B4B0]" />
                 {article.readTime}
               </span>
-              {article.relatedExperience && (
-                <>
-                  <span>•</span>
-                  <span className="inline-flex items-center gap-1 text-[#302B29] font-medium">
-                    <Compass className="w-3.5 h-3.5 text-[#D9B4B0]" />
-                    {article.relatedExperience}
-                  </span>
-                </>
-              )}
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light text-[#302B29] leading-tight">
@@ -110,35 +101,6 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
             ))}
           </div>
 
-          {/* Related Experience Banner */}
-          {article.relatedExperience && (
-            <div className="p-6 bg-[#F7F2EC] rounded-2xl border border-[#EADBCE] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="space-y-1">
-                <span className="text-[10px] uppercase tracking-wider text-[#D9B4B0] font-semibold flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Related Curated Experience
-                </span>
-                <h4 className="text-lg font-editorial font-medium text-[#302B29]">
-                  {article.relatedExperience}
-                </h4>
-                <p className="text-xs text-[#786761]">
-                  Experience the techniques, products, and clinics discussed in this article.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onBookExperience();
-                }}
-                className="px-5 py-2.5 bg-[#302B29] hover:bg-[#443E3B] text-[#F7F2EC] text-xs uppercase tracking-wider rounded-full font-medium transition-all shrink-0 flex items-center gap-1.5"
-              >
-                <span>Book This Experience</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#E9D2CD]" />
-              </button>
-            </div>
-          )}
-
           {/* Tags */}
           <div className="pt-6 border-t border-[#EADBCE] flex flex-wrap gap-2">
             {(article.tags || []).map((tag) => (
@@ -175,15 +137,6 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                 Our bilingual curators guide you through accredited clinics and private Hanok sanctuaries across Seoul.
               </p>
             </div>
-            <button
-              onClick={() => {
-                onClose();
-                onBookExperience();
-              }}
-              className="px-6 py-3 bg-[#D9B4B0] text-[#302B29] hover:bg-[#E9D2CD] text-xs uppercase tracking-[0.18em] font-semibold rounded-full transition-all whitespace-nowrap shadow-xs"
-            >
-              Book an Experience
-            </button>
           </div>
         </div>
       </div>

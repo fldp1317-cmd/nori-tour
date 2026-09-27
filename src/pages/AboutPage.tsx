@@ -18,7 +18,7 @@ const FAQS: FAQItem[] = [
   },
   {
     question: 'Do your signature beauty and spa experiences require downtime?',
-    answer: 'Our signature group and private experiences (including the Cheongdam Glass Skin Facial, Hanok Scalp Head Spa, and Personal Color Styling) are completely non-invasive and require zero downtime. You walk away radiant, calm, and camera-ready. For travelers interested in specialized clinical lasers or skin boosters, our medical liaisons prepare personalized pre-and-post care regimens to ensure full comfort throughout your trip.'
+    answer: 'Our curated beauty and wellness experiences are completely non-invasive and require zero downtime. You walk away radiant, calm, and camera-ready. For travelers interested in specialized clinical lasers or skin boosters, our medical liaisons prepare personalized pre-and-post care regimens to ensure full comfort throughout your trip.'
   },
   {
     question: 'What if I have sensitive or reactive skin?',
@@ -26,11 +26,11 @@ const FAQS: FAQItem[] = [
   },
   {
     question: 'How does the tax refund process work in Korea?',
-    answer: 'South Korea provides direct immediate VAT refunds (typically 7-10%) on medical aesthetic care and cosmetic purchases for foreign tourists. Bring your passport on your tour day. Your NORI curator assists with immediate on-site tax reduction or ensures your receipts are properly validated for swift customs clearance.'
+    answer: 'South Korea provides direct immediate VAT refunds (typically 7-10%) on eligible cosmetic purchases and aesthetic services for foreign tourists. Bring your passport when shopping, and your NORI guide can help you navigate immediate on-site tax refund counters or receipt validation.'
   },
   {
-    question: 'Why do you limit group sizes to maximum 4 guests?',
-    answer: 'True discovery cannot happen in large bus groups. To ensure a personalized, comfortable, pressure-free atmosphere where every question can be answered and diagnostic reports can be individually reviewed, we cap our boutique groups at 4 guests.'
+    question: 'How does NORI personalize each trip?',
+    answer: 'No two trips to Korea should look the same. Tell us what you want to experience—from airport transfers and private guiding to K-beauty shopping, personal color analysis, or beauty consultations—and we build the ground arrangements around your personal pace and preferences.'
   }
 ];
 
@@ -132,7 +132,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
               How We Guide You
             </h2>
             <p className="text-sm text-[#786761] font-light max-w-xl mx-auto">
-              How we approach every guest consultation, spa partnership, and cultural encounter in Seoul.
+              How we approach every guest consultation, beauty arrangement, and local experience in Korea.
             </p>
           </div>
 
@@ -157,7 +157,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
                 Local Knowledge
               </h3>
               <p className="text-xs text-[#786761] leading-relaxed font-light">
-                From quiet Hanok tea courtyards in Bukchon to accredited private aesthetic suites in Cheongdam, our insider relationships open doors travelers cannot easily access alone.
+                From quiet Hanok tea courtyards in Bukchon to beauty neighborhoods across Seoul, our local knowledge helps travelers navigate Korea with ease and confidence.
               </p>
             </div>
 
@@ -427,7 +427,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
           </div>
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom Callout */}
         <div className="text-center space-y-4 p-12 rounded-3xl bg-[#302B29] text-[#F7F2EC] shadow-md">
           <h3 className="text-2xl sm:text-4xl font-editorial font-light text-[#F7F2EC]">
             Find Your Glow. Play Your Way.
@@ -435,14 +435,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
           <p className="text-xs sm:text-sm text-[#D9B4B0] max-w-md mx-auto font-light leading-relaxed">
             NORI helps you find what works for you, enjoy the discovery, and leave Korea glowing in your own way.
           </p>
-          <div className="pt-2">
-            <button
-              onClick={onBookExperience}
-              className="px-8 py-3.5 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#302B29] text-xs uppercase tracking-[0.18em] font-semibold rounded-full transition-all shadow-md"
-            >
-              Book Your Journey
-            </button>
-          </div>
         </div>
       </div>
     </div>

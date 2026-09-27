@@ -13,7 +13,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-10-04',
     heroImage: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: 'cheongdam-glass-skin',
     seoTitle: 'The 10-Step Skincare Myth in Korea | NORI Seoul Beauty Guide',
     seoDescription: 'Discover why Seoul aestheticians in Cheongdam practice Skip-Care instead of 10-step routines to protect the skin barrier and prevent sensitized redness.',
     articleContent: [
@@ -45,7 +44,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-09-28',
     heroImage: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: 'private-vip-cheongdam-dermatology-concierge',
     seoTitle: 'PDRN, Exosomes & Centella Guide | Korean Aesthetic Ingredients Explained',
     seoDescription: 'A clinical breakdown of salmon DNA PDRN, botanical exosomes, and high-purity cica used across premier Cheongdam aesthetic clinics in Seoul.',
     articleContent: [
@@ -75,7 +73,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-09-15',
     heroImage: 'https://images.unsplash.com/photo-1512290900672-1f5be57d23d8?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: '2hr-kbeauty-skincare-shopping-seoul',
     seoTitle: 'Olive Young & Seongsu Flagship Beauty Shopping Guide | NORI TOUR',
     seoDescription: 'Bypass tourist-trap TikTok hype: how to shop Olive Young using real-time Hwahae rankings and discover hidden fragrance ateliers in Seongsu.',
     articleContent: [
@@ -105,7 +102,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-09-02',
     heroImage: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: 'personal-color-kbeauty-styling',
     seoTitle: 'Personal Color Seasons & Draping Analysis in Seoul | NORI TOUR',
     seoDescription: 'Why personal color analysis has transformed makeup and wardrobe selection in Korea, and how accurate drape swatches illuminate your natural tone.',
     articleContent: [
@@ -135,7 +131,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-08-20',
     heroImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: 'nori-glow-day',
     seoTitle: 'Incheon Arrival & Post-Flight Skincare Survival Guide | NORI TOUR',
     seoDescription: 'Crucial first 24-hour skincare recovery steps after arriving at Incheon Airport, adapting to Seoul climate shifts, and calming travel redness.',
     articleContent: [
@@ -165,7 +160,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-08-05',
     heroImage: 'https://images.unsplash.com/photo-1512290900672-1f4a9ce80261?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: 'private-vip-cheongdam-dermatology-concierge',
     seoTitle: 'Laser Toning vs Skin Boosters in Gangnam Clinics | Honest Guide',
     seoDescription: 'Unpack the differences between Pico laser toning, Rejuran, and LDM ultrasound in Cheongdam with zero medical upselling.',
     articleContent: [
@@ -195,7 +189,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-07-18',
     heroImage: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: 'bukchon-hanok-head-spa-tea',
     seoTitle: 'Korean Head Spa & Waterfall Scalp Treatment Ritual | Bukchon Wellness',
     seoDescription: 'Why scalp wellness is the root of facial elasticity in Korea, and what to expect during a mindful Hanok hydro-ring head spa session in Seoul.',
     articleContent: [
@@ -225,7 +218,6 @@ export const ARTICLES_DATA: JournalArticle[] = [
     },
     publishDate: '2024-07-01',
     heroImage: 'https://images.unsplash.com/photo-1538669715315-155099bfa816?auto=format&fit=crop&w=1200&q=80',
-    relatedExperience: 'joseon-royal-palace-modern-hanbok',
     seoTitle: 'Seoul K-Beauty Neighborhood Guide: Cheongdam, Seongsu, Samcheong | NORI',
     seoDescription: 'Navigate Seoul by aesthetic signature: clinical formulations in Cheongdam, creative indie flagships in Seongsu, and Hanok heritage in Bukchon.',
     articleContent: [
