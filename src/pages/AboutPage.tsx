@@ -10,6 +10,7 @@ import {
   Sliders,
 } from 'lucide-react';
 import { BUSINESS_POLICIES } from '../data/businessPolicies';
+import aboutEditorialHero from '../assets/images/about_nori_editorial_hero_1790649547011.jpg';
 
 interface AboutPageProps {
   onBookExperience: () => void;
@@ -108,7 +109,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
           <div className="lg:col-span-6">
             <div className="relative aspect-16/10 rounded-3xl overflow-hidden shadow-md bg-[#ECE4D9] border border-[#EADBCE]">
               <img
-                src="/src/assets/images/about_nori_editorial_hero_1790649547011.jpg"
+                src={aboutEditorialHero}
                 alt="Personalized Korea travel planning and K-beauty curation in Seoul"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"

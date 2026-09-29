@@ -228,7 +228,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
     setValidationError(null);
     setSubmissionFailed(false);
     setCurrentStep(step);
-    window.scrollTo({ top: 120, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNext = () => {
@@ -243,7 +243,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
     if (currentStep < 5) {
       setCurrentStep((prev) => prev + 1);
-      window.scrollTo({ top: 120, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -253,7 +253,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
     setSubmissionFailed(false);
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
-      window.scrollTo({ top: 120, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -365,7 +365,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
         : `Email (${formData.email.trim()})`;
 
     return (
-      <div id="plan-trip-confirmation-page" className="w-full pt-32 pb-28 px-6 sm:px-8 bg-[#F7F2EC]">
+      <div id="plan-trip-confirmation-page" className="w-full pt-36 sm:pt-32 pb-32 sm:pb-28 px-6 sm:px-8 bg-[#F7F2EC]">
         <div className="max-w-2xl mx-auto bg-[#FCFAF7] border border-[#EADBCE] rounded-3xl p-8 sm:p-14 shadow-xs text-center space-y-8">
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#F7F2EC] border border-[#EADBCE] shadow-2xs">
@@ -458,7 +458,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
   }
 
   return (
-    <div id="plan-my-trip-page" className="w-full pt-32 pb-28 bg-[#F7F2EC]">
+    <div id="plan-my-trip-page" className="w-full pt-36 sm:pt-32 pb-32 sm:pb-28 bg-[#F7F2EC]">
       {/* Page Intro */}
       <section className="max-w-3xl mx-auto px-6 sm:px-8 pb-12 text-center space-y-5">
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE] shadow-2xs">
@@ -501,8 +501,51 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
       {/* Multi-Step Progress Bar */}
       <div className="max-w-4xl mx-auto px-6 sm:px-8 mb-10">
-        <div className="p-2.5 sm:p-3 rounded-2xl bg-[#FCFAF7] border border-[#EADBCE] shadow-2xs">
-          <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+        <div className="p-3 sm:p-3 rounded-2xl bg-[#FCFAF7] border border-[#EADBCE] shadow-2xs">
+          {/* Mobile Step Navigation: Compact 01–05 Row + Active Step Label Below */}
+          <div className="md:hidden">
+            <div className="grid grid-cols-5 gap-1.5">
+              {STEPS.map((step, index) => {
+                const stepNumber = index + 1;
+                const isActive = currentStep === stepNumber;
+                const isCompleted = currentStep > stepNumber;
+
+                return (
+                  <button
+                    key={step.num}
+                    type="button"
+                    onClick={() => goToStep(stepNumber)}
+                    disabled={isSubmitting}
+                    aria-label={`Step ${step.num}: ${step.label}`}
+                    aria-current={isActive ? 'step' : undefined}
+                    className={`py-2.5 rounded-xl text-center transition-all flex items-center justify-center ${
+                      isActive
+                        ? 'bg-[#302B29] text-[#F7F2EC] shadow-xs'
+                        : isCompleted
+                        ? 'bg-[#F4E8E5] text-[#302B29] hover:bg-[#E9D2CD]/70'
+                        : 'bg-transparent text-[#786761] hover:bg-[#F7F2EC]'
+                    }`}
+                  >
+                    <span
+                      className={`text-xs font-editorial italic tracking-[0.16em] font-semibold ${
+                        isActive ? 'text-[#E9D2CD]' : isCompleted ? 'text-[#302B29]' : 'text-[#786761]'
+                      }`}
+                    >
+                      {step.num}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-2.5 pt-2.5 border-t border-[#EADBCE]/80 text-center">
+              <span className="text-[11px] uppercase tracking-[0.22em] text-[#302B29] font-medium">
+                {STEPS[currentStep - 1]?.label}
+              </span>
+            </div>
+          </div>
+
+          {/* Desktop & Tablet Step Navigation (Unchanged) */}
+          <div className="hidden md:grid md:grid-cols-5 gap-2">
             {STEPS.map((step, index) => {
               const stepNumber = index + 1;
               const isActive = currentStep === stepNumber;
@@ -514,7 +557,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                   type="button"
                   onClick={() => goToStep(stepNumber)}
                   disabled={isSubmitting}
-                  className={`py-2.5 px-2 sm:px-3 rounded-xl text-left transition-all flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 ${
+                  className={`py-2.5 px-3 rounded-xl text-left transition-all flex items-center gap-2 ${
                     isActive
                       ? 'bg-[#302B29] text-[#F7F2EC] shadow-xs'
                       : isCompleted
@@ -529,7 +572,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                   >
                     {step.num}
                   </span>
-                  <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.12em] font-medium truncate">
+                  <span className="text-[11px] uppercase tracking-[0.12em] font-medium truncate">
                     {step.label}
                   </span>
                 </button>
