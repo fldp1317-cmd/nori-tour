@@ -483,18 +483,61 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           <p className="text-xs uppercase tracking-[0.18em] text-[#9B8983] font-medium">
             No payment is required at this stage.
           </p>
-          <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-4 py-2.5 rounded-2xl bg-[#FCFAF7] border border-[#EADBCE] text-[10px] uppercase tracking-[0.14em] text-[#786761]">
-            <span className="text-[#302B29] font-medium">Submit Request</span>
-            <span className="text-[#D9B4B0]">→</span>
-            <span>NORI Reviews</span>
-            <span className="text-[#D9B4B0]">→</span>
-            <span>Personalized Plan &amp; Quote</span>
-            <span className="text-[#D9B4B0]">→</span>
-            <span>Customer Agrees</span>
-            <span className="text-[#D9B4B0]">→</span>
-            <span>Payment</span>
-            <span className="text-[#D9B4B0]">→</span>
-            <span>Booking Confirmed</span>
+          <div className="lg:-mx-16 xl:-mx-24 flex justify-center">
+            <div className="w-full sm:w-auto inline-flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-center justify-center gap-y-1.5 sm:gap-x-2.5 sm:gap-y-2 px-5 py-4 sm:px-5 sm:py-3 rounded-2xl bg-[#FCFAF7] border border-[#EADBCE] text-[10px] uppercase tracking-[0.13em] text-[#786761] shadow-2xs">
+              <span className="text-[#302B29] font-medium whitespace-nowrap">
+                SUBMIT REQUEST
+              </span>
+              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                ↓
+              </span>
+              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                →
+              </span>
+              <span className="whitespace-nowrap">
+                NORI REVIEWS YOUR REQUEST
+              </span>
+              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                ↓
+              </span>
+              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                →
+              </span>
+              <span className="whitespace-nowrap">
+                PERSONALIZED PLAN &amp; QUOTE
+              </span>
+              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                ↓
+              </span>
+              <span aria-hidden="true" className="hidden lg:inline text-[#D9B4B0] leading-none">
+                →
+              </span>
+              <span aria-hidden="true" className="hidden sm:block lg:hidden basis-full h-0" />
+              <span aria-hidden="true" className="hidden sm:inline lg:hidden text-[#D9B4B0] leading-none">
+                →
+              </span>
+              <span className="whitespace-nowrap">
+                YOU CONFIRM
+              </span>
+              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                ↓
+              </span>
+              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                →
+              </span>
+              <span className="whitespace-nowrap">
+                PAYMENT
+              </span>
+              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                ↓
+              </span>
+              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                →
+              </span>
+              <span className="whitespace-nowrap">
+                BOOKING CONFIRMED
+              </span>
+            </div>
           </div>
         </div>
       </section>
