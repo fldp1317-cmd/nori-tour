@@ -240,6 +240,52 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
+      {/* 2B. Compact "WHY NORI" Editorial Section */}
+      <section id="why-nori-section" className="py-20 px-6 sm:px-8 bg-[#F7F2EC] border-b border-[#EADBCE]">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="max-w-2xl mx-auto text-center space-y-4">
+            <span className="text-xs uppercase tracking-[0.26em] text-[#D9B4B0] font-medium block">
+              WHY NORI
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light text-[#302B29] leading-tight">
+              Personalized travel, with K-beauty expertise built in.
+            </h2>
+            <p className="text-sm sm:text-base text-[#786761] font-light leading-relaxed pt-1">
+              NORI combines personalized Korea travel with thoughtful K-beauty guidance, so your trip can feel connected, personal, and genuinely useful.
+            </p>
+          </div>
+
+          <div className="border-t border-b border-[#EADBCE] bg-[#FCFAF7]/70 divide-y md:divide-y-0 md:divide-x divide-[#EADBCE] grid grid-cols-1 md:grid-cols-3">
+            <div className="py-7 px-6 sm:px-8 space-y-2.5 text-center md:text-left">
+              <h3 className="text-xs uppercase tracking-[0.2em] text-[#302B29] font-medium">
+                PRIVATE &amp; PERSONALIZED
+              </h3>
+              <p className="text-xs sm:text-sm text-[#786761] font-light leading-relaxed">
+                Your trip is shaped around your interests, pace, and the kind of support you actually want.
+              </p>
+            </div>
+
+            <div className="py-7 px-6 sm:px-8 space-y-2.5 text-center md:text-left">
+              <h3 className="text-xs uppercase tracking-[0.2em] text-[#302B29] font-medium">
+                K-BEAUTY EXPERTISE
+              </h3>
+              <p className="text-xs sm:text-sm text-[#786761] font-light leading-relaxed">
+                We help you understand skincare, products, beauty experiences, and your options in a simple, practical way.
+              </p>
+            </div>
+
+            <div className="py-7 px-6 sm:px-8 space-y-2.5 text-center md:text-left">
+              <h3 className="text-xs uppercase tracking-[0.2em] text-[#302B29] font-medium">
+                HONEST RECOMMENDATIONS
+              </h3>
+              <p className="text-xs sm:text-sm text-[#786761] font-light leading-relaxed">
+                More is not always better. If you don't need something, we'll tell you.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 3. High-Level Service Preview: What can NORI arrange? */}
       <section id="what-we-can-arrange" className="py-24 px-6 sm:px-8 max-w-7xl mx-auto bg-[#FFFFFF]">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -374,6 +420,60 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </p>
               </blockquote>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5B. Real Guest Stories Teaser */}
+      <section id="real-guest-stories-teaser" className="py-20 px-6 sm:px-8 bg-[#FBF9F6] border-t border-[#EADBCE]">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="text-xs uppercase tracking-[0.26em] text-[#D9B4B0] font-medium block">
+              REAL GUEST STORIES
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light text-[#302B29] leading-tight">
+              What our guests remember most
+            </h2>
+          </div>
+
+          <div className="border-t border-b border-[#EADBCE] bg-[#FCFAF7] divide-y md:divide-y-0 md:divide-x divide-[#EADBCE] grid grid-cols-1 md:grid-cols-3">
+            <blockquote className="py-8 px-6 sm:px-8 flex flex-col justify-between gap-5 text-center md:text-left">
+              <p className="text-xl sm:text-2xl font-editorial italic font-light text-[#302B29] leading-snug">
+                “We actually ended up shopping less than we expected.”
+              </p>
+              <footer className="text-xs text-[#786761] font-light tracking-wide">
+                Singapore · 40s · 2 Travelers
+              </footer>
+            </blockquote>
+
+            <blockquote className="py-8 px-6 sm:px-8 flex flex-col justify-between gap-5 text-center md:text-left">
+              <p className="text-xl sm:text-2xl font-editorial italic font-light text-[#302B29] leading-snug">
+                “She was always checking how we were feeling.”
+              </p>
+              <footer className="text-xs text-[#786761] font-light tracking-wide">
+                Singapore · 50s · 3 Travelers
+              </footer>
+            </blockquote>
+
+            <blockquote className="py-8 px-6 sm:px-8 flex flex-col justify-between gap-5 text-center md:text-left">
+              <p className="text-xl sm:text-2xl font-editorial italic font-light text-[#302B29] leading-snug">
+                “She told me she honestly didn't think I needed a skin treatment.”
+              </p>
+              <footer className="text-xs text-[#786761] font-light tracking-wide">
+                Los Angeles, USA · 40s · Couple
+              </footer>
+            </blockquote>
+          </div>
+
+          <div className="text-center pt-1">
+            <button
+              id="home-read-guest-stories-link"
+              type="button"
+              onClick={() => onNavigate('reviews')}
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#302B29] hover:text-[#786761] font-medium transition-colors border-b border-[#302B29] hover:border-[#786761] pb-1"
+            >
+              <span>READ GUEST STORIES →</span>
+            </button>
           </div>
         </div>
       </section>
