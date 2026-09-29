@@ -6,29 +6,15 @@ interface NavbarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   onPlanMyTrip: () => void;
-  currentLang?: 'EN' | '中文';
-  onLanguageChange?: (lang: 'EN' | '中文') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
   onPlanMyTrip,
-  currentLang: controlledLang,
-  onLanguageChange,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [internalLang, setInternalLang] = useState<'EN' | '中文'>('EN');
-
-  const currentLang = controlledLang ?? internalLang;
-  const handleLanguageSelect = (lang: 'EN' | '中文') => {
-    if (onLanguageChange) {
-      onLanguageChange(lang);
-    } else {
-      setInternalLang(lang);
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'arrange', label: 'WHAT WE CAN ARRANGE' },
     { id: 'plan', label: 'PLAN YOUR TRIP' },
     { id: 'journal', label: "NORI'S JOURNAL" },
+    { id: 'reviews', label: 'REVIEWS' },
     { id: 'about', label: 'ABOUT' },
   ];
 
@@ -96,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Actions: PLAN MY TRIP CTA & Language Switcher */}
+          {/* Right Actions: PLAN MY TRIP CTA */}
           <div className="flex items-center gap-2.5 sm:gap-3">
             <button
               id="nav-plan-trip-btn"
@@ -106,38 +93,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Sparkles className="w-3.5 h-3.5 text-[#E9D2CD] group-hover:rotate-12 transition-transform" />
               <span>PLAN MY TRIP</span>
             </button>
-
-            {/* Language Switcher UI: EN | 中文 */}
-            <div
-              className="inline-flex items-center px-2 py-1 rounded-full border border-[#EADBCE] bg-[#FCFAF7] text-[11px] select-none"
-              aria-label="Language selector"
-            >
-              <button
-                type="button"
-                onClick={() => handleLanguageSelect('EN')}
-                className={`transition-colors font-medium px-1.5 ${
-                  currentLang === 'EN'
-                    ? 'text-[#302B29] font-semibold'
-                    : 'text-[#9B8983] hover:text-[#302B29]'
-                }`}
-                aria-current={currentLang === 'EN' ? 'true' : undefined}
-              >
-                EN
-              </button>
-              <span className="text-[#D5C7BC] text-[10px]" aria-hidden="true">|</span>
-              <button
-                type="button"
-                onClick={() => handleLanguageSelect('中文')}
-                className={`transition-colors px-1.5 ${
-                  currentLang === '中文'
-                    ? 'text-[#302B29] font-semibold'
-                    : 'text-[#9B8983] hover:text-[#302B29]'
-                }`}
-                aria-current={currentLang === '中文' ? 'true' : undefined}
-              >
-                中文
-              </button>
-            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -158,26 +113,21 @@ export const Navbar: React.FC<NavbarProps> = ({
           id="mobile-menu-drawer"
           className="fixed inset-0 z-40 bg-[#F7F2EC] pt-24 px-8 pb-10 flex flex-col justify-between lg:hidden animate-fade-in"
         >
-          <div className="space-y-6">
-            <div className="border-b border-[#EADBCE] pb-3">
-              <NoriLogo size="sm" showSubtitle={true} />
-            </div>
-            <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`text-left text-xl tracking-[0.08em] font-editorial py-2 flex items-center justify-between ${
-                    activeTab === item.id
-                      ? 'text-[#D9B4B0] font-medium'
-                      : 'text-[#302B29] hover:text-[#D9B4B0]'
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  <ArrowRight className="w-4 h-4 opacity-40 text-[#D9B4B0]" />
-                </button>
-              ))}
-            </div>
+          <div className="flex flex-col space-y-4">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`text-left text-xl tracking-[0.08em] font-editorial py-2 flex items-center justify-between ${
+                  activeTab === item.id
+                    ? 'text-[#D9B4B0] font-medium'
+                    : 'text-[#302B29] hover:text-[#D9B4B0]'
+                }`}
+              >
+                <span>{item.label}</span>
+                <ArrowRight className="w-4 h-4 opacity-40 text-[#D9B4B0]" />
+              </button>
+            ))}
           </div>
 
           <div className="pt-8 border-t border-[#EADBCE] space-y-3">

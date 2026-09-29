@@ -11,50 +11,48 @@ import { HomePage } from './pages/HomePage';
 import { WhatWeCanArrangePage } from './pages/WhatWeCanArrangePage';
 import { PlanMyTripPage } from './pages/PlanMyTripPage';
 import { BeautyJournalPage } from './pages/BeautyJournalPage';
+import { ReviewsPage } from './pages/ReviewsPage';
 import { AboutPage } from './pages/AboutPage';
 
+const VALID_TABS = ['home', 'arrange', 'plan', 'journal', 'reviews', 'about'];
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('home');
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    const hash = window.location.hash.replace('#', '').replace('/', '');
+    if (VALID_TABS.includes(hash)) return hash;
+    const path = window.location.pathname.replace(/^\/+/, '').split('/')[0];
+    if (VALID_TABS.includes(path)) return path;
+    return 'home';
+  });
   const [selectedArticle, setSelectedArticle] = useState<JournalArticle | null>(null);
 
   // Business operations modals
   const [isPoliciesModalOpen, setIsPoliciesModalOpen] = useState<boolean>(false);
   const [activePolicyTab, setActivePolicyTab] = useState<PolicyTabId>('cancellation');
 
-  // Language state (default EN, active on homepage)
-  const [language, setLanguage] = useState<'EN' | '中文'>(() => {
-    try {
-      const saved = localStorage.getItem('nori_language');
-      return saved === '中文' ? '中文' : 'EN';
-    } catch {
-      return 'EN';
-    }
-  });
-
-  const handleLanguageChange = (lang: 'EN' | '中文') => {
-    setLanguage(lang);
-    try {
-      localStorage.setItem('nori_language', lang);
-    } catch {
-      // ignore
-    }
-  };
-
-  // Handle hash-based navigation for deep links or browser history
+  // Handle hash-based and popstate navigation for deep links or browser history
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (['home', 'arrange', 'plan', 'journal', 'about'].includes(hash)) {
+    const handleLocationChange = () => {
+      const hash = window.location.hash.replace('#', '').replace('/', '');
+      if (VALID_TABS.includes(hash)) {
         setActiveTab(hash);
+        window.scrollTo(0, 0);
+        return;
+      }
+      const path = window.location.pathname.replace(/^\/+/, '').split('/')[0];
+      if (VALID_TABS.includes(path)) {
+        setActiveTab(path);
         window.scrollTo(0, 0);
       }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    if (window.location.hash) {
-      handleHashChange();
-    }
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    window.addEventListener('popstate', handleLocationChange);
+    handleLocationChange();
+    return () => {
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
+    };
   }, []);
 
   const handleTabChange = (tab: string) => {
@@ -83,8 +81,6 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={handleTabChange}
         onPlanMyTrip={handlePlanMyTrip}
-        currentLang={language}
-        onLanguageChange={handleLanguageChange}
       />
 
       {/* Main Page Routing Views */}
@@ -94,7 +90,6 @@ export default function App() {
             articles={ARTICLES_DATA}
             onSelectArticle={handleSelectArticle}
             onNavigate={handleTabChange}
-            language={language}
           />
         )}
 
@@ -115,6 +110,10 @@ export default function App() {
             onSelectArticle={handleSelectArticle}
             onBookExperience={handlePlanMyTrip}
           />
+        )}
+
+        {activeTab === 'reviews' && (
+          <ReviewsPage />
         )}
 
         {activeTab === 'about' && (

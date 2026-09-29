@@ -78,30 +78,41 @@ export const HomePage: React.FC<HomePageProps> = ({
   ];
 
   return (
-    <div id="home-page" className="w-full bg-[#F7F2EC]">
+    <div id="home-page" className="w-full bg-[#FFFFFF]">
       {/* 1. Homepage Hero */}
       <section
         id="hero-section"
         className="relative min-h-[90vh] flex items-center justify-center pt-32 pb-24 px-6 sm:px-8 overflow-hidden bg-[#F7F2EC]"
       >
-        {/* Editorial Visual with Soft Rose & Warm Ivory Glow */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <img
-            src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=2000&q=85"
-            alt="Serene Korean Beauty and Editorial Travel Atmosphere"
-            referrerPolicy="no-referrer"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src =
-                'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=2000&q=85';
-            }}
-            className="w-full h-full object-cover object-center opacity-25 scale-105 transform duration-1000 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F7F2EC]/85 via-[#F7F2EC]/60 to-[#F7F2EC]" />
-
-          {/* Subtle Ambient Glow Motifs */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[360px] bg-[#E9D2CD]/35 blur-3xl rounded-full" />
-          <div className="absolute top-1/4 right-10 w-48 h-48 bg-[#D9B4B0]/20 blur-2xl rounded-full" />
-        </div>
+        {/* Layered Editorial Color Atmosphere: Warm Ivory (#F7F2EC) with Asymmetric Blush/Taupe Diffused Glows & Subtle Paper Grain */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            background: `
+              radial-gradient(ellipse 68% 64% at 78% 36%, rgba(233, 210, 205, 0.52) 0%, rgba(217, 180, 176, 0.22) 38%, rgba(120, 103, 97, 0.04) 64%, rgba(247, 242, 236, 0) 100%),
+              radial-gradient(ellipse 62% 54% at 24% 84%, rgba(120, 103, 97, 0.085) 0%, rgba(217, 180, 176, 0.14) 42%, rgba(247, 242, 236, 0) 100%),
+              radial-gradient(ellipse 55% 48% at 18% 22%, rgba(252, 250, 247, 0.85) 0%, rgba(247, 242, 236, 0) 100%),
+              linear-gradient(135deg, #FAF6F1 0%, #F7F2EC 48%, #F3EAE2 100%)
+            `,
+          }}
+        />
+        {/* Ultra-Subtle Editorial Paper / Film Grain Texture */}
+        <svg
+          aria-hidden="true"
+          className="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-[0.028] mix-blend-multiply"
+        >
+          <filter id="nori-editorial-grain">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.8"
+              numOctaves="3"
+              stitchTiles="stitch"
+            />
+            <feColorMatrix type="saturate" values="0" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#nori-editorial-grain)" />
+        </svg>
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
@@ -169,7 +180,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 2. Introduce the New NORI Concept */}
-      <section id="nori-concept-section" className="py-24 px-6 sm:px-8 bg-[#FCFAF7] border-y border-[#EADBCE]">
+      <section id="nori-concept-section" className="py-24 px-6 sm:px-8 bg-[#FBF9F6] border-y border-[#EADBCE]">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F7F2EC] border border-[#EADBCE] text-[10px] uppercase tracking-[0.24em] text-[#786761] font-medium">
             <Compass className="w-3.5 h-3.5 text-[#D9B4B0]" />
@@ -230,7 +241,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 3. High-Level Service Preview: What can NORI arrange? */}
-      <section id="what-we-can-arrange" className="py-24 px-6 sm:px-8 max-w-7xl mx-auto">
+      <section id="what-we-can-arrange" className="py-24 px-6 sm:px-8 max-w-7xl mx-auto bg-[#FFFFFF]">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <span className="text-xs uppercase tracking-[0.26em] text-[#D9B4B0] font-medium block">
             {isZh ? '服务范畴' : 'Tailored Ground Arrangements'}
@@ -293,7 +304,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 4. Personalized Process: 3-Step Section */}
-      <section id="personalized-process" className="py-24 px-6 sm:px-8 bg-[#FCFAF7] border-y border-[#EADBCE]">
+      <section id="personalized-process" className="py-24 px-6 sm:px-8 bg-[#FBF9F6] border-y border-[#EADBCE]">
         <div className="max-w-6xl mx-auto space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs uppercase tracking-[0.26em] text-[#D9B4B0] font-medium block">
@@ -328,7 +339,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 5. NORI Brand / Honesty Section */}
-      <section id="honest-guidance-section" className="py-24 px-6 sm:px-8 bg-[#F7F2EC]">
+      <section id="honest-guidance-section" className="py-24 px-6 sm:px-8 bg-[#FFFFFF]">
         <div className="max-w-4xl mx-auto">
           <div className="p-10 sm:p-16 rounded-3xl bg-[#FCFAF7] border border-[#EADBCE] shadow-xs relative overflow-hidden">
             {/* Subtle glow highlight */}
@@ -388,47 +399,36 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
 
         {/* Magazine-style articles grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="max-w-3xl mx-auto">
           {previewArticles.map((article) => (
             <article
               key={article.id}
               onClick={() => onSelectArticle(article)}
-              className="group cursor-pointer bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl overflow-hidden hover:border-[#D9B4B0] transition-all flex flex-col justify-between hover:shadow-md"
+              className="group cursor-pointer bg-[#FCFAF7] border border-[#EADBCE] rounded-3xl overflow-hidden hover:border-[#D9B4B0] transition-all flex flex-col justify-between hover:shadow-md p-8 sm:p-10"
             >
-              <div>
-                <div className="relative aspect-16/10 overflow-hidden bg-[#ECE4D9]">
-                  <img
-                    src={article.heroImage}
-                    alt={article.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 bg-[#F7F2EC]/90 backdrop-blur-md text-[10px] uppercase tracking-[0.16em] text-[#302B29] font-semibold rounded-full shadow-2xs">
-                      {article.category}
-                    </span>
-                  </div>
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7F2EC] border border-[#EADBCE]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D9B4B0]" />
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                    {article.category}
+                  </span>
                 </div>
-
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-[11px] text-[#786761] mb-2.5">
-                    <span>{article.date}</span>
-                    <span>•</span>
-                    <span>{article.readTime}</span>
-                  </div>
-                  <h3 className="text-xl font-editorial font-light text-[#302B29] group-hover:text-[#786761] transition-colors leading-snug mb-3">
-                    {article.title}
-                  </h3>
-                  <p className="text-xs text-[#786761] leading-relaxed line-clamp-2 font-light">
-                    {article.excerpt}
+                <h3 className="text-2xl sm:text-3xl font-editorial font-light text-[#302B29] group-hover:text-[#786761] transition-colors leading-snug">
+                  {article.title}
+                </h3>
+                {(article.subtitle || article.excerpt) && (
+                  <p className="text-base sm:text-lg font-editorial italic text-[#786761] leading-relaxed font-light">
+                    {article.subtitle || article.excerpt}
                   </p>
-                </div>
+                )}
               </div>
 
-              <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-[#EADBCE]/60 text-xs text-[#786761]">
-                <span>{isZh ? `作者：${article.author.name}` : `By ${article.author.name}`}</span>
-                <span className="group-hover:text-[#302B29] font-medium flex items-center gap-1">
-                  {isZh ? '阅读全文' : 'Read Story'} <ArrowRight className="w-3 h-3 text-[#D9B4B0]" />
+              <div className="mt-8 pt-5 flex items-center justify-between border-t border-[#EADBCE]/60 text-xs text-[#786761]">
+                <span className="uppercase tracking-[0.18em] text-[#302B29] font-medium">
+                  {isZh ? `作者：${article.author.name}` : article.author.name}
+                </span>
+                <span className="group-hover:text-[#302B29] font-semibold uppercase tracking-[0.16em] text-[#302B29] flex items-center gap-1.5">
+                  {isZh ? '阅读全文' : 'Read Journal'} <ArrowRight className="w-3.5 h-3.5 text-[#D9B4B0] group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>
             </article>

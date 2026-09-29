@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Sparkles, ShieldCheck, Heart, Users, Compass, ChevronDown, ChevronUp, ArrowRight, Award, Building2, Phone, Mail, Globe, MapPin } from 'lucide-react';
+import {
+  Sparkles,
+  ShieldCheck,
+  Heart,
+  Compass,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  Sliders,
+} from 'lucide-react';
 import { BUSINESS_POLICIES } from '../data/businessPolicies';
 
 interface AboutPageProps {
@@ -13,25 +22,30 @@ interface FAQItem {
 
 const FAQS: FAQItem[] = [
   {
-    question: 'How does NORI select aesthetic clinics, spas, and styling ateliers?',
-    answer: 'We audit every destination in person with strict clinical and ethical criteria. We verify physician credentials, sterile protocol adherence, genuine equipment authenticity certificates, and patient safety records. Because NORI operates 100% independently with zero clinic kickbacks or sales quotas, our guidance is solely driven by what is healthy and beneficial for your individual skin.'
+    question: 'Is NORI TOUR a fixed-package tour agency?',
+    answer:
+      'No. NORI TOUR does not sell rigid, one-size-fits-all tour packages. We are a personalized Korea travel and K-beauty planning service. You tell us what you want to experience—from airport transfers and private guiding to skincare shopping, personal color analysis, or beauty consultations—and we build a custom plan and quote around you.',
   },
   {
-    question: 'Do your signature beauty and spa experiences require downtime?',
-    answer: 'Our curated beauty and wellness experiences are completely non-invasive and require zero downtime. You walk away radiant, calm, and camera-ready. For travelers interested in specialized clinical lasers or skin boosters, our medical liaisons prepare personalized pre-and-post care regimens to ensure full comfort throughout your trip.'
+    question: 'How does the planning and booking process work?',
+    answer:
+      'Start by submitting a request through our Plan My Trip form. No payment is required when submitting your request. Our team reviews your travel dates, preferences, and interests, then contacts you via WhatsApp or email with a personalized itinerary proposal and quote. Your booking is only confirmed once the plan, pricing, and payment are agreed upon.',
   },
   {
-    question: 'What if I have sensitive or reactive skin?',
-    answer: 'Our curators are certified dermo-aestheticians. Before any treatment, we evaluate your active allergies, skin barrier history, and current routine. If a gentle, soothing botanical or barrier-strengthening treatment is better than an aggressive exfoliating peel, we will recommend that with uncompromising honesty.'
+    question: 'Can I request only beauty experiences, or only travel arrangements?',
+    answer:
+      'Yes. Every itinerary is built around what you actually need. Whether you only want help navigating K-beauty experiences in Seoul, or you want end-to-end ground support including airport transfers, a private vehicle, hotel assistance, and local activities, you can choose as much or as little as fits your trip.',
   },
   {
-    question: 'How does the tax refund process work in Korea?',
-    answer: 'South Korea provides direct immediate VAT refunds (typically 7-10%) on eligible cosmetic purchases and aesthetic services for foreign tourists. Bring your passport when shopping, and your NORI guide can help you navigate immediate on-site tax refund counters or receipt validation.'
+    question: 'Does NORI arrange international flights to Korea?',
+    answer:
+      'NORI specializes in ground arrangements within Korea. International airfare is not included or arranged, though we are happy to coordinate Incheon or Gimpo airport pickups and drop-offs around your flight schedule.',
   },
   {
-    question: 'How does NORI personalize each trip?',
-    answer: 'No two trips to Korea should look the same. Tell us what you want to experience—from airport transfers and private guiding to K-beauty shopping, personal color analysis, or beauty consultations—and we build the ground arrangements around your personal pace and preferences.'
-  }
+    question: 'How does NORI approach beauty treatments and clinical consultations?',
+    answer:
+      'We believe in honest, pressure-free guidance—sometimes the best recommendation is "You don\'t need it." When travelers request dermatology or aesthetic clinic coordination, NORI assists with scheduling and interpretation support. All medical advice, diagnoses, and treatments are provided directly by licensed medical professionals.',
+  },
 ];
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
@@ -42,51 +56,60 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
   };
 
   return (
-    <div id="about-page" className="w-full pt-28 pb-24 bg-[#F7F2EC]">
+    <div id="about-page" className="w-full pt-32 pb-24 bg-[#F7F2EC]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Title Banner */}
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-20 space-y-5">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE]">
             <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
-            <span className="text-xs uppercase tracking-[0.28em] text-[#786761] font-medium">
-              About NORI TOUR • Nori
+            <span className="text-[11px] uppercase tracking-[0.26em] text-[#786761] font-medium">
+              ABOUT NORI TOUR
             </span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-editorial font-light text-[#302B29] tracking-tight">
-            Beauty + Wellness + Playful Premium
+          <h1 className="text-4xl sm:text-6xl font-editorial font-light text-[#302B29] tracking-tight leading-[1.12]">
+            Personal, playful, and <span className="italic font-normal text-[#786761]">designed around you.</span>
           </h1>
           <p className="text-base sm:text-lg text-[#786761] font-light leading-relaxed max-w-2xl mx-auto">
-            NORI was founded to help international travelers explore Korean beauty and wellness with confidence, honest guidance, and unhurried curiosity.
+            NORI TOUR creates personalized Korea travel and K-beauty experiences for international travelers — combining thoughtful ground arrangements with honest local guidance.
           </p>
         </div>
 
-        {/* The Meaning of Nori Section */}
+        {/* Who We Are & How We Work */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24 pb-20 border-b border-[#EADBCE]">
           <div className="lg:col-span-6 space-y-6">
-            <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-semibold">
-              The Meaning of Our Name
+            <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-semibold block">
+              Our Approach
             </span>
             <h2 className="text-3xl sm:text-4xl font-editorial font-light text-[#302B29] leading-tight">
-              NORI comes from the Korean word “Nori,” meaning “play.”
+              Built around your trip, not a pre-made catalog.
             </h2>
-            <div className="space-y-4 text-sm text-[#786761] font-light leading-relaxed">
+            <div className="space-y-4 text-sm sm:text-base text-[#786761] font-light leading-relaxed">
               <p>
-                For NORI, <span className="font-editorial italic font-medium text-[#302B29]">“play”</span> means exploring freely, discovering what suits you, enjoying the process, and feeling comfortable and curious.
+                Inspired by the Korean word <span className="font-editorial italic font-medium text-[#302B29]">“놀이” (nori)</span>, meaning play, NORI was created to help travelers explore Korea and K-beauty with curiosity, ease, and no unnecessary pressure.
               </p>
               <p>
-                Too often, international travelers arrive in Seoul excited about K-beauty, only to face overwhelming marketing, commercial clinic sales pressure, and confusion over complex ingredients.
+                Instead of asking you to fit your schedule into a fixed group tour or a pre-bundled package, we start by listening to what you want to experience, your travel pace, and what kind of support would make your time in Korea smoother.
               </p>
               <p>
-                We believe discovering beauty and Korea should feel curious, enjoyable, relaxed, personal, and completely pressure-free. We craft experiences where you can ask real questions, learn the science behind Korean glow, and enjoy Korea in a way that feels entirely your own.
+                From private airport transfers, guiding, and hotel support to K-beauty shopping, personal color, hair, and aesthetic care coordination, we help put the pieces together in a way that feels genuinely yours.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-[#EADBCE]/80 space-y-0.5">
+              <p className="text-sm font-editorial font-medium text-[#302B29]">
+                Seoha Park (Lucy)
+              </p>
+              <p className="text-xs text-[#786761] font-light tracking-wide">
+                Founder &amp; Representative Director
               </p>
             </div>
           </div>
 
           <div className="lg:col-span-6">
-            <div className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-md bg-[#ECE4D9] border border-[#EADBCE]">
+            <div className="relative aspect-16/10 rounded-3xl overflow-hidden shadow-md bg-[#ECE4D9] border border-[#EADBCE]">
               <img
-                src="https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1200&q=80"
-                alt="Traditional Korean Hanok Courtyard with Sunlight"
+                src="/src/assets/images/about_nori_editorial_hero_1790649547011.jpg"
+                alt="Personalized Korea travel planning and K-beauty curation in Seoul"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
@@ -94,196 +117,114 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
           </div>
         </div>
 
-        {/* Honest Guidance / Brand Philosophy */}
+        {/* Beauty Expertise Editorial Section */}
         <div className="mb-24">
-          <div className="p-10 sm:p-14 rounded-3xl bg-[#FCFAF7] border border-[#EADBCE] shadow-xs relative overflow-hidden">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <span className="text-xs uppercase tracking-[0.28em] text-[#D9B4B0] font-medium">
-                Our Brand Promise
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#FCFAF7] border border-[#EADBCE] shadow-xs">
+            <div className="max-w-3xl mx-auto space-y-5">
+              <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-semibold block">
+                BEAUTY EXPERTISE
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light text-[#302B29]">
-                Honest guidance, always.
+              <h2 className="text-3xl sm:text-4xl font-editorial font-light text-[#302B29] leading-tight">
+                Beauty knowledge, shaped by real conversations.
               </h2>
-              <p className="text-base sm:text-lg text-[#786761] font-light leading-relaxed">
-                We believe the best beauty choice is not always the most expensive, dramatic, or popular one. NORI helps you understand your options and choose what genuinely fits you.
-              </p>
-              <blockquote className="p-6 rounded-2xl bg-[#F7F2EC] border border-[#EADBCE] text-center space-y-2">
-                <p className="text-xs uppercase tracking-[0.2em] text-[#D9B4B0] font-semibold">
-                  Our Honest Standard
+              <div className="space-y-4 text-sm sm:text-base text-[#786761] font-light leading-relaxed pt-1">
+                <p>
+                  NORI TOUR is led by Seoha Park (Lucy), who holds the highest-level Cosmetics Specialist qualification (Level 1) and has hands-on experience working in a K-beauty curation retail environment.
                 </p>
-                <p className="text-xl sm:text-2xl font-editorial italic text-[#302B29] leading-snug">
-                  Sometimes the best recommendation is: “You don’t need it.”
+                <p>
+                  Through assisting many international customers with skincare and cosmetic shopping, she gained practical experience listening to different skin concerns, routines, preferences, and budgets — and helping each customer navigate Korea’s wide range of beauty products with greater confidence.
                 </p>
-              </blockquote>
-              <p className="text-xs sm:text-sm text-[#786761] font-light leading-relaxed max-w-2xl mx-auto">
-                NORI never recommends a product or treatment simply because it is expensive, trending, popular, dramatic, or invasive. If a simpler or gentler option makes more sense for your skin, we say so with complete honesty.
-              </p>
+                <p>
+                  That experience continues to shape NORI’s approach today: thoughtful guidance, personalized recommendations, and an honest belief that more is not always better.
+                </p>
+                <p>
+                  For NORI, K-beauty is not about following every trend. It is about helping each guest understand their options and discover what genuinely makes sense for them.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* 6 Core Pillars of NORI */}
+        {/* Core Philosophy Pillars */}
         <div className="mb-24">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase tracking-[0.28em] text-[#D9B4B0] font-medium">
-              The NORI Experience
+          <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+            <span className="text-xs uppercase tracking-[0.28em] text-[#D9B4B0] font-medium block">
+              Our Philosophy
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light text-[#302B29]">
-              How We Guide You
-            </h2>
-            <p className="text-sm text-[#786761] font-light max-w-xl mx-auto">
-              How we approach every guest consultation, beauty arrangement, and local experience in Korea.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="p-8 bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl space-y-3 hover:border-[#D9B4B0] transition-colors shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0] mb-4">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <h3 className="text-xl font-editorial font-light text-[#302B29]">
-                Personalized K-Beauty Guidance
-              </h3>
-              <p className="text-xs text-[#786761] leading-relaxed font-light">
-                No two complexions or lifestyles are alike. We listen to your concerns, goals, and sensitivities to guide you to routines that build genuine skin health.
-              </p>
-            </div>
-
-            <div className="p-8 bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl space-y-3 hover:border-[#D9B4B0] transition-colors shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0] mb-4">
-                <Compass className="w-5 h-5" />
-              </div>
-              <h3 className="text-xl font-editorial font-light text-[#302B29]">
-                Local Knowledge
-              </h3>
-              <p className="text-xs text-[#786761] leading-relaxed font-light">
-                From quiet Hanok tea courtyards in Bukchon to beauty neighborhoods across Seoul, our local knowledge helps travelers navigate Korea with ease and confidence.
-              </p>
-            </div>
-
-            <div className="p-8 bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl space-y-3 hover:border-[#D9B4B0] transition-colors shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0] mb-4">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="text-xl font-editorial font-light text-[#302B29]">
-                Honest Recommendations
-              </h3>
-              <p className="text-xs text-[#786761] leading-relaxed font-light">
-                We maintain strict independence from clinics and retail brands. We prioritize gentleness, safety, and evidence-based efficacy over fleeting trends.
-              </p>
-            </div>
-
-            <div className="p-8 bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl space-y-3 hover:border-[#D9B4B0] transition-colors shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0] mb-4">
-                <Award className="w-5 h-5" />
-              </div>
-              <h3 className="text-xl font-editorial font-light text-[#302B29]">
-                Beauty + Wellness Expertise
-              </h3>
-              <p className="text-xs text-[#786761] leading-relaxed font-light">
-                Our team includes licensed dermo-aestheticians and certified personal color analysts. We explain clinical technology in clear, practical English.
-              </p>
-            </div>
-
-            <div className="p-8 bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl space-y-3 hover:border-[#D9B4B0] transition-colors shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0] mb-4">
-                <Heart className="w-5 h-5" />
-              </div>
-              <h3 className="text-xl font-editorial font-light text-[#302B29]">
-                Comfortable & Pressure-Free
-              </h3>
-              <p className="text-xs text-[#786761] leading-relaxed font-light">
-                We remove the intimidation from K-beauty. An unhurried pace, welcoming environments, and warm hospitality allow you to truly relax and enjoy.
-              </p>
-            </div>
-
-            <div className="p-8 bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl space-y-3 hover:border-[#D9B4B0] transition-colors shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0] mb-4">
-                <Users className="w-5 h-5" />
-              </div>
-              <h3 className="text-xl font-editorial font-light text-[#302B29]">
-                Curated for Individual Needs
-              </h3>
-              <p className="text-xs text-[#786761] leading-relaxed font-light">
-                Whether you seek barrier restoration, custom foundation matching, or serene mindfulness, each journey is sculpted around what benefits you most.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Meet the Curators */}
-        <div className="mb-24 pb-20 border-b border-[#EADBCE]">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-semibold">
-              The Curators
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-editorial font-light text-[#302B29]">
-              Passionate Local Experts by Your Side
+              What Guides Every Plan
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl overflow-hidden shadow-xs">
-              <div className="aspect-3/3 bg-[#ECE4D9] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
-                  alt="Lucy, Representative Director of NORI TOUR Co., Ltd."
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
-                />
+            <div className="p-8 sm:p-10 bg-[#FCFAF7] border border-[#EADBCE] rounded-3xl space-y-4 hover:border-[#D9B4B0] transition-colors shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0]">
+                <Sliders className="w-5 h-5" />
               </div>
-              <div className="p-6 space-y-2">
-                <h4 className="text-xl font-editorial font-light text-[#302B29]">Lucy</h4>
-                <p className="text-xs uppercase tracking-wider text-[#D9B4B0] font-semibold">Representative Director</p>
-                <p className="text-xs text-[#786761] leading-relaxed font-light">
-                  Representative Director of NORI TOUR Co., Ltd. (주식회사 노리투어). Dedicated to transparent travel operations, statutory integrity, and personalized Korean beauty experiences.
-                </p>
-              </div>
+              <h3 className="text-2xl font-editorial font-light text-[#302B29]">
+                Personalized over packaged.
+              </h3>
+              <p className="text-xs sm:text-sm text-[#786761] leading-relaxed font-light">
+                Every traveler has a different rhythm. Choose only the ground arrangements, local activities, and beauty experiences you actually want—and skip the rest.
+              </p>
             </div>
 
-            <div className="bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl overflow-hidden shadow-xs">
-              <div className="aspect-3/3 bg-[#ECE4D9] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80"
-                  alt="Yuna Song"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
-                />
+            <div className="p-8 sm:p-10 bg-[#FCFAF7] border border-[#EADBCE] rounded-3xl space-y-4 hover:border-[#D9B4B0] transition-colors shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0]">
+                <Compass className="w-5 h-5" />
               </div>
-              <div className="p-6 space-y-2">
-                <h4 className="text-xl font-editorial font-light text-[#302B29]">Yuna Song</h4>
-                <p className="text-xs uppercase tracking-wider text-[#D9B4B0] font-semibold">Lead Color & Styling Analyst</p>
-                <p className="text-xs text-[#786761] leading-relaxed font-light">
-                  Certified Color Consultant trained in Seoul. Passionate about helping international travelers find harmonious cosmetic shades and personal style.
-                </p>
-              </div>
+              <h3 className="text-2xl font-editorial font-light text-[#302B29]">
+                Useful over excessive.
+              </h3>
+              <p className="text-xs sm:text-sm text-[#786761] leading-relaxed font-light">
+                A great itinerary isn't about packing in the most stops or buying the longest list of products. We focus on thoughtful scheduling and practical local guidance that truly helps you.
+              </p>
             </div>
 
-            <div className="bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl overflow-hidden shadow-xs">
-              <div className="aspect-3/3 bg-[#ECE4D9] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
-                  alt="Dr. Ji-Hoon Kang"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
-                />
+            <div className="p-8 sm:p-10 bg-[#FCFAF7] border border-[#EADBCE] rounded-3xl space-y-4 hover:border-[#D9B4B0] transition-colors shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-[#F4E8E5] flex items-center justify-center text-[#D9B4B0]">
+                <Heart className="w-5 h-5" />
               </div>
-              <div className="p-6 space-y-2">
-                <h4 className="text-xl font-editorial font-light text-[#302B29]">Dr. Ji-Hoon Kang</h4>
-                <p className="text-xs uppercase tracking-wider text-[#D9B4B0] font-semibold">Medical Advisor & Doctor Liaison</p>
-                <p className="text-xs text-[#786761] leading-relaxed font-light">
-                  Board-certified dermatologist advising on safety standards, sterile clinical auditing, and gentle post-travel skin restoration.
+              <h3 className="text-2xl font-editorial font-light text-[#302B29]">
+                Honest recommendations over unnecessary spending.
+              </h3>
+              <p className="text-xs sm:text-sm text-[#786761] leading-relaxed font-light">
+                We believe discovering K-beauty should be comfortable and pressure-free. When a simpler option makes more sense—or when you don't need something at all—we say so honestly.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Honest Guidance Callout */}
+        <div className="mb-24">
+          <div className="p-10 sm:p-14 rounded-3xl bg-[#FCFAF7] border border-[#EADBCE] shadow-xs relative overflow-hidden">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <span className="text-xs uppercase tracking-[0.28em] text-[#D9B4B0] font-medium block">
+                Our Standard
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light text-[#302B29]">
+                Beauty, without the pressure.
+              </h2>
+              <p className="text-sm sm:text-base text-[#786761] font-light leading-relaxed max-w-2xl mx-auto">
+                Navigating beauty shops, salons, and clinics in a new country can feel overwhelming. NORI is here to help you explore at your own pace and focus on what genuinely fits you.
+              </p>
+              <blockquote className="p-6 rounded-2xl bg-[#F7F2EC] border border-[#EADBCE] text-center space-y-2 max-w-xl mx-auto">
+                <p className="text-xs uppercase tracking-[0.2em] text-[#786761] font-light">
+                  Sometimes the best recommendation is:
                 </p>
-              </div>
+                <p className="text-xl sm:text-2xl font-editorial italic text-[#302B29] leading-snug">
+                  “You don’t need it.”
+                </p>
+              </blockquote>
             </div>
           </div>
         </div>
 
         {/* FAQs Accordion */}
-        <div className="max-w-3xl mx-auto mb-20">
+        <div className="max-w-3xl mx-auto mb-24">
           <div className="text-center mb-12 space-y-2">
             <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-semibold">
-              Questions & Answers
+              Questions &amp; Answers
             </span>
             <h2 className="text-3xl font-editorial font-light text-[#302B29]">
               Frequently Asked Questions
@@ -313,7 +254,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-[#786761] leading-relaxed border-t border-[#EADBCE]/50">
+                    <div className="px-6 pb-5 pt-2 text-xs sm:text-sm text-[#786761] font-light leading-relaxed border-t border-[#EADBCE]/50">
                       {faq.answer}
                     </div>
                   )}
@@ -329,7 +270,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EADBCE] pb-6">
               <div>
                 <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-semibold block mb-1">
-                  Statutory Transparency
+                  Company Details
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-editorial font-light text-[#302B29]">
                   Official Business Information
@@ -354,8 +295,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
                 <span className="text-[10px] uppercase tracking-wider text-[#786761] block font-semibold">
                   Representative Director
                 </span>
-                <p className="font-semibold text-sm text-[#302B29]">{BUSINESS_POLICIES.businessInformation.representative}</p>
-                <p className="text-[#786761] text-[11px]">Representative Director & Founder</p>
+                <p className="font-semibold text-sm text-[#302B29]">Seoha Park (Lucy)</p>
+                <p className="text-[#786761] text-[11px]">Founder &amp; Representative Director</p>
               </div>
 
               <div className="p-5 bg-white rounded-2xl border border-[#EADBCE] space-y-1">
@@ -414,7 +355,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
               </div>
               <div className="pt-3 border-t border-[#EADBCE] flex flex-wrap items-center gap-6 text-[#302B29]">
                 <div>
-                  <strong>Phone:</strong> <a href={`tel:${BUSINESS_POLICIES.businessInformation.phone}`} className="hover:underline ml-1">{BUSINESS_POLICIES.businessInformation.phone}</a>
+                  <strong>Phone:</strong> <a href="https://wa.me/821048295754" target="_blank" rel="noopener noreferrer" className="hover:underline ml-1">{BUSINESS_POLICIES.businessInformation.phone}</a>
                 </div>
                 <div>
                   <strong>Email:</strong> <a href={`mailto:${BUSINESS_POLICIES.businessInformation.email}`} className="hover:underline ml-1">{BUSINESS_POLICIES.businessInformation.email}</a>
@@ -428,13 +369,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookExperience }) => {
         </div>
 
         {/* Bottom Callout */}
-        <div className="text-center space-y-4 p-12 rounded-3xl bg-[#302B29] text-[#F7F2EC] shadow-md">
-          <h3 className="text-2xl sm:text-4xl font-editorial font-light text-[#F7F2EC]">
-            Find Your Glow. Play Your Way.
-          </h3>
-          <p className="text-xs sm:text-sm text-[#D9B4B0] max-w-md mx-auto font-light leading-relaxed">
-            NORI helps you find what works for you, enjoy the discovery, and leave Korea glowing in your own way.
-          </p>
+        <div className="text-center space-y-6 p-12 sm:p-16 rounded-3xl bg-[#302B29] text-[#F7F2EC] shadow-md">
+          <div className="space-y-3">
+            <h3 className="text-3xl sm:text-5xl font-editorial font-light text-[#F7F2EC]">
+              Find your glow. <span className="italic text-[#E9D2CD]">Play your way.</span>
+            </h3>
+            <p className="text-xs sm:text-sm text-[#D9B4B0] max-w-lg mx-auto font-light leading-relaxed">
+              Tell us what you want to experience in Korea, and we'll create a personalized plan and quote around you.
+            </p>
+          </div>
+          <div className="pt-1">
+            <button
+              onClick={onBookExperience}
+              className="px-9 py-4 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#302B29] rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md inline-flex items-center gap-2.5 group"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#302B29]" />
+              <span>PLAN MY TRIP</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#302B29] group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

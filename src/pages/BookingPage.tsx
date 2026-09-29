@@ -1011,7 +1011,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                   <p>Tourism License: {BUSINESS_POLICIES.businessInformation.tourismLicenseNumber} | Biz Reg: {BUSINESS_POLICIES.businessInformation.businessRegistrationNumber}</p>
                   <p>{BUSINESS_POLICIES.businessInformation.englishAddress}</p>
                   <div className="pt-1 flex flex-wrap gap-2 text-[#302B29] font-medium">
-                    <a href={`tel:${BUSINESS_POLICIES.businessInformation.phone}`} className="hover:underline">Tel: {BUSINESS_POLICIES.businessInformation.phone}</a>
+                    <a href="https://wa.me/821048295754" target="_blank" rel="noopener noreferrer" className="hover:underline">Tel: {BUSINESS_POLICIES.businessInformation.phone}</a>
                     <span>•</span>
                     <a href={`mailto:${BUSINESS_POLICIES.businessInformation.email}`} className="hover:underline">{BUSINESS_POLICIES.businessInformation.email}</a>
                   </div>

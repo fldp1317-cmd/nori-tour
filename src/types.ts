@@ -148,6 +148,11 @@ export interface TourVisualStoryItem {
 }
 
 export type JournalCategory = 
+  | 'NORI PHILOSOPHY'
+  | 'SKINCARE INGREDIENTS'
+  | 'SKINCARE SCIENCE'
+  | 'SKIN BARRIER'
+  | 'AESTHETIC GUIDE'
   | 'Skincare' 
   | 'Ingredients' 
   | 'K-Beauty Shopping' 
@@ -159,20 +164,42 @@ export type JournalCategory =
   | 'Travel Beauty Tips'
   | 'Wellness & Glow';
 
+export interface JournalNoriPick {
+  label: string;
+  productName: string;
+  officialUrl: string;
+  paragraphs: string[];
+}
+
+export interface JournalReferenceLink {
+  text: string;
+  url: string;
+}
+
+export interface JournalSection {
+  heading?: string;
+  paragraphs: string[];
+  noriPick?: JournalNoriPick;
+  referenceLink?: JournalReferenceLink;
+}
+
 // 5. CMS-Style Beauty Journal Data Structure
 export interface JournalArticle {
   id: string;
   title: string;
+  subtitle?: string;
   slug: string;
   category: JournalCategory;
   author: {
     name: string;
-    role: string;
-    avatar: string;
+    role?: string;
+    avatar?: string;
   };
-  publishDate: string;
-  heroImage: string;
+  publishDate?: string;
+  heroImage?: string;
   articleContent: string[];
+  sections?: JournalSection[];
+  signOff?: string;
   relatedExperience?: string;
   seoTitle: string;
   seoDescription: string;
@@ -285,7 +312,8 @@ export interface TripInquiryData {
   preferredContactMethod: 'WhatsApp' | 'Email';
   whatsappCountryCode: string;
   whatsappNumber: string;
-  preferredLanguage: 'English' | 'Korean' | 'Chinese' | 'Other';
+  preferredLanguage: 'English' | 'Chinese' | 'Other';
+  preferredLanguageOther?: string;
   instagramHandle: string;
   quoteRequestConsent: boolean;
 }

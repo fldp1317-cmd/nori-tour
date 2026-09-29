@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { Search, Clock, ArrowRight, Sparkles, Compass } from 'lucide-react';
+import React from 'react';
+import { Sparkles } from 'lucide-react';
 import { JournalArticle, JournalCategory } from '../types';
 
 interface BeautyJournalPageProps {
@@ -8,227 +8,230 @@ interface BeautyJournalPageProps {
   onBookExperience: () => void;
 }
 
-const CATEGORIES: ('All' | JournalCategory)[] = [
-  'All',
-  'Skincare',
-  'Ingredients',
-  'K-Beauty Shopping',
-  'Beauty Tips',
-  'Beauty Treatments',
-  'Wellness',
-  'Korea Beauty Guide'
-];
+const CARD_TEASERS: Record<string, string> = {
+  'nori-philosophy-what-beauty-means-to-nori':
+    'There is no one way to be beautiful.',
+  'skincare-ingredients-the-secret-of-niacinamide':
+    'More isn’t always better. The percentage matters.',
+  'skincare-science-why-dark-spots-happen-and-how-to-fade-them':
+    'Sun, acne, vitamin C, and when professional treatment may make sense.',
+  'skin-barrier-your-skin-barrier-is-doing-more-than-you-think':
+    'Ceramides, panthenol, and why healthy skin sometimes needs less, not more.',
+  'aesthetic-guide-before-you-fill-your-nasolabial-folds':
+    'Why NORI doesn’t automatically recommend filling every smile line.',
+};
+
+const renderCategoryIcon = (category: JournalCategory) => {
+  switch (category) {
+    case 'NORI PHILOSOPHY':
+      // Minimal inner glow / abstract 4-petal botanical star
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+          aria-hidden="true"
+        >
+          <path d="M12 3.5C12.7 7.8 16.2 11.3 20.5 12C16.2 12.7 12.7 16.2 12 20.5C11.3 16.2 7.8 12.7 3.5 12C7.8 11.3 11.3 7.8 12 3.5Z" />
+          <circle cx="12" cy="12" r="1.25" />
+        </svg>
+      );
+
+    case 'SKINCARE INGREDIENTS':
+      // Minimal serum droplet
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+          aria-hidden="true"
+        >
+          <path d="M12 3.75C12 3.75 6.5 10.2 6.5 14.5C6.5 17.54 8.96 20 12 20C15.04 20 17.5 17.54 17.5 14.5C17.5 10.2 12 3.75 12 3.75Z" />
+          <path d="M9.75 14.75C9.75 16.1 10.65 17.15 12 17.4" />
+        </svg>
+      );
+
+    case 'SKINCARE SCIENCE':
+      // Minimal sun + subtle pigment spot motif
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+          aria-hidden="true"
+        >
+          <circle cx="11.5" cy="11.5" r="4.25" />
+          <path d="M11.5 4V5.25" />
+          <path d="M11.5 17.75V19" />
+          <path d="M4 11.5H5.25" />
+          <path d="M17.75 11.5H19" />
+          <path d="M6.2 6.2L7.1 7.1" />
+          <path d="M15.9 15.9L16.8 16.8" />
+          <path d="M16.8 6.2L15.9 7.1" />
+          <path d="M7.1 15.9L6.2 16.8" />
+          <circle cx="18.25" cy="17.75" r="1.35" />
+        </svg>
+      );
+
+    case 'SKIN BARRIER':
+      // Minimal layered skin barrier / protective curves
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+          aria-hidden="true"
+        >
+          <path d="M4.5 9.25C7 7.75 9.5 7.75 12 9.25C14.5 10.75 17 10.75 19.5 9.25" />
+          <path d="M4.5 13.25C7 11.75 9.5 11.75 12 13.25C14.5 14.75 17 14.75 19.5 13.25" />
+          <path d="M4.5 17.25C7 15.75 9.5 15.75 12 17.25C14.5 18.75 17 18.75 19.5 17.25" />
+        </svg>
+      );
+
+    case 'AESTHETIC GUIDE':
+      // Minimal facial contour / profile line
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+          aria-hidden="true"
+        >
+          <path d="M9.5 4.25C13.5 4.25 16.25 7.1 16.25 11.1C16.25 14.8 14.1 18.2 10.75 19.75" />
+          <path d="M11.25 12.25C12.35 13.1 13.1 14.55 12.85 16.1" />
+        </svg>
+      );
+
+    default:
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5"
+          aria-hidden="true"
+        >
+          <path d="M12 4.5V19.5M4.5 12H19.5" />
+        </svg>
+      );
+  }
+};
 
 export const BeautyJournalPage: React.FC<BeautyJournalPageProps> = ({
   articles,
   onSelectArticle,
   onBookExperience,
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<'All' | JournalCategory>('All');
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const filteredArticles = useMemo(() => {
-    return articles.filter((art) => {
-      const matchesCat = selectedCategory === 'All' || art.category === selectedCategory;
-      const matchesSearch =
-        searchQuery.trim() === '' ||
-        art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (art.excerpt ? art.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) : false) ||
-        (art.tags || []).some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchesCat && matchesSearch;
-    });
-  }, [articles, selectedCategory, searchQuery]);
-
-  const featuredArticle = articles[0];
-
   return (
-    <div id="beauty-journal-page" className="w-full pt-28 pb-24 bg-[#F7F2EC]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Magazine Title Banner */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE]">
-            <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
-            <span className="text-xs uppercase tracking-[0.28em] text-[#786761] font-medium">
-              The NORI Journal • Nori
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-editorial font-light text-[#302B29] tracking-tight">
-            The Seoul Beauty Journal
+    <div id="beauty-journal-page" className="w-full pt-32 pb-28 bg-[#FBF9F6]">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8">
+        {/* Magazine Archive Header */}
+        <div className="text-center max-w-xl mx-auto mb-16 sm:mb-20 space-y-3.5">
+          <span className="text-[10px] uppercase tracking-[0.28em] text-[#B69688] font-medium block">
+            The NORI Journal
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-editorial font-light text-[#302B29] tracking-tight">
+            NORI&apos;s Journal
           </h1>
-          <p className="text-sm sm:text-base text-[#786761] font-light leading-relaxed max-w-xl mx-auto">
-            Editorial essays, clinical ingredient breakdowns, and honest guides written by licensed Korean aestheticians and wellness curators.
+          <p className="text-sm text-[#786761] font-light leading-relaxed">
+            Thoughtful notes on K-beauty, skin, and aesthetic care.
           </p>
         </div>
 
-        {/* Featured Editorial Cover Story */}
-        {selectedCategory === 'All' && searchQuery === '' && featuredArticle && (
-          <div
-            onClick={() => onSelectArticle(featuredArticle)}
-            className="cursor-pointer group mb-16 rounded-3xl overflow-hidden bg-[#FCFAF7] border border-[#EADBCE] hover:border-[#D9B4B0] transition-all shadow-xs hover:shadow-md grid grid-cols-1 lg:grid-cols-12"
-          >
-            <div className="lg:col-span-7 relative aspect-16/10 lg:aspect-auto overflow-hidden bg-[#ECE4D9]">
-              <img
-                src={featuredArticle.heroImage}
-                alt={featuredArticle.title}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute top-4 left-4 flex gap-2">
-                <span className="px-3.5 py-1.5 bg-[#F7F2EC]/90 backdrop-blur-md text-[11px] uppercase tracking-[0.2em] font-semibold text-[#302B29] rounded-full shadow-xs">
-                  Cover Story
-                </span>
-              </div>
-            </div>
+        {/* 2-Column Editorial Archive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {articles.map((article) => {
+            const teaser =
+              CARD_TEASERS[article.id] || article.subtitle || article.excerpt || '';
 
-            <div className="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-xs text-[#786761]">
-                  <span className="text-[#D9B4B0] font-semibold uppercase tracking-wider">
-                    {featuredArticle.category}
+            return (
+              <article
+                key={article.id}
+                onClick={() => onSelectArticle(article)}
+                className="group cursor-pointer rounded-2xl bg-[#FCFAF7] border border-[#EAE0D6] hover:border-[#D9B4B0] transition-all duration-300 ease-out md:hover:-translate-y-0.5 shadow-[0_1px_2px_rgba(48,43,41,0.02)] hover:shadow-[0_8px_24px_rgba(48,43,41,0.05)] p-7 sm:p-9 flex flex-col justify-between min-h-[230px] sm:min-h-[250px]"
+              >
+                <div className="space-y-4">
+                  {/* Small Minimal Line Icon */}
+                  <div className="text-[#B69688] group-hover:text-[#9D7F73] transition-transform duration-300 ease-out md:group-hover:-translate-y-0.5">
+                    {renderCategoryIcon(article.category)}
+                  </div>
+
+                  {/* Category Label */}
+                  <span className="text-[10px] uppercase tracking-[0.24em] text-[#8C7A73] font-medium block pt-0.5">
+                    {article.category}
                   </span>
-                  <span>•</span>
-                  <span>{featuredArticle.readTime}</span>
-                </div>
 
-                <h2 className="text-2xl sm:text-4xl font-editorial font-light text-[#302B29] group-hover:text-[#786761] transition-colors leading-snug">
-                  {featuredArticle.title}
-                </h2>
-
-                <p className="text-sm text-[#786761] font-light leading-relaxed">
-                  {featuredArticle.excerpt}
-                </p>
-              </div>
-
-              <div className="pt-8 border-t border-[#EADBCE] flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={featuredArticle.author.avatar}
-                    alt={featuredArticle.author.name}
-                    referrerPolicy="no-referrer"
-                    className="w-9 h-9 rounded-full object-cover border border-[#EADBCE]"
-                  />
-                  <div>
-                    <p className="text-xs font-semibold text-[#302B29]">
-                      {featuredArticle.author.name}
-                    </p>
-                    <p className="text-[10px] text-[#786761]">{featuredArticle.author.role}</p>
-                  </div>
-                </div>
-
-                <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#302B29] font-semibold group-hover:text-[#786761] transition-colors">
-                  Read Story <ArrowRight className="w-3.5 h-3.5 text-[#D9B4B0]" />
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Filter Navigation Bar */}
-        <div className="mb-12 pt-6 border-t border-[#EADBCE] flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Category tabs */}
-          <div className="flex flex-wrap items-center gap-2">
-            {CATEGORIES.map((cat) => {
-              const count =
-                cat === 'All'
-                  ? articles.length
-                  : articles.filter((a) => a.category === cat).length;
-              const isActive = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.14em] font-medium transition-all ${
-                    isActive
-                      ? 'bg-[#302B29] text-[#F7F2EC]'
-                      : 'bg-[#FCFAF7] text-[#786761] hover:bg-[#F4E8E5] border border-[#EADBCE]'
-                  }`}
-                >
-                  <span>{cat}</span>
-                  <span className="ml-1.5 opacity-60 text-[10px]">({count})</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Search bar */}
-          <div className="relative w-full md:w-64">
-            <Search className="w-4 h-4 text-[#786761] absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search stories, ingredients..."
-              className="w-full pl-9 pr-4 py-2 bg-[#FCFAF7] border border-[#EADBCE] rounded-full text-xs text-[#302B29] placeholder-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
-            />
-          </div>
-        </div>
-
-        {/* Article Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredArticles.map((article) => (
-            <article
-              key={article.id}
-              onClick={() => onSelectArticle(article)}
-              className="group cursor-pointer bg-[#FCFAF7] border border-[#EADBCE] rounded-2xl overflow-hidden hover:border-[#D9B4B0] transition-all flex flex-col justify-between shadow-xs hover:shadow-md"
-            >
-              <div>
-                <div className="relative aspect-16/10 overflow-hidden bg-[#ECE4D9]">
-                  <img
-                    src={article.heroImage}
-                    alt={article.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 bg-[#F7F2EC]/90 backdrop-blur-md text-[10px] uppercase tracking-[0.16em] text-[#302B29] font-medium rounded-full shadow-2xs">
-                      {article.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-[11px] text-[#786761] mb-2">
-                    <Clock className="w-3 h-3 text-[#D9B4B0]" />
-                    <span>{article.readTime}</span>
-                    <span>•</span>
-                    <span>{article.publishDate || article.date}</span>
-                  </div>
-
-                  <h3 className="text-xl font-editorial font-light text-[#302B29] group-hover:text-[#786761] transition-colors leading-snug mb-3">
+                  {/* Article Title */}
+                  <h2 className="text-2xl sm:text-[28px] font-editorial font-light text-[#302B29] group-hover:text-[#5E504B] transition-colors leading-[1.2] tracking-[-0.005em]">
                     {article.title}
-                  </h3>
+                  </h2>
 
-                  <p className="text-xs text-[#786761] leading-relaxed line-clamp-2 font-light mb-3">
-                    {article.excerpt}
-                  </p>
+                  {/* Short Teaser: always visible on mobile, gently revealed on hover on desktop */}
+                  {teaser && (
+                    <p className="text-xs sm:text-[13.5px] text-[#786761] font-light leading-relaxed pt-1 opacity-100 md:opacity-0 md:translate-y-1 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 ease-out">
+                      {teaser}
+                    </p>
+                  )}
                 </div>
-              </div>
 
-              <div className="p-6 pt-0">
-                <div className="pt-4 border-t border-[#EADBCE] flex items-center justify-between text-xs text-[#786761]">
-                  <span>By {article.author.name}</span>
-                  <span className="group-hover:text-[#302B29] font-medium flex items-center gap-1">
-                    Read <ArrowRight className="w-3 h-3 text-[#D9B4B0]" />
+                {/* Subtle Read Journal Affordance */}
+                <div className="pt-6 mt-4 border-t border-[#EFE7DF]/80 flex items-center justify-between">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#9A8881] font-normal">
+                    {article.author.name}
+                  </span>
+
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#302B29] font-medium opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-out">
+                    READ JOURNAL →
                   </span>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-20 p-10 rounded-3xl bg-[#302B29] text-[#F7F2EC] flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-20 p-10 sm:p-12 rounded-3xl bg-[#302B29] text-[#F7F2EC] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <span className="text-xs uppercase tracking-[0.2em] text-[#D9B4B0] font-medium">
-              Curated Seoul Guidance
+              Personalized Korea Travel &amp; K-Beauty
             </span>
             <h3 className="text-2xl sm:text-3xl font-editorial font-light text-[#F7F2EC]">
-              Experience these beauty rituals in person
+              Planning a trip to Korea?
             </h3>
-            <p className="text-xs text-[#D9B4B0] font-light max-w-md">
-              From clinical facials in Cheongdam to mindful Hanok head spas, let our bilingual aestheticians guide your journey.
+            <p className="text-xs sm:text-sm text-[#D9B4B0] font-light max-w-lg">
+              Tell us what you&apos;d like to experience, from getting around Seoul to discovering K-beauty, and we&apos;ll build a personalized plan and quote around you.
             </p>
           </div>
+          <button
+            onClick={onBookExperience}
+            className="w-full md:w-auto px-8 py-4 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#302B29] rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xs inline-flex items-center justify-center gap-2 shrink-0"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#302B29]" />
+            <span>PLAN MY TRIP</span>
+          </button>
         </div>
       </div>
     </div>

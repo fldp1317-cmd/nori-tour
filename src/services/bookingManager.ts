@@ -361,10 +361,15 @@ export const submitTripInquiry = async (inquiry: TripInquiryData): Promise<Booki
   ];
 
   // Logical Group Summaries for immediate readability by the NORI team
+  const resolvedPreferredLanguage =
+    inquiry.preferredLanguage === 'Other' && inquiry.preferredLanguageOther?.trim()
+      ? `Other (${inquiry.preferredLanguageOther.trim()})`
+      : inquiry.preferredLanguage;
+
   const travelerGroupSummary = [
     `Name: ${customerName}`,
     `Country / Region: ${inquiry.countryRegion.trim() || 'Not specified'}`,
-    `Preferred Language: ${inquiry.preferredLanguage}`,
+    `Preferred Language: ${resolvedPreferredLanguage}`,
   ].join(' | ');
 
   const tripDetailsGroupSummary = [
@@ -396,7 +401,7 @@ export const submitTripInquiry = async (inquiry: TripInquiryData): Promise<Booki
     `Email: ${inquiry.email.trim()}`,
     `Preferred Contact: ${inquiry.preferredContactMethod}`,
     `WhatsApp: ${formattedWhatsapp || 'Not provided'}`,
-    `Language: ${inquiry.preferredLanguage}`,
+    `Language: ${resolvedPreferredLanguage}`,
     `Instagram / Social: ${inquiry.instagramHandle.trim() || 'Not provided'}`,
   ].join(' | ');
 
@@ -456,7 +461,7 @@ export const submitTripInquiry = async (inquiry: TripInquiryData): Promise<Booki
     params.append('Email', inquiry.email.trim());
     params.append('WhatsApp_Number', formattedWhatsapp || 'Not provided');
     params.append('Preferred_Contact_Method', inquiry.preferredContactMethod);
-    params.append('Preferred_Language', inquiry.preferredLanguage);
+    params.append('Preferred_Language', resolvedPreferredLanguage);
     params.append('Instagram_or_Social_Handle', inquiry.instagramHandle.trim() || 'Not provided');
 
     // 3. TRIP DETAILS

@@ -108,9 +108,8 @@ const BUDGET_OPTIONS = [
   "I'm not sure yet",
 ];
 
-const LANGUAGE_OPTIONS: Array<'English' | 'Korean' | 'Chinese' | 'Other'> = [
+const LANGUAGE_OPTIONS: Array<'English' | 'Chinese' | 'Other'> = [
   'English',
-  'Korean',
   'Chinese',
   'Other',
 ];
@@ -145,6 +144,7 @@ const INITIAL_INQUIRY_STATE: TripInquiryData = {
   whatsappCountryCode: '+1',
   whatsappNumber: '',
   preferredLanguage: 'English',
+  preferredLanguageOther: '',
   instagramHandle: '',
   quoteRequestConsent: false,
 };
@@ -405,7 +405,20 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               </p>
             </div>
 
-            <div className="pt-3 border-t border-[#EADBCE]/80 flex items-center justify-center">
+            <div className="pt-3 border-t border-[#EADBCE]/80 flex flex-col items-center justify-center gap-3">
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.15em] text-[#786761]">
+                <span className="text-[#302B29] font-semibold">Submit Request</span>
+                <span className="text-[#D9B4B0]">→</span>
+                <span className="text-[#302B29] font-semibold">NORI Reviews</span>
+                <span className="text-[#D9B4B0]">→</span>
+                <span>Personalized Plan &amp; Quote</span>
+                <span className="text-[#D9B4B0]">→</span>
+                <span>Customer Agrees</span>
+                <span className="text-[#D9B4B0]">→</span>
+                <span>Payment</span>
+                <span className="text-[#D9B4B0]">→</span>
+                <span>Booking Confirmed</span>
+              </div>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE] text-xs text-[#302B29] font-medium">
                 Nori's on it ✌️
               </span>
@@ -466,9 +479,24 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           </p>
         </div>
 
-        <p className="text-xs uppercase tracking-[0.18em] text-[#9B8983] font-medium pt-1">
-          No payment is required at this stage.
-        </p>
+        <div className="pt-1 space-y-3">
+          <p className="text-xs uppercase tracking-[0.18em] text-[#9B8983] font-medium">
+            No payment is required at this stage.
+          </p>
+          <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-4 py-2.5 rounded-2xl bg-[#FCFAF7] border border-[#EADBCE] text-[10px] uppercase tracking-[0.14em] text-[#786761]">
+            <span className="text-[#302B29] font-medium">Submit Request</span>
+            <span className="text-[#D9B4B0]">→</span>
+            <span>NORI Reviews</span>
+            <span className="text-[#D9B4B0]">→</span>
+            <span>Personalized Plan &amp; Quote</span>
+            <span className="text-[#D9B4B0]">→</span>
+            <span>Customer Agrees</span>
+            <span className="text-[#D9B4B0]">→</span>
+            <span>Payment</span>
+            <span className="text-[#D9B4B0]">→</span>
+            <span>Booking Confirmed</span>
+          </div>
+        </div>
       </section>
 
       {/* Multi-Step Progress Bar */}
@@ -626,55 +654,50 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                 >
                   How many people are traveling? *
                 </label>
-                <div className="flex items-center justify-between p-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl max-w-xs">
-                  <div className="flex items-center gap-2.5 text-xs text-[#786761] pl-1">
-                    <Users className="w-4 h-4 text-[#D9B4B0]" />
-                    <span>Number of travelers</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          numberOfTravelers: Math.max(1, prev.numberOfTravelers - 1),
-                        }))
-                      }
-                      className="w-8 h-8 rounded-full border border-[#EADBCE] bg-[#FCFAF7] hover:border-[#D9B4B0] text-[#302B29] flex items-center justify-center text-sm font-medium transition-colors"
-                    >
-                      -
-                    </button>
-                    <input
-                      id="inquiry-travelers-count"
-                      name="Number_of_Travelers"
-                      type="number"
-                      min={1}
-                      max={50}
-                      required
-                      value={formData.numberOfTravelers}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value, 10);
-                        setFormData((prev) => ({
-                          ...prev,
-                          numberOfTravelers: isNaN(val) || val < 1 ? 1 : val,
-                        }));
-                      }}
-                      className="w-12 text-center bg-transparent text-sm font-semibold text-[#302B29] focus:outline-none"
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          numberOfTravelers: prev.numberOfTravelers + 1,
-                        }))
-                      }
-                      className="w-8 h-8 rounded-full border border-[#EADBCE] bg-[#FCFAF7] hover:border-[#D9B4B0] text-[#302B29] flex items-center justify-center text-sm font-medium transition-colors"
-                    >
-                      +
-                    </button>
-                  </div>
+                <input
+                  id="inquiry-travelers-count"
+                  name="Number_of_Travelers"
+                  type="hidden"
+                  value={formData.numberOfTravelers >= 7 ? '7+' : formData.numberOfTravelers}
+                />
+                <div className="grid grid-cols-4 sm:grid-cols-7 gap-2.5">
+                  {[
+                    { label: '1', value: 1 },
+                    { label: '2', value: 2 },
+                    { label: '3', value: 3 },
+                    { label: '4', value: 4 },
+                    { label: '5', value: 5 },
+                    { label: '6', value: 6 },
+                    { label: '7+', value: 7 },
+                  ].map((option) => {
+                    const isSelected =
+                      option.value === 7
+                        ? formData.numberOfTravelers >= 7
+                        : formData.numberOfTravelers === option.value;
+                    return (
+                      <button
+                        key={option.label}
+                        type="button"
+                        onClick={() =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            numberOfTravelers: option.value,
+                          }))
+                        }
+                        className={`py-3 px-4 rounded-2xl border text-xs sm:text-sm transition-all ${
+                          isSelected
+                            ? 'bg-[#302B29] text-[#F7F2EC] border-[#302B29] font-medium shadow-2xs'
+                            : 'bg-[#F7F2EC] text-[#302B29] border-[#EADBCE] hover:border-[#D9B4B0] font-light'
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    );
+                  })}
                 </div>
+                <p className="text-xs text-[#786761] font-light leading-relaxed">
+                  NORI specializes in private, personalized trips for small groups. Some experiences may have individual group-size limits. Traveling with 7 or more? Send us your request and we’ll let you know what we can arrange.
+                </p>
               </div>
 
               {/* Who are you traveling with? */}
@@ -1144,7 +1167,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                 <label className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium">
                   Preferred language
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-3 gap-3">
                   {LANGUAGE_OPTIONS.map((lang) => {
                     const isSelected = formData.preferredLanguage === lang;
                     return (
@@ -1165,6 +1188,31 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                     );
                   })}
                 </div>
+
+                {formData.preferredLanguage === 'Other' && (
+                  <div className="space-y-1.5 pt-1">
+                    <label
+                      htmlFor="inquiry-preferred-language-other"
+                      className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                    >
+                      Please specify your preferred language
+                    </label>
+                    <input
+                      id="inquiry-preferred-language-other"
+                      name="Preferred_Language_Other"
+                      type="text"
+                      value={formData.preferredLanguageOther || ''}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          preferredLanguageOther: e.target.value,
+                        }))
+                      }
+                      placeholder="e.g. Japanese, French, Spanish"
+                      className="w-full px-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Instagram / Social Handle (Optional) */}

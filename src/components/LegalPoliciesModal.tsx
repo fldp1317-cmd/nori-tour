@@ -56,9 +56,12 @@ export const LegalPoliciesModal: React.FC<LegalPoliciesModalProps> = ({
         </p>
       </div>
 
-      <div className="p-4 bg-[#F4E8E5]/50 border border-[#D9B4B0]/40 rounded-2xl text-xs text-[#302B29] leading-relaxed">
-        <strong>Summary: </strong>{section.summary}
-      </div>
+      {section.summary && (
+        <div className="p-4 bg-[#F4E8E5]/50 border border-[#D9B4B0]/40 rounded-2xl text-xs text-[#302B29] leading-relaxed whitespace-pre-line">
+          <strong className="block mb-1">Summary</strong>
+          {section.summary}
+        </div>
+      )}
 
       <div className="space-y-5 pt-2">
         {section.rules.map((rule, idx) => (
@@ -66,15 +69,20 @@ export const LegalPoliciesModal: React.FC<LegalPoliciesModalProps> = ({
             <h4 className="text-sm font-semibold text-[#302B29] tracking-wide">
               {rule.heading}
             </h4>
-            <p className="text-xs text-[#786761] leading-relaxed">
+            <p className="text-xs text-[#786761] leading-relaxed whitespace-pre-line">
               {rule.description}
             </p>
             {rule.bullets && rule.bullets.length > 0 && (
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-[#786761] pt-1">
                 {rule.bullets.map((bullet, bIdx) => (
-                  <li key={bIdx}>{bullet}</li>
+                  <li key={bIdx} className="whitespace-pre-line leading-relaxed">{bullet}</li>
                 ))}
               </ul>
+            )}
+            {rule.footerDescription && (
+              <p className="text-xs text-[#786761] leading-relaxed whitespace-pre-line pt-1">
+                {rule.footerDescription}
+              </p>
             )}
           </div>
         ))}
@@ -113,7 +121,6 @@ export const LegalPoliciesModal: React.FC<LegalPoliciesModalProps> = ({
             Representative Director
           </span>
           <p className="font-semibold text-[#302B29]">{info.representative}</p>
-          <p className="text-[#786761] text-[11px]">Executive Director, NORI TOUR Co., Ltd.</p>
         </div>
 
         <div className="p-4 bg-white rounded-2xl border border-[#EADBCE] space-y-1">
@@ -125,7 +132,7 @@ export const LegalPoliciesModal: React.FC<LegalPoliciesModalProps> = ({
 
         <div className="p-4 bg-white rounded-2xl border border-[#EADBCE] space-y-1">
           <span className="text-[10px] uppercase tracking-wider text-[#786761] block font-semibold">
-            Tourism Business Registration (관광사업자 등록번호)
+            Tourism Business Registration No. (관광사업자 등록번호)
           </span>
           <p className="font-medium text-[#302B29]">{info.tourismLicenseNumber}</p>
         </div>
@@ -158,7 +165,7 @@ export const LegalPoliciesModal: React.FC<LegalPoliciesModalProps> = ({
           <p><strong>Korean Address:</strong> {info.koreanAddress}</p>
         </div>
         <div className="pt-2 border-t border-[#EADBCE] flex flex-wrap gap-4 sm:gap-6 text-[#302B29]">
-          <p><strong>Phone:</strong> <a href={`tel:${info.phone}`} className="hover:underline">{info.phone}</a></p>
+          <p><strong>Phone:</strong> <a href="https://wa.me/821048295754" target="_blank" rel="noopener noreferrer" className="hover:underline">{info.phone}</a></p>
           <p><strong>Email:</strong> <a href={`mailto:${info.email}`} className="hover:underline">{info.email}</a></p>
           <p><strong>Operating Hours:</strong> {info.operatingHours}</p>
         </div>
