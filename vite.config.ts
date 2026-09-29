@@ -21,15 +21,15 @@ function ensureNoriFaviconFiles() {
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, {recursive: true});
   }
-  const files: Record<string, string> = {
-    'favicon-16x16.png': FAVICON_16_BASE64,
-    'favicon-32x32.png': FAVICON_32_BASE64,
-    'favicon.ico': FAVICON_ICO_BASE64,
-    'apple-touch-icon.png': APPLE_TOUCH_ICON_BASE64,
-  };
-  for (const [filename, b64] of Object.entries(files)) {
-    fs.writeFileSync(path.join(publicDir, filename), Buffer.from(b64, 'base64'));
-  }
+  const icoBuffer = Buffer.from(FAVICON_ICO_BASE64, 'base64');
+  const png32Buffer = icoBuffer.subarray(38, 38 + 1915);
+  const png16Buffer = icoBuffer.subarray(38 + 1915);
+  const appleTouchBuffer = Buffer.from(APPLE_TOUCH_ICON_BASE64, 'base64');
+
+  fs.writeFileSync(path.join(publicDir, 'favicon.ico'), icoBuffer);
+  fs.writeFileSync(path.join(publicDir, 'favicon-32x32.png'), png32Buffer);
+  fs.writeFileSync(path.join(publicDir, 'favicon-16x16.png'), png16Buffer);
+  fs.writeFileSync(path.join(publicDir, 'apple-touch-icon.png'), appleTouchBuffer);
 }
 
 function noriFaviconPlugin(): Plugin {
