@@ -20,7 +20,7 @@ export const NoriLogo: React.FC<NoriLogoProps> = ({
     ? 'text-[#F7F2EC]'
     : isGold
     ? 'text-[#D9B4B0]'
-    : 'text-[#302B29]';
+    : 'text-[#1C1917]';
 
   const tourColor = isLight
     ? 'text-[#E9D2CD]'

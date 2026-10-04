@@ -14,32 +14,15 @@
   --color-blush-pink-light: #F4E8E5;
   --color-warm-taupe: #786761;
   --color-warm-taupe-light: #9B8983;
-  --color-deep-charcoal: #302B29;
-  --color-deep-charcoal-light: #443E3B;
+  --color-deep-charcoal: #1C1917;
+  --color-deep-charcoal-light: #292524;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #F7F2EC;
-  color: #302B29;
+  background-color: #1C1917;
+  color: #F7F2EC;
   overflow-x: hidden;
-}
-
-h1, h2, h3, .font-editorial {
-  font-family: var(--font-serif);
-}
-
-/* Soft radiant glow highlight */
-.glow-subtle {
-  box-shadow: 0 4px 28px -2px rgba(217, 180, 176, 0.22);
-}
-
-.glow-card {
-  box-shadow: 0 8px 32px -4px rgba(120, 103, 97, 0.08);
-}
-
-.glow-rose {
-  box-shadow: 0 6px 20px -2px rgba(217, 180, 176, 0.35);
 }
 
 /* Custom scrollbar for an editorial feel */
@@ -49,16 +32,254 @@ h1, h2, h3, .font-editorial {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F7F2EC;
+  background: #1C1917;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #EADBCE;
+  background: #3D3634;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #D9B4B0;
+}
+
+/* Ambient breathing background glow for hero */
+@keyframes ambientGlow {
+  0%, 100% {
+    transform: scale(1) translate(0%, 0%);
+    opacity: 0.16;
+  }
+  50% {
+    transform: scale(1.08) translate(-1%, 2%);
+    opacity: 0.24;
+  }
+}
+
+@keyframes ambientGlowSecondary {
+  0%, 100% {
+    transform: scale(1) translate(0%, 0%);
+    opacity: 0.12;
+  }
+  50% {
+    transform: scale(1.1) translate(2%, -1%);
+    opacity: 0.20;
+  }
+}
+
+/* Home Hero Slogan: Slower, softer, luxurious 1.25s duration with 180ms stagger */
+@keyframes heroLine1 {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroLine2 {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered smooth entrance animations: translateY 12px, duration ~700-850ms */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Subtle luxury shimmer across rose text */
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-glow-primary {
+  animation: ambientGlow 10s ease-in-out infinite;
+}
+
+.animate-glow-secondary {
+  animation: ambientGlowSecondary 12s ease-in-out infinite;
+}
+
+/* Hero entrance classes */
+.animate-hero-eyebrow {
+  animation: fadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-line-1 {
+  animation: heroLine1 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.animate-hero-line-2 {
+  animation: heroLine2 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.23s both;
+}
+
+.animate-hero-supporting {
+  animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
+}
+
+.animate-hero-cta {
+  animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+}
+
+.animate-hero-scroll {
+  animation: fadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.88s both;
+}
+
+/* Legacy reveal classes mapped smoothly to unified motion language */
+.animate-reveal-1 {
+  animation: fadeSlideUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-reveal-2 {
+  animation: heroLine1 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.animate-reveal-3 {
+  animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
+}
+
+.animate-reveal-4 {
+  animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+}
+
+.animate-reveal-5 {
+  animation: fadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.88s both;
+}
+
+/* Unified Scroll Reveal Transitions */
+.nori-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.nori-reveal.nori-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+.nori-reveal-heading {
+  transition-duration: 750ms;
+}
+
+.nori-reveal-card {
+  transition-duration: 700ms;
+}
+
+.text-shimmer-rose {
+  background: linear-gradient(
+    90deg,
+    #E9D2CD 0%,
+    #FFF8F6 50%,
+    #E9D2CD 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 7s linear infinite;
+}
+
+/* Calm, gentle float for scroll guidance without harsh bouncing */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+.animate-gentle-float {
+  animation: gentleFloat 2.6s ease-in-out infinite;
+}
+
+@keyframes fadeInSimple {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeInSimple 0.25s ease-out forwards;
+}
+
+/* Mobile motion restraint: shallower translateY (8-10px) to prevent layout shifts */
+@media (max-width: 640px) {
+  @keyframes heroLine1 {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroLine2 {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nori-reveal {
+    transform: translateY(8px);
+  }
+}
+
+/* Accessibility: respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .nori-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 

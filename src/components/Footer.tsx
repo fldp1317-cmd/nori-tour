@@ -45,19 +45,19 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer id="main-footer" className="bg-[#302B29] text-[#F7F2EC] pt-20 pb-12 border-t border-[#443E3B]">
+    <footer id="main-footer" className="bg-[#1C1917] text-[#F7F2EC] pt-20 pb-12 border-t border-[#3D3634]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Upper Editorial Newsletter & Headline */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-[#443E3B]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-[#3D3634]">
           <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#443E3B]/60 border border-[#524B47]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2A2523] border border-[#3D3634]">
               <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
               <span className="text-xs uppercase tracking-[0.25em] text-[#D9B4B0] font-medium">
                 NORI TOUR • SEOUL, KOREA
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-editorial font-light tracking-wide leading-tight text-[#F7F2EC]">
-              Find your glow. Play your way.
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-sans font-bold tracking-tight leading-tight text-white">
+              Find your glow. <span className="text-[#E9D2CD]">Play your way.</span>
             </h2>
             <p className="text-sm text-[#D9B4B0] font-light max-w-xl leading-relaxed">
               Personalized Korea travel and K-beauty experiences, designed around you. Tell us what you need, and NORI creates a personalized plan and quote.
@@ -68,9 +68,9 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={onOpenBooking}
-                className="px-7 py-3.5 bg-[#D9B4B0] text-[#302B29] hover:bg-[#E9D2CD] transition-all rounded-full text-xs uppercase tracking-[0.18em] font-semibold flex items-center justify-center gap-2 shadow-xs group"
+                className="px-7 py-3.5 bg-[#D9B4B0] text-[#1C1917] hover:bg-[#E9D2CD] transition-all rounded-full text-xs uppercase tracking-[0.18em] font-semibold flex items-center justify-center gap-2 shadow-xs group cursor-pointer active:scale-[0.98]"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#302B29]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#1C1917] group-hover:scale-110 transition-transform duration-300" />
                 <span>PLAN MY TRIP</span>
               </button>
               <button
@@ -78,13 +78,13 @@ export const Footer: React.FC<FooterProps> = ({
                   setActiveTab('journal');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-6 py-3.5 bg-[#443E3B]/70 text-[#F7F2EC] hover:bg-[#524B47] border border-[#524B47] transition-all rounded-full text-xs uppercase tracking-[0.16em] font-medium flex items-center justify-center gap-2"
+                className="px-6 py-3.5 bg-[#252120] hover:bg-[#2E2826] text-[#F7F2EC] hover:border-[#D9B4B0] border border-[#3D3634] transition-all rounded-full text-xs uppercase tracking-[0.16em] font-medium flex items-center justify-center gap-2 group cursor-pointer active:scale-[0.98]"
               >
                 <span>NORI's Journal</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#D9B4B0]" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#D9B4B0] group-hover:translate-x-1 transition-transform duration-200" />
               </button>
             </div>
-            <div className="mt-1 flex items-center gap-2 text-[11px] text-[#9B8983] tracking-wider">
+            <div className="mt-1 flex items-center gap-2 text-[11px] text-[#BAAEA8] tracking-wider">
               <Clock className="w-3.5 h-3.5 text-[#D9B4B0]" />
               <span>Current Time in Seoul (KST): <strong className="text-[#F7F2EC]">{seoulTime || '09:00 AM'}</strong></span>
             </div>
@@ -99,7 +99,7 @@ export const Footer: React.FC<FooterProps> = ({
             <p className="text-xs leading-relaxed text-[#D9B4B0] font-light max-w-sm pt-1">
               NORI TOUR crafts elevated Korean beauty, wellness, and cultural journeys for international travelers. Rooted in "Nori" (playful discovery), comfort, and honest guidance.
             </p>
-            <div className="pt-2 text-xs text-[#9B8983] space-y-1">
+            <div className="pt-2 text-xs text-[#BAAEA8] space-y-1">
               <p className="text-[#E9D2CD] font-medium">
                 NORI TOUR Co., Ltd. (주식회사 노리투어)
               </p>
@@ -108,7 +108,7 @@ export const Footer: React.FC<FooterProps> = ({
               <p>Tourism Business Registration No. {BUSINESS_POLICIES.businessInformation.tourismLicenseNumber}</p>
               <p>Mail-Order Business: {BUSINESS_POLICIES.businessInformation.mailOrderRegistrationNumber}</p>
               <p>Address: {BUSINESS_POLICIES.businessInformation.englishAddress}</p>
-              <p className="text-[11px] text-[#86756F]">{BUSINESS_POLICIES.businessInformation.koreanAddress}</p>
+              <p className="text-[11px] text-[#A89C96]">{BUSINESS_POLICIES.businessInformation.koreanAddress}</p>
               <p>Phone: <a href="https://wa.me/821048295754" target="_blank" rel="noopener noreferrer" className="hover:text-[#F7F2EC] transition-colors">{BUSINESS_POLICIES.businessInformation.phone}</a></p>
               <p>Email: {BUSINESS_POLICIES.businessInformation.email}</p>
               <p>Website: <a href={BUSINESS_POLICIES.businessInformation.website} target="_blank" rel="noopener noreferrer" className="hover:text-[#F7F2EC] underline underline-offset-2">{BUSINESS_POLICIES.businessInformation.website}</a></p>
@@ -250,7 +250,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Lower Legal & Aesthetic Sign-off */}
-        <div className="pt-8 border-t border-[#443E3B] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#9B8983]">
+        <div className="pt-8 border-t border-[#3D3634] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#BAAEA8]">
           <p>© 2026 NORI TOUR Co., Ltd. All rights reserved. Licensed Inbound Tourism Agency, Seoul.</p>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <button

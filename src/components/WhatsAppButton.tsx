@@ -25,7 +25,7 @@ export const WhatsAppButton: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with NORI TOUR on WhatsApp"
-        className="group flex items-center justify-center gap-2.5 w-11 h-11 sm:w-auto sm:h-auto p-0 sm:px-4 sm:py-3 rounded-full bg-[#302B29] text-[#F7F2EC] shadow-lg sm:shadow-xl border border-[#D9B4B0]/40 hover:border-[#D9B4B0] hover:bg-[#3D3734] transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#D9B4B0] focus:ring-offset-2 focus:ring-offset-[#F7F2EC]"
+        className="group flex items-center justify-center gap-2.5 w-12 h-12 sm:w-auto sm:h-auto p-0 sm:px-4 sm:py-3 rounded-full bg-[#1C1917] text-[#F7F2EC] shadow-lg sm:shadow-xl border border-[#D9B4B0]/40 hover:border-[#D9B4B0] hover:bg-[#252120] transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#D9B4B0] focus:ring-offset-2 focus:ring-offset-[#1C1917] cursor-pointer"
       >
         {/* WhatsApp Icon */}
         <div className="relative flex items-center justify-center w-5 h-5 flex-shrink-0">

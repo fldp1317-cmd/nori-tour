@@ -65,27 +65,27 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
   return (
     <div
       id="article-reader-overlay"
-      className="fixed inset-0 z-50 bg-[#FBF9F6] overflow-y-auto"
+      className="fixed inset-0 z-50 bg-[#1C1917] text-[#F7F2EC] overflow-y-auto"
     >
       {/* Minimal Sticky Editorial Navigation Bar */}
-      <div className="sticky top-0 z-20 bg-[#FBF9F6]/90 backdrop-blur-md border-b border-[#EFE7DF]">
+      <div className="sticky top-0 z-20 bg-[#1C1917]/95 backdrop-blur-md border-b border-[#3D3634]">
         <div className="max-w-5xl mx-auto px-6 sm:px-10 py-4 flex items-center justify-between">
           <button
             onClick={onClose}
-            className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[#786761] hover:text-[#302B29] transition-colors"
+            className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[#E8DFD7] hover:text-[#F7F2EC] transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-3.5 h-3.5 text-[#B69688]" />
+            <ArrowLeft className="w-3.5 h-3.5 text-[#D9B4B0]" />
             <span>Back to Journal</span>
           </button>
 
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.26em] text-[#9A8881]">
+            <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.26em] text-[#D9B4B0] font-medium">
               {article.category}
             </span>
             <button
               onClick={onClose}
               aria-label="Close article"
-              className="p-1.5 rounded-full text-[#786761] hover:text-[#302B29] hover:bg-[#F3EDE6] transition-colors"
+              className="p-1.5 rounded-full text-[#E8DFD7] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -96,46 +96,46 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
       {/* Main Editorial Article Canvas */}
       <article
         id="article-reader-content"
-        className="w-full bg-[#FBF9F6] px-6 sm:px-10 pt-14 sm:pt-24 pb-24 sm:pb-32"
+        className="w-full bg-[#1C1917] px-6 sm:px-10 pt-14 sm:pt-24 pb-24 sm:pb-32"
       >
         {/* Editorial Header */}
-        <header className="max-w-2xl mx-auto text-center space-y-6 pb-14 sm:pb-16 border-b border-[#EAE0D6]">
-          <span className="text-[11px] uppercase tracking-[0.28em] text-[#B69688] font-medium block">
+        <header className="max-w-2xl mx-auto text-center space-y-6 pb-14 sm:pb-16 border-b border-[#3D3634] animate-reveal-1">
+          <span className="text-[11px] uppercase tracking-[0.28em] text-[#D9B4B0] font-medium block">
             {article.category}
           </span>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-editorial font-light text-[#302B29] leading-[1.12] tracking-[-0.01em]">
+          <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-sans font-bold text-[#F7F2EC] leading-[1.15] tracking-tight [text-wrap:balance]">
             {article.title}
           </h1>
 
           {(article.subtitle || article.excerpt) && (
-            <p className="text-2xl sm:text-[28px] font-editorial italic font-light text-[#5E504B] leading-snug pt-1">
+            <p className="text-xl sm:text-2xl font-serif italic font-normal text-[#E9D2CD] leading-snug pt-1 [text-wrap:balance]">
               {article.subtitle || article.excerpt}
             </p>
           )}
 
           <div className="pt-4 flex flex-col items-center gap-3">
             <span className="w-8 h-[1px] bg-[#D9B4B0]" />
-            <p className="text-[11px] uppercase tracking-[0.24em] text-[#786761] font-normal">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-[#BFB3AC] font-normal">
               {article.author.name}
             </p>
           </div>
         </header>
 
         {/* Comfortable Reading Column */}
-        <div className="max-w-[600px] mx-auto pt-14 sm:pt-16 space-y-14 sm:space-y-16 text-[#302B29]">
+        <div className="max-w-[620px] mx-auto pt-14 sm:pt-16 space-y-14 sm:space-y-16 text-[#F7F2EC]">
           {article.sections ? (
             article.sections.map((section, sIdx) => (
               <section
                 key={sIdx}
-                className={sIdx > 0 ? 'pt-10 sm:pt-12 border-t border-[#EFE7DF] space-y-6' : 'space-y-6'}
+                className={sIdx > 0 ? 'pt-10 sm:pt-12 border-t border-[#3D3634] space-y-6' : 'space-y-6'}
               >
                 {section.heading && (
                   <h2
                     className={
                       section.heading === 'NORI NOTE'
-                        ? 'text-xs uppercase tracking-[0.26em] text-[#B69688] font-semibold pb-1'
-                        : 'text-2xl sm:text-[32px] font-editorial font-light text-[#302B29] leading-[1.2] tracking-[-0.005em] pb-1'
+                        ? 'text-xs uppercase tracking-[0.26em] text-[#D9B4B0] font-semibold pb-1'
+                        : 'text-2xl sm:text-3xl font-sans font-bold text-[#F7F2EC] leading-snug tracking-tight pb-1 [text-wrap:balance]'
                     }
                   >
                     {section.heading}
@@ -151,12 +151,12 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
 
                     if (isQuoteEmphasis) {
                       return (
-                        <p
+                        <blockquote
                           key={pIdx}
-                          className="py-2.5 my-1.5 text-2xl sm:text-[28px] font-editorial italic font-light text-[#302B29] leading-snug tracking-[-0.005em]"
+                          className="py-3.5 px-5 my-3 text-xl sm:text-2xl font-serif italic text-[#F7F2EC] leading-snug tracking-[-0.005em] border-l-2 border-[#D9B4B0] bg-[#252120] rounded-r-xl"
                         >
                           {paragraph}
-                        </p>
+                        </blockquote>
                       );
                     }
 
@@ -164,7 +164,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                       return (
                         <p
                           key={pIdx}
-                          className="py-2 my-1 text-xl sm:text-[23px] font-editorial italic font-light text-[#302B29] leading-[1.55]"
+                          className="py-2 my-1 text-lg sm:text-xl font-serif italic text-[#E9D2CD] leading-[1.6]"
                         >
                           {paragraph}
                         </p>
@@ -175,7 +175,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                       return (
                         <p
                           key={pIdx}
-                          className="whitespace-pre-line pl-5 border-l border-[#DFC9C2] text-[15px] sm:text-[17px] text-[#463E3B] font-light leading-[1.95] my-2"
+                          className="whitespace-pre-line pl-5 border-l border-[#3D3634] text-[15px] sm:text-[17px] text-[#BFB3AC] font-normal leading-[1.95] my-2"
                         >
                           {paragraph}
                         </p>
@@ -186,7 +186,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                       return (
                         <p
                           key={pIdx}
-                          className="text-lg sm:text-[19px] text-[#302B29] font-light leading-[1.85]"
+                          className="text-lg sm:text-[19px] text-[#F7F2EC] font-medium leading-[1.85]"
                         >
                           {paragraph}
                         </p>
@@ -196,7 +196,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                     return (
                       <p
                         key={pIdx}
-                        className="whitespace-pre-line text-[15px] sm:text-[17px] text-[#3D3633] font-light leading-[1.88]"
+                        className="whitespace-pre-line text-[15px] sm:text-[17px] text-[#BFB3AC] font-normal leading-[1.88]"
                       >
                         {paragraph}
                       </p>
@@ -206,8 +206,8 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
 
                 {/* Understated Editorial NORI PICK Note */}
                 {section.noriPick && (
-                  <aside className="mt-8 pt-6 pb-6 px-6 sm:px-8 rounded-2xl bg-[#F5EFE8]/75 border border-[#E8DDD2] space-y-3.5">
-                    <span className="text-[10px] uppercase tracking-[0.26em] text-[#B69688] font-semibold block">
+                  <aside className="mt-8 pt-6 pb-6 px-6 sm:px-8 rounded-2xl bg-[#252120] border border-[#3D3634] space-y-3.5 shadow-md">
+                    <span className="text-[10px] uppercase tracking-[0.26em] text-[#D9B4B0] font-semibold block">
                       {section.noriPick.label}
                     </span>
 
@@ -216,10 +216,10 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                         href={section.noriPick.officialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/link inline-flex items-baseline gap-1.5 text-xl sm:text-2xl font-editorial font-light text-[#302B29] hover:text-[#786761] transition-colors border-b border-[#D9B4B0] hover:border-[#786761] pb-0.5"
+                        className="group/link inline-flex items-baseline gap-1.5 text-xl sm:text-2xl font-sans font-bold text-[#F7F2EC] hover:text-[#E9D2CD] transition-colors border-b border-[#D9B4B0] pb-0.5"
                       >
                         <span>{section.noriPick.productName}</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-[#B69688] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform shrink-0 self-center" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-[#D9B4B0] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform shrink-0 self-center" />
                       </a>
                     </div>
 
@@ -228,14 +228,14 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                         pickPara.startsWith('“') ? (
                           <p
                             key={pickIdx}
-                            className="py-1 text-lg sm:text-xl font-editorial italic font-light text-[#302B29] leading-snug"
+                            className="py-1 text-base sm:text-lg font-serif italic text-[#F7F2EC] leading-snug"
                           >
                             {pickPara}
                           </p>
                         ) : (
                           <p
                             key={pickIdx}
-                            className="whitespace-pre-line text-[14px] sm:text-[15.5px] text-[#4A413E] font-light leading-[1.82]"
+                            className="whitespace-pre-line text-[14px] sm:text-[15.5px] text-[#BFB3AC] font-normal leading-[1.82]"
                           >
                             {pickPara}
                           </p>
@@ -251,10 +251,10 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
                       href={section.referenceLink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/ref inline-flex items-center gap-1.5 text-sm font-editorial italic text-[#5E504B] hover:text-[#302B29] transition-colors border-b border-[#D9B4B0] hover:border-[#786761] pb-0.5"
+                      className="group/ref inline-flex items-center gap-1.5 text-sm font-sans text-[#E8DFD7] hover:text-[#E9D2CD] transition-colors border-b border-[#3D3634] hover:border-[#D9B4B0] pb-0.5"
                     >
                       <span>{section.referenceLink.text}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#B69688] group-hover/ref:translate-x-0.5 group-hover/ref:-translate-y-0.5 transition-transform shrink-0" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#D9B4B0] group-hover/ref:translate-x-0.5 group-hover/ref:-translate-y-0.5 transition-transform shrink-0" />
                     </a>
                   </div>
                 )}
@@ -265,7 +265,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
               {(article.content || article.articleContent || []).map((p, idx) => (
                 <p
                   key={idx}
-                  className="whitespace-pre-line text-[15px] sm:text-[17px] text-[#3D3633] font-light leading-[1.88]"
+                  className="whitespace-pre-line text-[15px] sm:text-[17px] text-[#BFB3AC] font-normal leading-[1.88]"
                 >
                   {p}
                 </p>
@@ -275,8 +275,8 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
 
           {/* Understated Editorial Sign-Off */}
           {article.signOff && (
-            <footer className="pt-10 mt-12 border-t border-[#EAE0D6] flex items-center justify-between">
-              <p className="text-sm font-editorial italic text-[#786761] tracking-[0.04em]">
+            <footer className="pt-10 mt-12 border-t border-[#3D3634] flex items-center justify-between">
+              <p className="text-sm font-serif italic text-[#BFB3AC] tracking-[0.04em]">
                 {article.signOff}
               </p>
               <span className="w-6 h-[1px] bg-[#D9B4B0]/70" />
@@ -285,23 +285,23 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
 
           {/* Subtle Invitation Footer */}
           <div className="pt-10">
-            <div className="p-8 sm:p-10 rounded-2xl bg-[#F6F1EB] border border-[#EADBCE] flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="p-8 sm:p-10 rounded-2xl bg-[#252120] border border-[#3D3634] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
               <div className="space-y-1.5 text-center sm:text-left">
-                <p className="text-[10px] uppercase tracking-[0.24em] text-[#B69688] font-medium">
+                <p className="text-[10px] uppercase tracking-[0.24em] text-[#D9B4B0] font-semibold">
                   Personalized Korea Planning • NORI
                 </p>
-                <h4 className="text-xl sm:text-2xl font-editorial font-light text-[#302B29]">
+                <h4 className="text-xl sm:text-2xl font-sans font-bold text-[#F7F2EC]">
                   Planning a trip to Korea?
                 </h4>
-                <p className="text-xs text-[#786761] max-w-md font-light leading-relaxed">
+                <p className="text-xs text-[#BFB3AC] max-w-md font-normal leading-relaxed">
                   Tell us what you want to experience, and NORI will create a personalized itinerary and quote around you.
                 </p>
               </div>
               <button
                 onClick={() => onBookExperience()}
-                className="w-full sm:w-auto px-7 py-3.5 bg-[#302B29] hover:bg-[#443E3B] text-[#F7F2EC] rounded-full text-xs uppercase tracking-[0.18em] font-medium transition-all inline-flex items-center justify-center gap-2 shrink-0"
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#1C1917] rounded-full text-xs uppercase tracking-[0.18em] font-bold transition-all shadow-md inline-flex items-center justify-center gap-2 shrink-0 group cursor-pointer active:scale-[0.98]"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#D9B4B0]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#1C1917] group-hover:scale-110 transition-transform duration-200" />
                 <span>PLAN MY TRIP</span>
               </button>
             </div>

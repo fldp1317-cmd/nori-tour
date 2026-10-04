@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 export interface GuestReviewItem {
   id: string;
@@ -76,20 +77,25 @@ export const ReviewsPage: React.FC = () => {
   };
 
   return (
-    <div id="reviews-page" className="w-full pt-32 pb-28 bg-[#FBF9F6] min-h-[75vh]">
+    <div id="reviews-page" className="w-full pt-32 pb-28 bg-[#1C1917] text-[#F7F2EC] min-h-[75vh]">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         {/* Clean, Understated Hero */}
-        <header className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 space-y-4">
-          <span className="text-[11px] uppercase tracking-[0.28em] text-[#B69688] font-medium block">
-            GUEST STORIES
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-editorial font-light text-[#302B29] tracking-tight leading-[1.12]">
-            Real experiences, honestly shared.
-          </h1>
-          <p className="text-sm sm:text-base text-[#786761] font-light leading-relaxed max-w-xl mx-auto pt-1">
-            Thoughts from travelers we&apos;ve helped navigate beauty and travel in Korea.
-          </p>
-        </header>
+        <ScrollReveal variant="heading">
+          <header className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 space-y-4">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#2A2523] border border-[#3D3634] shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
+              <span className="text-[11px] uppercase tracking-[0.26em] text-[#E9D2CD] font-semibold">
+                GUEST STORIES
+              </span>
+            </div>
+            <h1 className="text-4xl sm:text-6xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-[1.12] [text-wrap:balance]">
+              Real experiences, honestly shared.
+            </h1>
+            <p className="text-base sm:text-lg text-[#BFB3AC] font-normal leading-relaxed max-w-xl mx-auto pt-1 [text-wrap:balance]">
+              Thoughts from travelers we&apos;ve helped navigate beauty and travel in Korea.
+            </p>
+          </header>
+        </ScrollReveal>
 
         {/* Interactive Editorial Review Cards */}
         <section
@@ -102,77 +108,83 @@ export const ReviewsPage: React.FC = () => {
               : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start'
           }
         >
-          {GUEST_REVIEWS.map((review) => {
+          {GUEST_REVIEWS.map((review, idx) => {
             const isExpanded = Boolean(expandedIds[review.id]);
 
             return (
-              <article
+              <ScrollReveal
                 key={review.id}
-                onClick={() => toggleReview(review.id)}
-                role="button"
-                tabIndex={0}
-                aria-expanded={isExpanded}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggleReview(review.id);
-                  }
-                }}
-                className="group cursor-pointer text-left rounded-2xl bg-[#FCFAF7] border border-[#EAE0D6] hover:border-[#D9B4B0] transition-all duration-300 ease-out md:hover:-translate-y-0.5 shadow-[0_1px_2px_rgba(48,43,41,0.02)] hover:shadow-[0_8px_24px_rgba(48,43,41,0.05)] p-7 sm:p-8 flex flex-col justify-between min-h-[240px] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#D9B4B0]"
+                variant="card"
+                delay={idx * 80}
+                className="h-full"
               >
-                <div className="space-y-4">
-                  {/* Top Row: Minimal Smile Line Icon & Rating */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-[#B69688] group-hover:text-[#9D7F73] transition-transform duration-300 ease-out md:group-hover:-translate-y-0.5">
-                      <MinimalSmileIcon />
+                <article
+                  onClick={() => toggleReview(review.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleReview(review.id);
+                    }
+                  }}
+                  className="group cursor-pointer text-left rounded-2xl bg-[#252120] border border-[#3D3634] hover:border-[#D9B4B0] transition-all duration-200 ease-out md:hover:-translate-y-1 shadow-md hover:shadow-xl p-6 sm:p-8 flex flex-col justify-between min-h-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B4B0] h-full"
+                >
+                  <div className="space-y-4">
+                    {/* Top Row: Minimal Smile Line Icon & Rating */}
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="text-[#D9B4B0] group-hover:text-[#E9D2CD] transition-transform duration-200 ease-out md:group-hover:-translate-y-0.5">
+                        <MinimalSmileIcon />
+                      </div>
+
+                      <div
+                        className="inline-flex items-center gap-2 whitespace-nowrap select-none"
+                        aria-label="5 out of 5 stars"
+                      >
+                        <span className="text-sm tracking-[0.28em] text-[#D9B4B0]">
+                          ★★★★★
+                        </span>
+                        <span className="text-[11px] tracking-[0.14em] text-[#BFB3AC] font-normal">
+                          5/5
+                        </span>
+                      </div>
                     </div>
 
-                    <div
-                      className="inline-flex items-center gap-2 whitespace-nowrap select-none"
-                      aria-label="5 out of 5 stars"
-                    >
-                      <span className="text-sm tracking-[0.28em] text-[#B69688]">
-                        ★★★★★
-                      </span>
-                      <span className="text-[11px] tracking-[0.14em] text-[#8C7A73] font-normal">
-                        5/5
+                    {/* Guest Information & Experience Label */}
+                    <div className="pt-2 space-y-2">
+                      <h2 className="text-2xl sm:text-[26px] font-sans font-bold text-[#F7F2EC] group-hover:text-[#E9D2CD] transition-colors leading-[1.22] tracking-tight">
+                        {review.guestInfo}
+                      </h2>
+                      <span className="text-[10px] uppercase tracking-[0.24em] text-[#D9B4B0] font-medium block">
+                        {review.experienceLabel}
                       </span>
                     </div>
+
+                    {/* Smoothly Expanded Full Testimonial */}
+                    {isExpanded && (
+                      <div className="pt-5 mt-5 border-t border-[#3D3634] space-y-4 text-[#BFB3AC] animate-fade-in">
+                        {review.paragraphs.map((paragraph, pIdx) => (
+                          <p
+                            key={pIdx}
+                            className="text-base sm:text-[17px] text-[#E8DFD7] font-normal leading-[1.82]"
+                          >
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  {/* Guest Information & Experience Label */}
-                  <div className="pt-2 space-y-2">
-                    <h2 className="text-2xl sm:text-[26px] font-editorial font-light text-[#302B29] group-hover:text-[#5E504B] transition-colors leading-[1.22] tracking-[-0.005em]">
-                      {review.guestInfo}
-                    </h2>
-                    <span className="text-[10px] uppercase tracking-[0.24em] text-[#8C7A73] font-medium block">
-                      {review.experienceLabel}
+                  {/* Bottom Interaction Cue */}
+                  <div className="pt-6 mt-5 border-t border-[#3D3634] flex items-center justify-between">
+                    <span className="text-[11px] uppercase tracking-[0.22em] text-[#D9B4B0] group-hover:text-[#E9D2CD] font-medium transition-colors">
+                      {isExpanded ? 'Close ↑' : 'Read their story →'}
                     </span>
+                    <span className="w-5 h-[1px] bg-[#D9B4B0] transition-all duration-200 group-hover:w-8" />
                   </div>
-
-                  {/* Smoothly Expanded Full Testimonial */}
-                  {isExpanded && (
-                    <div className="pt-5 mt-5 border-t border-[#EFE7DF] space-y-4 text-[#302B29] animate-fade-in">
-                      {review.paragraphs.map((paragraph, idx) => (
-                        <p
-                          key={idx}
-                          className="text-base sm:text-[17.5px] font-editorial font-light text-[#302B29] leading-[1.82]"
-                        >
-                          {paragraph}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Bottom Interaction Cue */}
-                <div className="pt-6 mt-5 border-t border-[#EFE7DF]/80 flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#302B29] group-hover:text-[#786761] font-medium transition-colors">
-                    {isExpanded ? 'Close ↑' : 'Read their story →'}
-                  </span>
-                  <span className="w-5 h-[1px] bg-[#D9B4B0] transition-all duration-300 group-hover:w-7" />
-                </div>
-              </article>
+                </article>
+              </ScrollReveal>
             );
           })}
         </section>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import { ScrollReveal } from '../components/ScrollReveal';
 import { JournalArticle, JournalCategory } from '../types';
 
 interface BeautyJournalPageProps {
@@ -24,7 +25,6 @@ const CARD_TEASERS: Record<string, string> = {
 const renderCategoryIcon = (category: JournalCategory) => {
   switch (category) {
     case 'NORI PHILOSOPHY':
-      // Minimal inner glow / abstract 4-petal botanical star
       return (
         <svg
           viewBox="0 0 24 24"
@@ -42,7 +42,6 @@ const renderCategoryIcon = (category: JournalCategory) => {
       );
 
     case 'SKINCARE INGREDIENTS':
-      // Minimal serum droplet
       return (
         <svg
           viewBox="0 0 24 24"
@@ -60,7 +59,6 @@ const renderCategoryIcon = (category: JournalCategory) => {
       );
 
     case 'SKINCARE SCIENCE':
-      // Minimal sun + subtle pigment spot motif
       return (
         <svg
           viewBox="0 0 24 24"
@@ -86,7 +84,6 @@ const renderCategoryIcon = (category: JournalCategory) => {
       );
 
     case 'SKIN BARRIER':
-      // Minimal layered skin barrier / protective curves
       return (
         <svg
           viewBox="0 0 24 24"
@@ -105,7 +102,6 @@ const renderCategoryIcon = (category: JournalCategory) => {
       );
 
     case 'AESTHETIC GUIDE':
-      // Minimal facial contour / profile line
       return (
         <svg
           viewBox="0 0 24 24"
@@ -146,93 +142,106 @@ export const BeautyJournalPage: React.FC<BeautyJournalPageProps> = ({
   onBookExperience,
 }) => {
   return (
-    <div id="beauty-journal-page" className="w-full pt-32 pb-28 bg-[#FBF9F6]">
+    <div id="beauty-journal-page" className="w-full pt-32 pb-28 bg-[#1C1917] text-[#F7F2EC]">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         {/* Magazine Archive Header */}
-        <div className="text-center max-w-xl mx-auto mb-16 sm:mb-20 space-y-3.5">
-          <span className="text-[10px] uppercase tracking-[0.28em] text-[#B69688] font-medium block">
-            The NORI Journal
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-editorial font-light text-[#302B29] tracking-tight">
-            NORI&apos;s Journal
-          </h1>
-          <p className="text-sm text-[#786761] font-light leading-relaxed">
-            Thoughtful notes on K-beauty, skin, and aesthetic care.
-          </p>
-        </div>
+        <ScrollReveal variant="heading">
+          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 space-y-4">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#2A2523] border border-[#3D3634] shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
+              <span className="text-[11px] uppercase tracking-[0.26em] text-[#E9D2CD] font-semibold">
+                THE NORI JOURNAL
+              </span>
+            </div>
+            <h1 className="text-4xl sm:text-6xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-[1.12] [text-wrap:balance]">
+              NORI&apos;s Journal
+            </h1>
+            <p className="text-base sm:text-lg text-[#BFB3AC] font-normal leading-relaxed max-w-xl mx-auto [text-wrap:balance]">
+              Thoughtful notes on K-beauty, skin, and aesthetic care.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 2-Column Editorial Archive Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {articles.map((article) => {
+          {articles.map((article, idx) => {
             const teaser =
               CARD_TEASERS[article.id] || article.subtitle || article.excerpt || '';
 
             return (
-              <article
+              <ScrollReveal
                 key={article.id}
-                onClick={() => onSelectArticle(article)}
-                className="group cursor-pointer rounded-2xl bg-[#FCFAF7] border border-[#EAE0D6] hover:border-[#D9B4B0] transition-all duration-300 ease-out md:hover:-translate-y-0.5 shadow-[0_1px_2px_rgba(48,43,41,0.02)] hover:shadow-[0_8px_24px_rgba(48,43,41,0.05)] p-7 sm:p-9 flex flex-col justify-between min-h-[230px] sm:min-h-[250px]"
+                variant="card"
+                delay={idx * 70}
+                className="h-full"
               >
-                <div className="space-y-4">
-                  {/* Small Minimal Line Icon */}
-                  <div className="text-[#B69688] group-hover:text-[#9D7F73] transition-transform duration-300 ease-out md:group-hover:-translate-y-0.5">
-                    {renderCategoryIcon(article.category)}
+                <article
+                  onClick={() => onSelectArticle(article)}
+                  className="group cursor-pointer rounded-2xl bg-[#252120] border border-[#3D3634] hover:border-[#D9B4B0] transition-all duration-200 ease-out md:hover:-translate-y-1 shadow-md hover:shadow-xl p-7 sm:p-9 flex flex-col justify-between min-h-[230px] sm:min-h-[250px] h-full"
+                >
+                  <div className="space-y-4">
+                    {/* Small Minimal Line Icon */}
+                    <div className="text-[#D9B4B0] group-hover:text-[#E9D2CD] transition-transform duration-200 ease-out md:group-hover:-translate-y-0.5">
+                      {renderCategoryIcon(article.category)}
+                    </div>
+
+                    {/* Category Label */}
+                    <span className="text-[10px] uppercase tracking-[0.24em] text-[#D9B4B0] font-medium block pt-0.5">
+                      {article.category}
+                    </span>
+
+                    {/* Article Title */}
+                    <h2 className="text-2xl sm:text-[26px] font-sans font-bold text-[#F7F2EC] group-hover:text-[#E9D2CD] transition-colors leading-[1.25] tracking-tight [text-wrap:balance]">
+                      {article.title}
+                    </h2>
+
+                    {/* Short Teaser: always visible on mobile, gently revealed on desktop */}
+                    {teaser && (
+                      <p className="text-xs sm:text-[13.5px] text-[#BFB3AC] font-normal leading-relaxed pt-1">
+                        {teaser}
+                      </p>
+                    )}
                   </div>
 
-                  {/* Category Label */}
-                  <span className="text-[10px] uppercase tracking-[0.24em] text-[#8C7A73] font-medium block pt-0.5">
-                    {article.category}
-                  </span>
+                  {/* Subtle Read Journal Affordance */}
+                  <div className="pt-6 mt-4 border-t border-[#3D3634] flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#BFB3AC] font-normal">
+                      {article.author.name}
+                    </span>
 
-                  {/* Article Title */}
-                  <h2 className="text-2xl sm:text-[28px] font-editorial font-light text-[#302B29] group-hover:text-[#5E504B] transition-colors leading-[1.2] tracking-[-0.005em]">
-                    {article.title}
-                  </h2>
-
-                  {/* Short Teaser: always visible on mobile, gently revealed on hover on desktop */}
-                  {teaser && (
-                    <p className="text-xs sm:text-[13.5px] text-[#786761] font-light leading-relaxed pt-1 opacity-100 md:opacity-0 md:translate-y-1 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 ease-out">
-                      {teaser}
-                    </p>
-                  )}
-                </div>
-
-                {/* Subtle Read Journal Affordance */}
-                <div className="pt-6 mt-4 border-t border-[#EFE7DF]/80 flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#9A8881] font-normal">
-                    {article.author.name}
-                  </span>
-
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#302B29] font-medium opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-out">
-                    READ JOURNAL →
-                  </span>
-                </div>
-              </article>
+                    <span className="text-[10px] uppercase tracking-[0.22em] text-[#D9B4B0] group-hover:text-[#E9D2CD] font-semibold transition-colors flex items-center gap-1">
+                      <span>READ JOURNAL</span> <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+                    </span>
+                  </div>
+                </article>
+              </ScrollReveal>
             );
           })}
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-20 p-10 sm:p-12 rounded-3xl bg-[#302B29] text-[#F7F2EC] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <span className="text-xs uppercase tracking-[0.2em] text-[#D9B4B0] font-medium">
-              Personalized Korea Travel &amp; K-Beauty
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-editorial font-light text-[#F7F2EC]">
-              Planning a trip to Korea?
-            </h3>
-            <p className="text-xs sm:text-sm text-[#D9B4B0] font-light max-w-lg">
-              Tell us what you&apos;d like to experience, from getting around Seoul to discovering K-beauty, and we&apos;ll build a personalized plan and quote around you.
-            </p>
+        <ScrollReveal variant="card" delay={140} className="mt-20">
+          <div className="p-10 sm:p-12 rounded-3xl bg-[#252120] border border-[#3D3634] text-[#F7F2EC] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="space-y-2 text-center md:text-left">
+              <span className="text-xs uppercase tracking-[0.2em] text-[#D9B4B0] font-semibold">
+                Personalized Korea Travel &amp; K-Beauty
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-sans font-bold text-[#F7F2EC] [text-wrap:balance]">
+                Planning a trip to Korea?
+              </h3>
+              <p className="text-xs sm:text-sm text-[#BFB3AC] font-normal max-w-lg leading-relaxed">
+                Tell us what you&apos;d like to experience, from getting around Seoul to discovering K-beauty, and we&apos;ll build a personalized plan and quote around you.
+              </p>
+            </div>
+            <button
+              onClick={onBookExperience}
+              className="w-full md:w-auto px-8 py-4 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#1C1917] rounded-full text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-lg inline-flex items-center justify-center gap-2 shrink-0 group cursor-pointer active:scale-[0.98]"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#1C1917] group-hover:scale-110 transition-transform duration-200" />
+              <span>PLAN MY TRIP</span>
+            </button>
           </div>
-          <button
-            onClick={onBookExperience}
-            className="w-full md:w-auto px-8 py-4 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#302B29] rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xs inline-flex items-center justify-center gap-2 shrink-0"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#302B29]" />
-            <span>PLAN MY TRIP</span>
-          </button>
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   );

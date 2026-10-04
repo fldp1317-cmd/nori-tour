@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ArrowLeft, Compass } from 'lucide-react';
 import { JournalArticle } from './types';
 import { ARTICLES_DATA } from './data/articles';
 import { Navbar } from './components/Navbar';
@@ -75,7 +74,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F2EC] text-[#302B29]">
+    <div className="min-h-screen flex flex-col bg-[#1C1917] text-[#F7F2EC]">
       {/* Top Fixed Editorial Navigation */}
       <Navbar
         activeTab={activeTab}

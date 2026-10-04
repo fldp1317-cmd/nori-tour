@@ -6,7 +6,6 @@ import {
   Check,
   Info,
   Calendar,
-  Users,
   Globe,
   Mail,
   MessageCircle,
@@ -18,6 +17,7 @@ import { TripInquiryData, BookingRecord } from '../types';
 import { submitTripInquiry } from '../services/bookingManager';
 import { PolicyTabId } from '../components/LegalPoliciesModal';
 import { NORI_WHATSAPP_URL } from '../components/WhatsAppButton';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 interface PlanMyTripPageProps {
   onOpenPoliciesModal: (tab?: PolicyTabId) => void;
@@ -264,8 +264,6 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
     setValidationError(null);
     setSubmissionFailed(false);
 
-    // Validate only genuinely necessary fields:
-    // First name, Email, Number of travelers, Preferred contact method, WhatsApp number (if WhatsApp), Consent
     if (!formData.numberOfTravelers || formData.numberOfTravelers < 1) {
       setValidationError('Please enter the number of travelers (at least 1).');
       return;
@@ -326,10 +324,10 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
       <label
         key={label}
         htmlFor={safeId}
-        className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all select-none ${
+        className={`group flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all select-none active:scale-[0.99] ${
           checked
-            ? 'bg-[#F4E8E5]/75 border-[#302B29] text-[#302B29] shadow-2xs'
-            : 'bg-[#F7F2EC] border-[#EADBCE] text-[#302B29] hover:border-[#D9B4B0]'
+            ? 'bg-[#2E2826] border-2 border-[#D9B4B0] text-[#F7F2EC] font-medium shadow-sm'
+            : 'bg-[#1C1917] border border-[#3D3634] text-[#E8DFD7] hover:border-[#D9B4B0]/80 hover:bg-[#252120]'
         }`}
       >
         <input
@@ -342,18 +340,24 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
         <span
           className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
             checked
-              ? 'bg-[#302B29] border-[#302B29] text-[#F7F2EC]'
-              : 'bg-[#FCFAF7] border-[#D1C4B8]'
+              ? 'bg-[#D9B4B0] border-[#D9B4B0] text-[#1C1917]'
+              : 'bg-[#1C1917] border-[#443E3B] group-hover:border-[#D9B4B0]/80'
           }`}
         >
           {checked && <Check className="w-3.5 h-3.5 stroke-[2.5]" />}
         </span>
-        <span className="text-xs sm:text-sm font-light leading-snug">{label}</span>
+        <span
+          className={`text-xs sm:text-sm leading-snug transition-colors ${
+            checked ? 'text-[#F7F2EC] font-medium' : 'text-[#E8DFD7] font-normal group-hover:text-[#F7F2EC]'
+          }`}
+        >
+          {label}
+        </span>
       </label>
     );
   };
 
-  // 5. SUCCESS STATE AFTER SUBMISSION
+  // SUCCESS STATE AFTER SUBMISSION
   if (submittedRecord) {
     const formattedWhatsapp = formData.whatsappNumber.trim()
       ? `${formData.whatsappCountryCode.trim()} ${formData.whatsappNumber.trim()}`.trim()
@@ -365,51 +369,51 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
         : `Email (${formData.email.trim()})`;
 
     return (
-      <div id="plan-trip-confirmation-page" className="w-full pt-36 sm:pt-32 pb-32 sm:pb-28 px-6 sm:px-8 bg-[#F7F2EC]">
-        <div className="max-w-2xl mx-auto bg-[#FCFAF7] border border-[#EADBCE] rounded-3xl p-8 sm:p-14 shadow-xs text-center space-y-8">
+      <div id="plan-trip-confirmation-page" className="w-full pt-36 sm:pt-32 pb-32 sm:pb-28 px-6 sm:px-8 bg-[#1C1917] text-[#F7F2EC]">
+        <div className="max-w-2xl mx-auto bg-[#252120] border border-[#3D3634] rounded-3xl p-8 sm:p-14 shadow-xl text-center space-y-8">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#F7F2EC] border border-[#EADBCE] shadow-2xs">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1C1917] border border-[#3D3634] shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
-            <span className="text-[11px] uppercase tracking-[0.26em] text-[#786761] font-medium">
+            <span className="text-[11px] uppercase tracking-[0.26em] text-[#E9D2CD] font-semibold">
               REQUEST RECEIVED
             </span>
           </div>
 
           {/* Heading & Body */}
           <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-editorial font-light text-[#302B29] tracking-tight leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-tight [text-wrap:balance]">
               Your Korea plan starts here ✨
             </h1>
 
-            <div className="space-y-3 text-sm sm:text-base text-[#786761] font-light leading-relaxed max-w-xl mx-auto pt-1">
-              <p className="text-base sm:text-lg text-[#302B29] font-normal">
+            <div className="space-y-3 text-sm sm:text-base text-[#BFB3AC] font-normal leading-relaxed max-w-xl mx-auto pt-1">
+              <p className="text-base sm:text-lg text-[#E8DFD7] font-medium">
                 Thanks for telling us what you're looking for.
               </p>
               <p>
                 The NORI team will review your trip details and preferences and contact you with a personalized plan and quote.
               </p>
-              <p className="text-xs sm:text-sm text-[#786761] pt-1">
+              <p className="text-xs sm:text-sm text-[#BFB3AC] pt-1">
                 Your booking is not confirmed until the itinerary, price and payment have been agreed.
               </p>
             </div>
           </div>
 
           {/* Preferred Contact & Nori Copy */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#F7F2EC] border border-[#EADBCE] space-y-4">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#1C1917] border border-[#3D3634] space-y-4">
             <div className="space-y-1">
-              <span className="text-[11px] uppercase tracking-[0.2em] text-[#9B8983] font-medium block">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[#D9B4B0] font-medium block">
                 Preferred contact:
               </span>
-              <p className="text-sm sm:text-base font-medium text-[#302B29]">
+              <p className="text-sm sm:text-base font-medium text-[#F7F2EC]">
                 {preferredContactDisplay}
               </p>
             </div>
 
-            <div className="pt-3 border-t border-[#EADBCE]/80 flex flex-col items-center justify-center gap-3">
-              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.15em] text-[#786761]">
-                <span className="text-[#302B29] font-semibold">Submit Request</span>
+            <div className="pt-3 border-t border-[#3D3634] flex flex-col items-center justify-center gap-3">
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.15em] text-[#BFB3AC]">
+                <span className="text-[#F7F2EC] font-semibold">Submit Request</span>
                 <span className="text-[#D9B4B0]">→</span>
-                <span className="text-[#302B29] font-semibold">NORI Reviews</span>
+                <span className="text-[#F7F2EC] font-semibold">NORI Reviews</span>
                 <span className="text-[#D9B4B0]">→</span>
                 <span>Personalized Plan &amp; Quote</span>
                 <span className="text-[#D9B4B0]">→</span>
@@ -419,15 +423,15 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                 <span className="text-[#D9B4B0]">→</span>
                 <span>Booking Confirmed</span>
               </div>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE] text-xs text-[#302B29] font-medium">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#252120] border border-[#3D3634] text-xs text-[#E9D2CD] font-medium">
                 Nori's on it ✌️
               </span>
             </div>
           </div>
 
-          {/* 6. WHATSAPP SUPPORT (Optional Support Link — Does Not Auto-Open) */}
-          <div className="p-6 rounded-2xl bg-[#F4E8E5]/55 border border-[#EADBCE] space-y-3">
-            <p className="text-xs sm:text-sm text-[#302B29] font-light">
+          {/* WhatsApp Support Link */}
+          <div className="p-6 rounded-2xl bg-[#2A2321] border border-[#3D3634] space-y-3">
+            <p className="text-xs sm:text-sm text-[#E8DFD7] font-normal">
               Have a question while you wait?
             </p>
             <div>
@@ -435,7 +439,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                 href={NORI_WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-3.5 bg-[#FCFAF7] hover:bg-white text-[#302B29] border border-[#EADBCE] hover:border-[#D9B4B0] rounded-full text-xs uppercase tracking-[0.18em] font-medium transition-all inline-flex items-center justify-center gap-2 shadow-2xs"
+                className="px-7 py-3.5 bg-[#252120] hover:bg-[#2E2826] text-[#F7F2EC] border border-[#3D3634] hover:border-[#D9B4B0] rounded-full text-xs uppercase tracking-[0.18em] font-medium transition-all inline-flex items-center justify-center gap-2 shadow-sm"
               >
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />
                 <span>CHAT WITH NORI</span>
@@ -447,7 +451,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
             <button
               type="button"
               onClick={onBackHome}
-              className="px-8 py-3.5 text-xs uppercase tracking-[0.18em] text-[#786761] hover:text-[#302B29] font-medium transition-colors"
+              className="px-8 py-3.5 text-xs uppercase tracking-[0.18em] text-[#BFB3AC] hover:text-[#F7F2EC] font-semibold transition-colors cursor-pointer"
             >
               Back to Home
             </button>
@@ -458,94 +462,96 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
   }
 
   return (
-    <div id="plan-my-trip-page" className="w-full pt-36 sm:pt-32 pb-32 sm:pb-28 bg-[#F7F2EC]">
+    <div id="plan-my-trip-page" className="w-full pt-36 sm:pt-32 pb-32 sm:pb-28 bg-[#1C1917] text-[#F7F2EC]">
       {/* Page Intro */}
-      <section className="max-w-3xl mx-auto px-6 sm:px-8 pb-12 text-center space-y-5">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FCFAF7] border border-[#EADBCE] shadow-2xs">
-          <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
-          <span className="text-[11px] uppercase tracking-[0.26em] text-[#786761] font-medium">
-            PLAN YOUR TRIP
-          </span>
-        </div>
+      <ScrollReveal variant="heading">
+        <section className="max-w-3xl mx-auto px-6 sm:px-8 pb-12 text-center space-y-5">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#2A2523] border border-[#3D3634] shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />
+            <span className="text-[11px] uppercase tracking-[0.26em] text-[#E9D2CD] font-semibold">
+              PLAN YOUR TRIP
+            </span>
+          </div>
 
-        <h1 className="text-4xl sm:text-6xl font-editorial font-light text-[#302B29] tracking-tight leading-[1.12]">
-          Tell us what your Korea trip looks like.
-        </h1>
+          <h1 className="text-4xl sm:text-6xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-[1.12] [text-wrap:balance]">
+            Tell us what your Korea trip looks like.
+          </h1>
 
-        <div className="max-w-xl mx-auto space-y-2 text-sm sm:text-base text-[#786761] font-light leading-relaxed">
-          <p>Choose what you need, skip what you don't.</p>
-          <p>
-            We'll review your request and create a personalized plan and quote for you.
-          </p>
-        </div>
+          <div className="max-w-xl mx-auto space-y-2 text-sm sm:text-base text-[#BFB3AC] font-normal leading-relaxed [text-wrap:balance]">
+            <p>Choose what you need, skip what you don't.</p>
+            <p>
+              We'll review your request and create a personalized plan and quote for you.
+            </p>
+          </div>
 
-        <div className="pt-1 space-y-3">
-          <p className="text-xs uppercase tracking-[0.18em] text-[#9B8983] font-medium">
-            No payment is required at this stage.
-          </p>
-          <div className="lg:-mx-16 xl:-mx-24 flex justify-center">
-            <div className="w-full sm:w-auto inline-flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-center justify-center gap-y-1.5 sm:gap-x-2.5 sm:gap-y-2 px-5 py-4 sm:px-5 sm:py-3 rounded-2xl bg-[#FCFAF7] border border-[#EADBCE] text-[10px] uppercase tracking-[0.13em] text-[#786761] shadow-2xs">
-              <span className="text-[#302B29] font-medium whitespace-nowrap">
-                SUBMIT REQUEST
-              </span>
-              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
-                ↓
-              </span>
-              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
-                →
-              </span>
-              <span className="whitespace-nowrap">
-                NORI REVIEWS YOUR REQUEST
-              </span>
-              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
-                ↓
-              </span>
-              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
-                →
-              </span>
-              <span className="whitespace-nowrap">
-                PERSONALIZED PLAN &amp; QUOTE
-              </span>
-              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
-                ↓
-              </span>
-              <span aria-hidden="true" className="hidden lg:inline text-[#D9B4B0] leading-none">
-                →
-              </span>
-              <span aria-hidden="true" className="hidden sm:block lg:hidden basis-full h-0" />
-              <span aria-hidden="true" className="hidden sm:inline lg:hidden text-[#D9B4B0] leading-none">
-                →
-              </span>
-              <span className="whitespace-nowrap">
-                YOU CONFIRM
-              </span>
-              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
-                ↓
-              </span>
-              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
-                →
-              </span>
-              <span className="whitespace-nowrap">
-                PAYMENT
-              </span>
-              <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
-                ↓
-              </span>
-              <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
-                →
-              </span>
-              <span className="whitespace-nowrap">
-                BOOKING CONFIRMED
-              </span>
+          <div className="pt-1 space-y-3">
+            <p className="text-xs uppercase tracking-[0.18em] text-[#D9B4B0] font-medium">
+              No payment is required at this stage.
+            </p>
+            <div className="lg:-mx-16 xl:-mx-24 flex justify-center">
+              <div className="w-full sm:w-auto inline-flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-center justify-center gap-y-1.5 sm:gap-x-2.5 sm:gap-y-2 px-5 py-4 sm:px-5 sm:py-3 rounded-2xl bg-[#252120] border border-[#3D3634] text-[10px] uppercase tracking-[0.13em] text-[#BFB3AC] shadow-md">
+                <span className="text-[#F7F2EC] font-bold whitespace-nowrap">
+                  SUBMIT REQUEST
+                </span>
+                <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                  ↓
+                </span>
+                <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                  →
+                </span>
+                <span className="whitespace-nowrap text-[#E8DFD7]">
+                  NORI REVIEWS YOUR REQUEST
+                </span>
+                <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                  ↓
+                </span>
+                <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                  →
+                </span>
+                <span className="whitespace-nowrap text-[#E8DFD7]">
+                  PERSONALIZED PLAN &amp; QUOTE
+                </span>
+                <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                  ↓
+                </span>
+                <span aria-hidden="true" className="hidden lg:inline text-[#D9B4B0] leading-none">
+                  →
+                </span>
+                <span aria-hidden="true" className="hidden sm:block lg:hidden basis-full h-0" />
+                <span aria-hidden="true" className="hidden sm:inline lg:hidden text-[#D9B4B0] leading-none">
+                  →
+                </span>
+                <span className="whitespace-nowrap text-[#E8DFD7]">
+                  YOU CONFIRM
+                </span>
+                <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                  ↓
+                </span>
+                <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                  →
+                </span>
+                <span className="whitespace-nowrap text-[#E8DFD7]">
+                  PAYMENT
+                </span>
+                <span aria-hidden="true" className="text-[#D9B4B0] leading-none sm:hidden">
+                  ↓
+                </span>
+                <span aria-hidden="true" className="hidden sm:inline text-[#D9B4B0] leading-none">
+                  →
+                </span>
+                <span className="whitespace-nowrap text-[#F7F2EC] font-semibold">
+                  BOOKING CONFIRMED
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* Multi-Step Progress Bar */}
       <div className="max-w-4xl mx-auto px-6 sm:px-8 mb-10">
-        <div className="p-3 sm:p-3 rounded-2xl bg-[#FCFAF7] border border-[#EADBCE] shadow-2xs">
-          {/* Mobile Step Navigation: Compact 01–05 Row + Active Step Label Below */}
+        <div className="p-3 rounded-2xl bg-[#252120] border border-[#3D3634] shadow-md">
+          {/* Mobile Step Navigation */}
           <div className="md:hidden">
             <div className="grid grid-cols-5 gap-1.5">
               {STEPS.map((step, index) => {
@@ -561,17 +567,17 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                     disabled={isSubmitting}
                     aria-label={`Step ${step.num}: ${step.label}`}
                     aria-current={isActive ? 'step' : undefined}
-                    className={`py-2.5 rounded-xl text-center transition-all flex items-center justify-center ${
+                    className={`py-2.5 rounded-xl text-center transition-all flex items-center justify-center cursor-pointer ${
                       isActive
-                        ? 'bg-[#302B29] text-[#F7F2EC] shadow-xs'
+                        ? 'bg-[#D9B4B0] text-[#1C1917] font-bold shadow-md'
                         : isCompleted
-                        ? 'bg-[#F4E8E5] text-[#302B29] hover:bg-[#E9D2CD]/70'
-                        : 'bg-transparent text-[#786761] hover:bg-[#F7F2EC]'
+                        ? 'bg-[#2E2826] text-[#E8DFD7] hover:bg-[#342D2B] border border-[#3D3634]'
+                        : 'bg-transparent text-[#BFB3AC] hover:bg-[#252120]'
                     }`}
                   >
                     <span
-                      className={`text-xs font-editorial italic tracking-[0.16em] font-semibold ${
-                        isActive ? 'text-[#E9D2CD]' : isCompleted ? 'text-[#302B29]' : 'text-[#786761]'
+                      className={`text-xs font-serif italic tracking-[0.16em] font-semibold ${
+                        isActive ? 'text-[#1C1917]' : isCompleted ? 'text-[#D9B4B0]' : 'text-[#BFB3AC]'
                       }`}
                     >
                       {step.num}
@@ -580,14 +586,14 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                 );
               })}
             </div>
-            <div className="mt-2.5 pt-2.5 border-t border-[#EADBCE]/80 text-center">
-              <span className="text-[11px] uppercase tracking-[0.22em] text-[#302B29] font-medium">
+            <div className="mt-2.5 pt-2.5 border-t border-[#3D3634] text-center">
+              <span className="text-[11px] uppercase tracking-[0.22em] text-[#E9D2CD] font-semibold">
                 {STEPS[currentStep - 1]?.label}
               </span>
             </div>
           </div>
 
-          {/* Desktop & Tablet Step Navigation (Unchanged) */}
+          {/* Desktop & Tablet Step Navigation */}
           <div className="hidden md:grid md:grid-cols-5 gap-2">
             {STEPS.map((step, index) => {
               const stepNumber = index + 1;
@@ -600,17 +606,17 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                   type="button"
                   onClick={() => goToStep(stepNumber)}
                   disabled={isSubmitting}
-                  className={`py-2.5 px-3 rounded-xl text-left transition-all flex items-center gap-2 ${
+                  className={`py-2.5 px-3 rounded-xl text-left transition-all flex items-center gap-2 cursor-pointer ${
                     isActive
-                      ? 'bg-[#302B29] text-[#F7F2EC] shadow-xs'
+                      ? 'bg-[#D9B4B0] text-[#1C1917] font-bold shadow-md'
                       : isCompleted
-                      ? 'bg-[#F4E8E5] text-[#302B29] hover:bg-[#E9D2CD]/70'
-                      : 'bg-transparent text-[#786761] hover:bg-[#F7F2EC]'
+                      ? 'bg-[#2E2826] text-[#E8DFD7] hover:bg-[#342D2B] border border-[#3D3634]'
+                      : 'bg-transparent text-[#BFB3AC] hover:bg-[#252120] hover:text-[#E8DFD7]'
                   }`}
                 >
                   <span
-                    className={`text-[10px] font-editorial italic tracking-[0.18em] font-semibold ${
-                      isActive ? 'text-[#E9D2CD]' : 'text-[#D9B4B0]'
+                    className={`text-[10px] font-serif italic tracking-[0.18em] font-semibold ${
+                      isActive ? 'text-[#1C1917]' : isCompleted ? 'text-[#D9B4B0]' : 'text-[#BFB3AC]'
                     }`}
                   >
                     {step.num}
@@ -625,7 +631,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
         </div>
       </div>
 
-      {/* Main Form Container */}
+      {/* Main Form Container — Clean Deep Charcoal Panel */}
       <div className="max-w-3xl mx-auto px-6 sm:px-8">
         <form
           id="nori-trip-inquiry-form"
@@ -634,18 +640,18 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           data-netlify="true"
           onSubmit={handleSubmit}
           noValidate
-          className="bg-[#FCFAF7] border border-[#EADBCE] rounded-3xl p-6 sm:p-12 shadow-xs space-y-8"
+          className="bg-[#252120] border border-[#3D3634] rounded-3xl p-7 sm:p-12 lg:p-14 shadow-2xl space-y-9 relative"
         >
           <input type="hidden" name="form-name" value="nori-booking" />
 
           {/* STEP 01 — YOUR TRIP */}
           {currentStep === 1 && (
             <div id="step-01-your-trip" className="space-y-8">
-              <div className="border-b border-[#EADBCE] pb-5 space-y-1.5">
-                <span className="text-[11px] uppercase tracking-[0.24em] text-[#D9B4B0] font-semibold block">
+              <div className="border-b border-[#3D3634] pb-6 space-y-2">
+                <span className="text-[11px] uppercase tracking-[0.26em] text-[#D9B4B0] font-semibold block">
                   01 — YOUR TRIP
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-editorial font-light text-[#302B29]">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-tight [text-wrap:balance]">
                   About your trip to Korea
                 </h2>
               </div>
@@ -654,12 +660,12 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               <div className="space-y-2.5">
                 <label
                   htmlFor="inquiry-country-region"
-                  className="block text-xs sm:text-sm font-medium text-[#302B29]"
+                  className="block text-sm sm:text-base font-semibold text-[#E8DFD7]"
                 >
                   Where are you traveling from?
                 </label>
                 <div className="relative">
-                  <Globe className="w-4 h-4 text-[#9B8983] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <Globe className="w-4 h-4 text-[#786761] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     id="inquiry-country-region"
                     name="Country_or_Region"
@@ -669,24 +675,24 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                       setFormData((prev) => ({ ...prev, countryRegion: e.target.value }))
                     }
                     placeholder="Country / region"
-                    className="w-full pl-11 pr-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                    className="w-full pl-11 pr-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                   />
                 </div>
               </div>
 
               {/* When will you be in Korea? */}
-              <div className="space-y-4">
-                <label className="block text-xs sm:text-sm font-medium text-[#302B29]">
+              <div className="space-y-3.5">
+                <label className="block text-sm sm:text-base font-semibold text-[#E8DFD7]">
                   When will you be in Korea?
                 </label>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <span className="text-[11px] uppercase tracking-[0.16em] text-[#786761] block">
+                    <span className="text-[11px] uppercase tracking-[0.16em] text-[#BFB3AC] font-medium block">
                       Arrival date
                     </span>
                     <div className="relative">
-                      <Calendar className="w-4 h-4 text-[#9B8983] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <Calendar className="w-4 h-4 text-[#786761] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         id="inquiry-arrival-date"
                         name="Arrival_Date"
@@ -695,17 +701,17 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                         onChange={(e) =>
                           setFormData((prev) => ({ ...prev, arrivalDate: e.target.value }))
                         }
-                        className="w-full pl-11 pr-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] focus:outline-none focus:border-[#D9B4B0]"
+                        className="w-full pl-11 pr-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors scheme-light font-normal"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <span className="text-[11px] uppercase tracking-[0.16em] text-[#786761] block">
+                    <span className="text-[11px] uppercase tracking-[0.16em] text-[#BFB3AC] font-medium block">
                       Departure date
                     </span>
                     <div className="relative">
-                      <Calendar className="w-4 h-4 text-[#9B8983] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <Calendar className="w-4 h-4 text-[#786761] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         id="inquiry-departure-date"
                         name="Departure_Date"
@@ -714,7 +720,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                         onChange={(e) =>
                           setFormData((prev) => ({ ...prev, departureDate: e.target.value }))
                         }
-                        className="w-full pl-11 pr-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] focus:outline-none focus:border-[#D9B4B0]"
+                        className="w-full pl-11 pr-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors scheme-light font-normal"
                       />
                     </div>
                   </div>
@@ -733,12 +739,12 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               </div>
 
               {/* How many people are traveling? */}
-              <div className="space-y-2.5">
+              <div className="space-y-3">
                 <label
                   htmlFor="inquiry-travelers-count"
-                  className="block text-xs sm:text-sm font-medium text-[#302B29]"
+                  className="block text-sm sm:text-base font-semibold text-[#E8DFD7]"
                 >
-                  How many people are traveling? *
+                  How many people are traveling? <span className="text-[#D9B4B0] font-bold">*</span>
                 </label>
                 <input
                   id="inquiry-travelers-count"
@@ -770,10 +776,10 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                             numberOfTravelers: option.value,
                           }))
                         }
-                        className={`py-3 px-4 rounded-2xl border text-xs sm:text-sm transition-all ${
+                        className={`py-3 px-4 rounded-2xl border text-xs sm:text-sm transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#302B29] text-[#F7F2EC] border-[#302B29] font-medium shadow-2xs'
-                            : 'bg-[#F7F2EC] text-[#302B29] border-[#EADBCE] hover:border-[#D9B4B0] font-light'
+                            ? 'bg-[#D9B4B0] text-[#1C1917] border-[#D9B4B0] font-bold shadow-md'
+                            : 'bg-[#1C1917] text-[#E8DFD7] border border-[#3D3634] hover:border-[#D9B4B0] hover:bg-[#2E2826] font-medium'
                         }`}
                       >
                         {option.label}
@@ -781,16 +787,16 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                     );
                   })}
                 </div>
-                <p className="text-xs text-[#786761] font-light leading-relaxed">
+                <p className="text-xs text-[#BFB3AC] font-normal leading-relaxed">
                   NORI specializes in private, personalized trips for small groups. Some experiences may have individual group-size limits. Traveling with 7 or more? Send us your request and we’ll let you know what we can arrange.
                 </p>
               </div>
 
               {/* Who are you traveling with? */}
               <div className="space-y-3">
-                <label className="block text-xs sm:text-sm font-medium text-[#302B29]">
+                <label className="block text-sm sm:text-base font-semibold text-[#E8DFD7]">
                   Who are you traveling with?{' '}
-                  <span className="text-xs font-light text-[#9B8983]">(Optional)</span>
+                  <span className="text-xs font-normal text-[#BFB3AC]">(Optional)</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {COMPANION_OPTIONS.map((option) =>
@@ -809,21 +815,21 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           {/* STEP 02 — TRAVEL SUPPORT */}
           {currentStep === 2 && (
             <div id="step-02-travel-support" className="space-y-8">
-              <div className="border-b border-[#EADBCE] pb-5 space-y-1.5">
-                <span className="text-[11px] uppercase tracking-[0.24em] text-[#D9B4B0] font-semibold block">
+              <div className="border-b border-[#3D3634] pb-6 space-y-2">
+                <span className="text-[11px] uppercase tracking-[0.26em] text-[#D9B4B0] font-semibold block">
                   02 — TRAVEL SUPPORT
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-editorial font-light text-[#302B29]">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-tight [text-wrap:balance]">
                   What would you like help with?
                 </h2>
-                <p className="text-xs sm:text-sm text-[#786761] font-light">
+                <p className="text-xs sm:text-sm text-[#BFB3AC] font-normal">
                   Select as many as you need.
                 </p>
               </div>
 
               {/* AIRPORT */}
               <div className="space-y-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                <h3 className="text-xs uppercase tracking-[0.24em] text-[#D9B4B0] font-bold">
                   AIRPORT
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -840,7 +846,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* GETTING AROUND */}
               <div className="space-y-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                <h3 className="text-xs uppercase tracking-[0.24em] text-[#D9B4B0] font-bold">
                   GETTING AROUND
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -857,7 +863,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* STAY & PLANNING */}
               <div className="space-y-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                <h3 className="text-xs uppercase tracking-[0.24em] text-[#D9B4B0] font-bold">
                   STAY &amp; PLANNING
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -873,7 +879,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               </div>
 
               {/* Beauty Only Option */}
-              <div className="pt-2 border-t border-[#EADBCE]">
+              <div className="pt-3 border-t border-[#3D3634]">
                 {renderCheckboxCard(
                   "I don't need travel support — I'm only interested in beauty experiences.",
                   formData.travelSupportBeautyOnly,
@@ -883,9 +889,9 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               </div>
 
               {/* Subtle Ground Arrangements Note */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#F4E8E5]/60 border border-[#EADBCE] flex items-start gap-3">
-                <Info className="w-4 h-4 text-[#786761] shrink-0 mt-0.5" />
-                <p className="text-xs text-[#786761] font-light leading-relaxed">
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#1C1917] border border-[#3D3634] flex items-start gap-3">
+                <Info className="w-4 h-4 text-[#D9B4B0] shrink-0 mt-0.5" />
+                <p className="text-xs text-[#BFB3AC] font-normal leading-relaxed">
                   NORI specializes in ground arrangements in Korea.
                   <br />
                   International airfare is not included.
@@ -897,14 +903,14 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           {/* STEP 03 — BEAUTY */}
           {currentStep === 3 && (
             <div id="step-03-beauty" className="space-y-8">
-              <div className="border-b border-[#EADBCE] pb-5 space-y-1.5">
-                <span className="text-[11px] uppercase tracking-[0.24em] text-[#D9B4B0] font-semibold block">
+              <div className="border-b border-[#3D3634] pb-6 space-y-2">
+                <span className="text-[11px] uppercase tracking-[0.26em] text-[#D9B4B0] font-semibold block">
                   03 — BEAUTY
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-editorial font-light text-[#302B29]">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-tight [text-wrap:balance]">
                   What are you interested in?
                 </h2>
-                <p className="text-xs sm:text-sm text-[#786761] font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#BFB3AC] font-normal leading-relaxed">
                   Choose anything you'd like to explore.
                   <br />
                   You don't need to know exactly what you want yet.
@@ -913,7 +919,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* SKINCARE & SHOPPING */}
               <div className="space-y-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                <h3 className="text-xs uppercase tracking-[0.24em] text-[#D9B4B0] font-bold">
                   SKINCARE &amp; SHOPPING
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -930,7 +936,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* COLOR & MAKEUP */}
               <div className="space-y-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                <h3 className="text-xs uppercase tracking-[0.24em] text-[#D9B4B0] font-bold">
                   COLOR &amp; MAKEUP
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -947,7 +953,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* HAIR & WELLNESS */}
               <div className="space-y-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                <h3 className="text-xs uppercase tracking-[0.24em] text-[#D9B4B0] font-bold">
                   HAIR &amp; WELLNESS
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -964,7 +970,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* BEAUTY & AESTHETIC CARE */}
               <div className="space-y-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-[#786761] font-semibold">
+                <h3 className="text-xs uppercase tracking-[0.24em] text-[#D9B4B0] font-bold">
                   BEAUTY &amp; AESTHETIC CARE
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -980,7 +986,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               </div>
 
               {/* Not Sure Option */}
-              <div className="pt-2 border-t border-[#EADBCE]">
+              <div className="pt-3 border-t border-[#3D3634]">
                 {renderCheckboxCard(
                   "I'm not sure — I'd like NORI to recommend options.",
                   formData.beautyNotSureRecommend,
@@ -998,18 +1004,18 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           {/* STEP 04 — YOUR PREFERENCES */}
           {currentStep === 4 && (
             <div id="step-04-preferences" className="space-y-8">
-              <div className="border-b border-[#EADBCE] pb-5 space-y-1.5">
-                <span className="text-[11px] uppercase tracking-[0.24em] text-[#D9B4B0] font-semibold block">
+              <div className="border-b border-[#3D3634] pb-6 space-y-2">
+                <span className="text-[11px] uppercase tracking-[0.26em] text-[#D9B4B0] font-semibold block">
                   04 — YOUR PREFERENCES
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-editorial font-light text-[#302B29]">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-tight [text-wrap:balance]">
                   Make it yours.
                 </h2>
               </div>
 
               {/* What matters most to you? */}
               <div className="space-y-3">
-                <label className="block text-xs sm:text-sm font-medium text-[#302B29]">
+                <label className="block text-sm sm:text-base font-semibold text-[#E8DFD7]">
                   What matters most to you?
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1027,10 +1033,10 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               {/* Approximate Budget */}
               <div className="space-y-3 pt-2">
                 <div className="space-y-1">
-                  <label className="block text-xs sm:text-sm font-medium text-[#302B29]">
+                  <label className="block text-sm sm:text-base font-semibold text-[#E8DFD7]">
                     What's your approximate budget for the services you'd like NORI to arrange?
                   </label>
-                  <p className="text-xs text-[#786761] font-light">
+                  <p className="text-xs text-[#BFB3AC] font-normal">
                     This refers to the NORI-arranged portion of the trip, not international airfare.
                   </p>
                 </div>
@@ -1055,11 +1061,11 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
               <div className="space-y-2.5 pt-2">
                 <label
                   htmlFor="inquiry-free-text"
-                  className="block text-sm sm:text-base font-editorial font-medium text-[#302B29]"
+                  className="block text-sm sm:text-base font-semibold text-[#E8DFD7]"
                 >
                   Tell Nori more ✨
                 </label>
-                <p className="text-xs text-[#786761] font-light">
+                <p className="text-xs text-[#BFB3AC] font-normal">
                   What would make this trip perfect for you?
                 </p>
                 <textarea
@@ -1071,7 +1077,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                     setFormData((prev) => ({ ...prev, freeTextRequest: e.target.value }))
                   }
                   placeholder="I'm traveling with my mom and we'd love a skincare shopping day, personal color analysis and a relaxing beauty treatment. We'd also like a private car for two days."
-                  className="w-full p-4 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-xs sm:text-sm text-[#302B29] placeholder:text-[#9B8983] font-light leading-relaxed focus:outline-none focus:border-[#D9B4B0]"
+                  className="w-full p-4 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-xs sm:text-sm text-[#302B29] placeholder:text-[#8C7E77] font-normal leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors"
                 />
               </div>
             </div>
@@ -1080,23 +1086,23 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           {/* STEP 05 — CONTACT */}
           {currentStep === 5 && (
             <div id="step-05-contact" className="space-y-8">
-              <div className="border-b border-[#EADBCE] pb-5 space-y-1.5">
-                <span className="text-[11px] uppercase tracking-[0.24em] text-[#D9B4B0] font-semibold block">
+              <div className="border-b border-[#3D3634] pb-6 space-y-2">
+                <span className="text-[11px] uppercase tracking-[0.26em] text-[#D9B4B0] font-semibold block">
                   05 — CONTACT
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-editorial font-light text-[#302B29]">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-bold text-[#F7F2EC] tracking-tight leading-tight [text-wrap:balance]">
                   Where should we send your plan?
                 </h2>
               </div>
 
               {/* First Name & Last Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   <label
                     htmlFor="inquiry-first-name"
-                    className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                    className="block text-sm sm:text-base font-semibold text-[#E8DFD7]"
                   >
-                    First name *
+                    First name <span className="text-[#D9B4B0] font-bold">*</span>
                   </label>
                   <input
                     id="inquiry-first-name"
@@ -1108,14 +1114,14 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                       setFormData((prev) => ({ ...prev, firstName: e.target.value }))
                     }
                     placeholder="First name"
-                    className="w-full px-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                    className="w-full px-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                   />
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   <label
                     htmlFor="inquiry-last-name"
-                    className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                    className="block text-sm sm:text-base font-semibold text-[#E8DFD7]"
                   >
                     Last name
                   </label>
@@ -1128,21 +1134,21 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                       setFormData((prev) => ({ ...prev, lastName: e.target.value }))
                     }
                     placeholder="Last name"
-                    className="w-full px-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                    className="w-full px-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                   />
                 </div>
               </div>
 
               {/* Email */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <label
                   htmlFor="inquiry-email"
-                  className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                  className="block text-sm sm:text-base font-semibold text-[#E8DFD7]"
                 >
-                  Email *
+                  Email <span className="text-[#D9B4B0] font-bold">*</span>
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 text-[#9B8983] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <Mail className="w-4 h-4 text-[#786761] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     id="inquiry-email"
                     name="Email"
@@ -1153,15 +1159,15 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                       setFormData((prev) => ({ ...prev, email: e.target.value }))
                     }
                     placeholder="you@example.com"
-                    className="w-full pl-11 pr-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                    className="w-full pl-11 pr-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                   />
                 </div>
               </div>
 
               {/* Preferred Contact Method */}
               <div className="space-y-3">
-                <label className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium">
-                  Preferred contact method *
+                <label className="block text-sm sm:text-base font-semibold text-[#E8DFD7]">
+                  Preferred contact method <span className="text-[#D9B4B0] font-bold">*</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3 max-w-md">
                   {(['WhatsApp', 'Email'] as const).map((method) => {
@@ -1171,8 +1177,8 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                         key={method}
                         className={`flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${
                           isSelected
-                            ? 'bg-[#F4E8E5]/75 border-[#302B29] text-[#302B29] shadow-2xs'
-                            : 'bg-[#F7F2EC] border-[#EADBCE] text-[#302B29] hover:border-[#D9B4B0]'
+                            ? 'bg-[#2E2826] border-2 border-[#D9B4B0] text-[#F7F2EC] font-medium shadow-sm'
+                            : 'bg-[#1C1917] border border-[#3D3634] text-[#E8DFD7] hover:border-[#D9B4B0]/80 hover:text-[#F7F2EC]'
                         }`}
                       >
                         <input
@@ -1187,10 +1193,10 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                         />
                         <span
                           className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                            isSelected ? 'border-[#302B29]' : 'border-[#9B8983]'
+                            isSelected ? 'border-[#D9B4B0]' : 'border-[#443E3B]'
                           }`}
                         >
-                          {isSelected && <span className="w-2 h-2 rounded-full bg-[#302B29]" />}
+                          {isSelected && <span className="w-2 h-2 rounded-full bg-[#D9B4B0]" />}
                         </span>
                         <span className="text-xs sm:text-sm font-medium">{method}</span>
                       </label>
@@ -1201,11 +1207,11 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* WhatsApp Details (Required when WhatsApp is selected) */}
               {formData.preferredContactMethod === 'WhatsApp' && (
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 p-5 rounded-2xl bg-[#F7F2EC] border border-[#EADBCE]">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 p-5 rounded-2xl bg-[#1C1917] border border-[#3D3634]">
                   <div className="sm:col-span-4 space-y-1.5">
                     <label
                       htmlFor="inquiry-whatsapp-code"
-                      className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                      className="block text-xs uppercase tracking-[0.14em] text-[#E8DFD7] font-semibold"
                     >
                       Country code
                     </label>
@@ -1218,19 +1224,19 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                         setFormData((prev) => ({ ...prev, whatsappCountryCode: e.target.value }))
                       }
                       placeholder="+1, +44, +65..."
-                      className="w-full px-4 py-3 bg-[#FCFAF7] border border-[#EADBCE] rounded-xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                      className="w-full px-4 py-3 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                     />
                   </div>
 
                   <div className="sm:col-span-8 space-y-1.5">
                     <label
                       htmlFor="inquiry-whatsapp-number"
-                      className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                      className="block text-xs uppercase tracking-[0.14em] text-[#E8DFD7] font-semibold"
                     >
-                      WhatsApp number *
+                      WhatsApp number <span className="text-[#D9B4B0] font-bold">*</span>
                     </label>
                     <div className="relative">
-                      <MessageCircle className="w-4 h-4 text-[#9B8983] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <MessageCircle className="w-4 h-4 text-[#25D366] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <input
                         id="inquiry-whatsapp-number"
                         name="WhatsApp_Number"
@@ -1241,7 +1247,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                           setFormData((prev) => ({ ...prev, whatsappNumber: e.target.value }))
                         }
                         placeholder="Phone number"
-                        className="w-full pl-11 pr-4 py-3 bg-[#FCFAF7] border border-[#EADBCE] rounded-xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                        className="w-full pl-11 pr-4 py-3 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                       />
                     </div>
                   </div>
@@ -1250,7 +1256,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
               {/* Preferred Language */}
               <div className="space-y-3">
-                <label className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium">
+                <label className="block text-sm sm:text-base font-semibold text-[#E8DFD7]">
                   Preferred language
                 </label>
                 <div className="grid grid-cols-3 gap-3">
@@ -1263,10 +1269,10 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                         onClick={() =>
                           setFormData((prev) => ({ ...prev, preferredLanguage: lang }))
                         }
-                        className={`py-3 px-4 rounded-2xl border text-xs sm:text-sm transition-all ${
+                        className={`py-3 px-4 rounded-2xl border text-xs sm:text-sm transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#302B29] text-[#F7F2EC] border-[#302B29] font-medium shadow-2xs'
-                            : 'bg-[#F7F2EC] text-[#302B29] border-[#EADBCE] hover:border-[#D9B4B0] font-light'
+                            ? 'bg-[#D9B4B0] text-[#1C1917] border-[#D9B4B0] font-bold shadow-md'
+                            : 'bg-[#1C1917] text-[#E8DFD7] border border-[#3D3634] hover:border-[#D9B4B0] hover:bg-[#252120] font-medium'
                         }`}
                       >
                         {lang}
@@ -1279,7 +1285,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                   <div className="space-y-1.5 pt-1">
                     <label
                       htmlFor="inquiry-preferred-language-other"
-                      className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                      className="block text-xs uppercase tracking-[0.14em] text-[#E8DFD7] font-semibold"
                     >
                       Please specify your preferred language
                     </label>
@@ -1295,23 +1301,23 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                         }))
                       }
                       placeholder="e.g. Japanese, French, Spanish"
-                      className="w-full px-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                      className="w-full px-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                     />
                   </div>
                 )}
               </div>
 
               {/* Instagram / Social Handle (Optional) */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <label
                   htmlFor="inquiry-instagram"
-                  className="block text-xs uppercase tracking-[0.14em] text-[#302B29] font-medium"
+                  className="block text-sm sm:text-base font-semibold text-[#E8DFD7]"
                 >
                   Instagram / social handle{' '}
-                  <span className="text-[#9B8983] font-light lowercase">(optional)</span>
+                  <span className="text-xs font-normal text-[#BFB3AC]">(optional)</span>
                 </label>
                 <div className="relative">
-                  <Instagram className="w-4 h-4 text-[#9B8983] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <Instagram className="w-4 h-4 text-[#786761] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     id="inquiry-instagram"
                     name="Instagram_or_Social_Handle"
@@ -1321,13 +1327,13 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                       setFormData((prev) => ({ ...prev, instagramHandle: e.target.value }))
                     }
                     placeholder="@yourhandle"
-                    className="w-full pl-11 pr-4 py-3.5 bg-[#F7F2EC] border border-[#EADBCE] rounded-2xl text-sm text-[#302B29] placeholder:text-[#9B8983] focus:outline-none focus:border-[#D9B4B0]"
+                    className="w-full pl-11 pr-4 py-3.5 bg-[#F3EEE8] border border-[#D5CBC2] focus:border-[#C99E9A] focus:bg-white rounded-2xl text-sm text-[#302B29] placeholder:text-[#8C7E77] focus:outline-none focus:ring-2 focus:ring-[#D9B4B0]/40 transition-colors font-normal"
                   />
                 </div>
               </div>
 
-              {/* Consent Checkbox & Existing Legal Policy Links */}
-              <div className="pt-4 border-t border-[#EADBCE] space-y-4">
+              {/* Consent Checkbox & Legal Policy Links */}
+              <div className="pt-4 border-t border-[#3D3634] space-y-4">
                 {renderCheckboxCard(
                   'I understand that this is a personalized quote request and not an instant booking.',
                   formData.quoteRequestConsent,
@@ -1339,12 +1345,12 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                   'quote-consent'
                 )}
 
-                <p className="text-xs text-[#786761] font-light leading-relaxed pl-1">
+                <p className="text-xs text-[#BFB3AC] font-normal leading-relaxed pl-1">
                   By submitting this request, you agree to our{' '}
                   <button
                     type="button"
                     onClick={() => onOpenPoliciesModal('privacy')}
-                    className="underline text-[#302B29] hover:text-[#786761] transition-colors"
+                    className="underline text-[#E9D2CD] hover:text-[#F7F2EC] transition-colors cursor-pointer"
                   >
                     Privacy Policy
                   </button>{' '}
@@ -1352,7 +1358,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                   <button
                     type="button"
                     onClick={() => onOpenPoliciesModal('terms')}
-                    className="underline text-[#302B29] hover:text-[#786761] transition-colors"
+                    className="underline text-[#E9D2CD] hover:text-[#F7F2EC] transition-colors cursor-pointer"
                   >
                     Terms &amp; Cancellation Policy
                   </button>
@@ -1364,19 +1370,19 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
 
           {/* Validation Error Banner */}
           {validationError && (
-            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-xs text-rose-900">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+            <div className="p-4 rounded-2xl bg-rose-950/60 border border-rose-700/70 flex items-start gap-3 text-xs text-rose-100">
+              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
               <span>{validationError}</span>
             </div>
           )}
 
-          {/* Submission Failure Banner (Preserves Customer Answers + Official WhatsApp Support Link) */}
+          {/* Submission Failure Banner */}
           {submissionFailed && (
-            <div className="p-5 rounded-2xl bg-rose-50 border border-rose-200 space-y-4 text-xs text-rose-900">
+            <div className="p-5 rounded-2xl bg-rose-950/60 border border-rose-700/70 space-y-4 text-xs text-rose-100">
               <div className="flex items-start gap-3">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
                 <div className="space-y-1 leading-relaxed">
-                  <p className="font-medium">
+                  <p className="font-semibold text-rose-100">
                     Something went wrong while sending your request.
                   </p>
                   <p>Please try again, or contact NORI on WhatsApp.</p>
@@ -1387,7 +1393,7 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                   href={NORI_WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 bg-[#302B29] hover:bg-[#443E3B] text-[#F7F2EC] rounded-full text-[11px] uppercase tracking-[0.16em] font-medium transition-all inline-flex items-center gap-2"
+                  className="px-5 py-2.5 bg-[#1C1917] hover:bg-[#252120] text-[#F7F2EC] border border-[#3D3634] rounded-full text-[11px] uppercase tracking-[0.16em] font-medium transition-all inline-flex items-center gap-2"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
                   <span>Contact NORI on WhatsApp</span>
@@ -1397,16 +1403,16 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
           )}
 
           {/* Step Navigation Buttons */}
-          <div className="pt-6 border-t border-[#EADBCE] flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
+          <div className="pt-6 border-t border-[#3D3634] flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
             {currentStep > 1 ? (
               <button
                 type="button"
                 id="plan-step-back-btn"
                 onClick={handleBack}
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-7 py-4 bg-[#F7F2EC] hover:bg-[#F4E8E5] disabled:opacity-50 text-[#302B29] border border-[#EADBCE] rounded-full text-xs uppercase tracking-[0.18em] font-medium transition-all inline-flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-7 py-4 bg-[#1C1917] hover:bg-[#252120] disabled:opacity-50 text-[#E8DFD7] border border-[#3D3634] hover:border-[#D9B4B0]/60 rounded-full text-xs uppercase tracking-[0.18em] font-semibold transition-all inline-flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
               >
-                <ArrowLeft className="w-3.5 h-3.5 text-[#786761]" />
+                <ArrowLeft className="w-3.5 h-3.5 text-[#D9B4B0]" />
                 <span>Back</span>
               </button>
             ) : (
@@ -1418,26 +1424,26 @@ export const PlanMyTripPage: React.FC<PlanMyTripPageProps> = ({
                 type="button"
                 id="plan-step-next-btn"
                 onClick={handleNext}
-                className="w-full sm:w-auto px-9 py-4 bg-[#302B29] hover:bg-[#443E3B] text-[#F7F2EC] rounded-full text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-sm inline-flex items-center justify-center gap-2.5 group"
+                className="w-full sm:w-auto px-9 py-4 bg-[#D9B4B0] hover:bg-[#E9D2CD] text-[#1C1917] rounded-full text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2.5 group cursor-pointer active:scale-[0.98]"
               >
                 <span>Next</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#E9D2CD] group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#1C1917] group-hover:translate-x-0.5 transition-transform" />
               </button>
             ) : (
               <button
                 type="submit"
                 id="create-trip-request-submit-btn"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-9 py-4 bg-[#302B29] hover:bg-[#443E3B] disabled:opacity-75 disabled:cursor-not-allowed text-[#F7F2EC] rounded-full text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-md inline-flex items-center justify-center gap-2.5 group"
+                className="w-full sm:w-auto px-9 py-4 bg-[#D9B4B0] hover:bg-[#E9D2CD] disabled:opacity-75 disabled:cursor-not-allowed text-[#1C1917] rounded-full text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-lg inline-flex items-center justify-center gap-2.5 group cursor-pointer active:scale-[0.98]"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 text-[#E9D2CD] animate-spin" />
+                    <Loader2 className="w-3.5 h-3.5 text-[#1C1917] animate-spin" />
                     <span>SENDING YOUR REQUEST...</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-3.5 h-3.5 text-[#E9D2CD] group-hover:rotate-12 transition-transform" />
+                    <Sparkles className="w-3.5 h-3.5 text-[#1C1917] group-hover:scale-110 transition-transform duration-300" />
                     <span>CREATE MY TRIP REQUEST</span>
                   </>
                 )}
